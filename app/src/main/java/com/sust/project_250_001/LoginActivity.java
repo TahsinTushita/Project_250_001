@@ -52,7 +52,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
         firebaseAuth = FirebaseAuth.getInstance();
-        if(firebaseAuth.getCurrentUser() != null || firebaseAuth.getCurrentUser() == null) {
+        if(firebaseAuth.getCurrentUser() != null) {
             loginBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
