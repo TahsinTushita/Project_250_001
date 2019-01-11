@@ -7,7 +7,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -19,20 +23,23 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookHolder> {
     public class BookHolder extends RecyclerView.ViewHolder{
 
         private TextView bookTitle,bookAuthor,bookISBN;
+        private ImageView imgurl;
         private CardView cardView;
 
         public BookHolder(View itemView) {
             super(itemView);
             cardView = itemView.findViewById(R.id.cardView);
             bookTitle = itemView.findViewById(R.id.bookTitle);
-            bookAuthor = itemView.findViewById(R.id.bookAuthor);
-            bookISBN = itemView.findViewById(R.id.bookISBN);
+            //bookAuthor = itemView.findViewById(R.id.bookAuthor);
+            //bookISBN = itemView.findViewById(R.id.bookISBN);
+            imgurl = itemView.findViewById(R.id.imgurl);
         }
 
         public void setDetails(Book book) {
             bookTitle.setText(book.getTitle());
-            bookAuthor.setText(book.getAuthor());
-            bookISBN.setText(book.getIsbn());
+            //bookAuthor.setText(book.getAuthor());
+            //bookISBN.setText(book.getIsbn());
+            Picasso.get().load(book.getImgurl()).into(imgurl);
         }
 
         public void bind(final Book book, final OnItemClickListener listener) {
@@ -41,6 +48,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookHolder> {
                     listener.onItemClick(book);
                 }
             });
+
         }
     }
 
