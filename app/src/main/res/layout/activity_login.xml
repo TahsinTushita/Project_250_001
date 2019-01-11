@@ -54,7 +54,7 @@
             android:layout_below="@+id/passWordID"
             android:layout_centerHorizontal="true"
             android:layout_margin="10dp"
-            android:background="@color/colorPrimaryDark"
+            android:background="@drawable/round_corner_bg"
             android:text="Login" />
     </RelativeLayout>
 </LinearLayout>
