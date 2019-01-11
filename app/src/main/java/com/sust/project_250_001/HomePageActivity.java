@@ -63,11 +63,11 @@ public class HomePageActivity extends AppCompatActivity {
 
         //Trending books fetching from firebase
         database = FirebaseDatabase.getInstance().getReference("Books");
-        database.addListenerForSingleValueEvent(valueEventListener);
+        database.addValueEventListener(valueEventListener);
 
         //Recent Reviews fetching from firebase
         reviewDatabase = FirebaseDatabase.getInstance().getReference("Reviews");
-        reviewDatabase.addListenerForSingleValueEvent(reviewValueEventListener);
+        reviewDatabase.addValueEventListener(reviewValueEventListener);
 
         //Set toolbar as actionbar
         toolbar = findViewById(R.id.toolbar);
@@ -183,6 +183,8 @@ public class HomePageActivity extends AppCompatActivity {
                 firebaseAuth.signOut();
                 if(firebaseAuth.getCurrentUser() == null)
                 startActivity(new Intent(HomePageActivity.this,LoginActivity.class));
+            case R.id.idMap:
+                startActivity(new Intent(HomePageActivity.this,MapActivity.class));
         }
         return super.onOptionsItemSelected(item);
     }

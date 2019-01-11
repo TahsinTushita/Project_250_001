@@ -22,13 +22,13 @@
         android:contentInsetEnd="0dp"
         app:contentInsetRight="0dp"
         app:contentInsetEnd="0dp">
-        <com.lapism.searchview.widget.SearchView
-            android:id="@+id/searchBar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_behavior="com.lapism.searchview.widget.SearchBehavior"/>
 
     </android.support.v7.widget.Toolbar>
+    <com.lapism.searchview.widget.SearchView
+        android:id="@+id/searchBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_behavior="com.lapism.searchview.widget.SearchBehavior"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -37,8 +37,8 @@
         android:textStyle="bold"
         android:textAlignment="center"
         android:textAppearance="@color/colorPrimary"/>
-
     <View
+        android:layout_margin="2dp"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@android:color/darker_gray"/>
@@ -47,12 +47,8 @@
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@android:color/darker_gray"/>
-
     <TextView
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Recent Reviews"
@@ -61,16 +57,12 @@
         android:textAlignment="center"
         android:textAppearance="@color/colorPrimary"/>
     <View
+        android:layout_margin="2dp"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@android:color/darker_gray"/>
-
     <android.support.v7.widget.RecyclerView
         android:id="@+id/reviewView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@android:color/darker_gray"/>
-</LinearLayout>
+   </LinearLayout>
