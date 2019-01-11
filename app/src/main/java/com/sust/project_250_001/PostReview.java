@@ -21,6 +21,7 @@ public class PostReview extends AppCompatActivity {
     private ProgressDialog progressDialog;
 
     final String EXTRA_BOOKPARENT = "bookParent";
+    private Book book;
     private String bookParent;
     private String userName;
 
@@ -33,7 +34,8 @@ public class PostReview extends AppCompatActivity {
         postBtn = findViewById(R.id.postBtn);
 
         progressDialog = new ProgressDialog(this);
-        bookParent = (String) getIntent().getExtras().get(EXTRA_BOOKPARENT);
+        book = (Book) getIntent().getExtras().getSerializable(EXTRA_BOOKPARENT);
+        bookParent = book.getParent();
         mDatabaseReference = FirebaseDatabase.getInstance().getReference().child("Books").child(bookParent).child("reviews");
 
 
@@ -59,6 +61,10 @@ public class PostReview extends AppCompatActivity {
         newPost.child("postDesc").setValue(postDesc);
         newPost.child("username").setValue(userName);
 
+        DatabaseReference recentReviewPost = FirebaseDatabase.getInstance().getReference().child("Reviews").push();
+        recentReviewPost.child("bookTitle").setValue(book.getTitle());
+        recentReviewPost.child("userName").setValue(userName);
+        recentReviewPost.child("reviewText").setValue(postDesc);
         progressDialog.dismiss();
 
     }

@@ -95,7 +95,7 @@ public class BookProfile extends AppCompatActivity {
 
     public void startPosting(View view) {
         Intent intent = new Intent(this,PostReview.class);
-        intent.putExtra("bookParent",book.getParent());
+        intent.putExtra("bookParent",book);
         startActivity(intent);
     }
 }
