@@ -82,7 +82,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end|bottom"
             android:layout_margin="16dp"
-            android:src="@mipmap/ic_launcher" />
+            android:src="@drawable/ic_add_white"
+            android:onClick="startPosting"/>
 
 
 
