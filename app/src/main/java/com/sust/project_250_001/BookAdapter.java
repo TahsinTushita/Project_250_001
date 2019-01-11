@@ -41,7 +41,6 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookHolder> {
                     listener.onItemClick(book);
                 }
             });
-
         }
     }
 
