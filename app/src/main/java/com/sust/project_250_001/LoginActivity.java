@@ -25,7 +25,7 @@ public class LoginActivity extends AppCompatActivity {
     //Login box related things
     private EditText userName;
     private EditText passWord;
-    private Button loginBtn;
+    private Button loginBtn,mapButton;
 
     // Firebase related things
     private FirebaseDatabase database;
@@ -47,10 +47,19 @@ public class LoginActivity extends AppCompatActivity {
         userName = findViewById(R.id.userNameID);
         passWord = findViewById(R.id.passWordID);
         loginBtn = findViewById(R.id.btnLogin);
+        mapButton = findViewById(R.id.mapButton);
+
+        mapButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this,MapActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
         firebaseAuth = FirebaseAuth.getInstance();
-        if(firebaseAuth.getCurrentUser() == null) {
+
             loginBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -85,9 +94,9 @@ public class LoginActivity extends AppCompatActivity {
 
                 }
             });
-        } else {
-            startActivity(new Intent(LoginActivity.this, HomePageActivity.class));
-            finish();
+         //else {
+            //startActivity(new Intent(LoginActivity.this, HomePageActivity.class));
+            //finish();
         }
     }
-}
+
