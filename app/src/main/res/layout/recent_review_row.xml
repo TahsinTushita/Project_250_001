@@ -7,34 +7,46 @@
     android:id="@+id/reviewCardView"
     android:layout_marginTop="5dp"
     android:layout_marginBottom="5dp"
-    android:elevation="10dp">
+    android:elevation="15dp">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-
-        <TextView
-            android:layout_margin="3dp"            android:id="@+id/bookTitle"
-            android:textColor="#587058"
-            android:textStyle="bold|italic"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Title" />
+            android:orientation="horizontal"
+            android:layout_margin="3dp"
+            >
+
+            <TextView
+                android:layout_margin="3dp"
+                android:textColor="#FF00FF"
+                android:textStyle="bold"
+                android:id="@+id/userName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="username"
+                />
+            <TextView
+                android:layout_margin="3dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="On"/>
+            <TextView
+                android:layout_margin="3dp"
+                android:id="@+id/bookTitle"
+                android:textColor="#587058"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Title" />
+        </LinearLayout>
         <TextView
             android:layout_margin="3dp"
             android:id="@+id/reviewText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="review"/>
-        <TextView
-            android:layout_margin="3dp"
-            android:gravity="bottom"
-            android:textColor="#FF00FF"
-            android:textStyle="bold"
-            android:id="@+id/userName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="username"
-            />
     </LinearLayout>
 </android.support.v7.widget.CardView>
