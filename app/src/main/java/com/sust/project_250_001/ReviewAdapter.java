@@ -17,7 +17,6 @@ import java.util.ArrayList;
 
 public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ReviewHolder> {
 
-    private ImageView cover;
     private TextView bookTitle;
     private TextView userName;
     private TextView reviewText;
@@ -26,16 +25,15 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ReviewHold
     public class ReviewHolder extends RecyclerView.ViewHolder {
         public ReviewHolder(@NonNull View itemView) {
             super(itemView);
-            cover = itemView.findViewById(R.id.bookCover);
             bookTitle = itemView.findViewById(R.id.bookTitle);
             userName = itemView.findViewById(R.id.userName);
             reviewText = itemView.findViewById(R.id.reviewText);
+            reviewText.setMaxLines(5);
         }
         public void setDetails(Review review) {
-            Picasso.get().load(review.getCoverUrl()).into(cover);
             bookTitle.setText(review.getBookTitle());
-            userName.setText(review.getUserName());
             reviewText.setText(review.getReviewText());
+            userName.setText(review.getUserName());
         }
     }
 
