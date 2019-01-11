@@ -22,13 +22,14 @@
         android:contentInsetEnd="0dp"
         app:contentInsetRight="0dp"
         app:contentInsetEnd="0dp">
-        <com.lapism.searchview.widget.SearchView
-            android:id="@+id/searchBar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_behavior="com.lapism.searchview.widget.SearchBehavior"/>
 
     </android.support.v7.widget.Toolbar>
+    <com.lapism.searchview.widget.SearchView
+        android:id="@+id/searchBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_behavior="com.lapism.searchview.widget.SearchBehavior"/>
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
