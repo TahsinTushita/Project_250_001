@@ -1,35 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="150dp"
+    android:layout_width="100dp"
     android:layout_height="150dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:id="@+id/cardView"
-    android:layout_margin="15dp"
+    android:layout_margin="5dp"
     app:cardCornerRadius="10dp"
     app:cardElevation="10dp"
     android:background="@color/colorAccent">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:weightSum="8"
+        android:layout_gravity="center"
         android:orientation="vertical">
 
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:id="@+id/imgurl"
+            android:layout_weight="6"
+            android:scaleType="fitXY"
+            android:layout_gravity="center"
+            android:src="@drawable/common_google_signin_btn_text_dark"
+            />
+
     <TextView
+        android:layout_margin="3dp"
         android:id="@+id/bookTitle"
+        android:textStyle="bold"
+        android:layout_weight="2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_height="0dp"
         android:text="Title" />
-
-    <TextView
-        android:id="@+id/bookAuthor"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Author" />
-
-    <TextView
-        android:id="@+id/bookISBN"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="isbn" />
     </LinearLayout>
+
+
 </android.support.v7.widget.CardView>

@@ -8,6 +8,25 @@ public class Book implements Serializable{
     String isbn;
     String topReview;
     String parent;
+    String imgurl;
+
+    public Book(String title, String author, String isbn, String topReview, String parent, String imgurl) {
+        this.title = title;
+        this.author = author;
+        this.isbn = isbn;
+        this.topReview = topReview;
+        this.parent = parent;
+        this.imgurl = imgurl;
+    }
+
+    public void setImgurl(String imgurl) {
+        this.imgurl = imgurl;
+    }
+
+    public String getImgurl() {
+
+        return imgurl;
+    }
 
     public String getParent() {
         return parent;
@@ -20,15 +39,6 @@ public class Book implements Serializable{
     public Book() {
 
     }
-
-    public Book(String title, String author,String isbn,String parent) {
-        this.title = title;
-        this.author = author;
-        this.isbn = isbn;
-        this.topReview = topReview;
-        this.parent = parent;
-    }
-
 
     public String getTitle() {
         return title;
