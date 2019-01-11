@@ -42,7 +42,7 @@ public class PostReview extends AppCompatActivity {
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         if(firebaseUser != null)
         userName = firebaseUser.getEmail();
-        userName = userName.substring(userName.lastIndexOf('@'));
+        userName = userName.substring(0,userName.lastIndexOf('@'));
 
     }
 
@@ -54,7 +54,7 @@ public class PostReview extends AppCompatActivity {
         progressDialog.show();
 
         DatabaseReference newPost;
-        newPost = mDatabaseReference.child(userName.toString());
+        newPost = mDatabaseReference.child(userName);
         newPost.child("postTitle").setValue(postTitle);
         newPost.child("postDesc").setValue(postDesc);
         newPost.child("username").setValue(userName);
