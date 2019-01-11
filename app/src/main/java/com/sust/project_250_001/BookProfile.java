@@ -17,6 +17,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -47,6 +48,8 @@ public class BookProfile extends AppCompatActivity {
         bookCover = findViewById(R.id.bookCover);
         bookTitle = findViewById(R.id.bookTitle);
         bookAuthor = findViewById(R.id.bookAuthor);
+
+        Picasso.get().load(book.getImgurl()).into(bookCover);
 
         bookAuthor.setText(book.getAuthor());
         bookTitle.setText(book.getTitle());

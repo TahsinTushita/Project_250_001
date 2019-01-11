@@ -63,11 +63,11 @@ public class HomePageActivity extends AppCompatActivity {
 
         //Trending books fetching from firebase
         database = FirebaseDatabase.getInstance().getReference("Books");
-        database.addListenerForSingleValueEvent(valueEventListener);
+        database.addValueEventListener(valueEventListener);
 
         //Recent Reviews fetching from firebase
         reviewDatabase = FirebaseDatabase.getInstance().getReference("Reviews");
-        reviewDatabase.addListenerForSingleValueEvent(reviewValueEventListener);
+        reviewDatabase.addValueEventListener(reviewValueEventListener);
 
         //Set toolbar as actionbar
         toolbar = findViewById(R.id.toolbar);
