@@ -44,7 +44,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
     private GoogleMap mMap;
     private FusedLocationProviderClient mfusedLocationProviderClient;
-    private static final float DEFAULT_ZOOM = 1f;
+    private static final float DEFAULT_ZOOM = 15f;
 
     private EditText mSearchText;
     private ImageView mGps;

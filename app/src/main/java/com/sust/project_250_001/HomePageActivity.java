@@ -183,6 +183,8 @@ public class HomePageActivity extends AppCompatActivity {
                 firebaseAuth.signOut();
                 if(firebaseAuth.getCurrentUser() == null)
                 startActivity(new Intent(HomePageActivity.this,LoginActivity.class));
+            case R.id.idMap:
+                startActivity(new Intent(HomePageActivity.this,MapActivity.class));
         }
         return super.onOptionsItemSelected(item);
     }
