@@ -1,18 +1,23 @@
 package com.sust.project_250_001;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -44,22 +49,24 @@ public class BookProfile extends AppCompatActivity {
         bookTitle = findViewById(R.id.bookTitle);
         bookAuthor = findViewById(R.id.bookAuthor);
 
+        Picasso.get().load(book.getImgurl()).into(bookCover);
+
         bookAuthor.setText(book.getAuthor());
         bookTitle.setText(book.getTitle());
 
 
-
+        reviewDatabase = FirebaseDatabase.getInstance().getReference("Books").child(book.getParent()).child("reviews");
         //Recent Reviews
         reviewView = findViewById(R.id.reviewView);
         reviewView.setLayoutManager(new LinearLayoutManager(this));
         reviewArrayList = new ArrayList<>();
-        reviewAdapter = new BookReviewAdapter(BookProfile.this,reviewArrayList);
+        reviewAdapter = new BookReviewAdapter(BookProfile.this, reviewArrayList);
         reviewView.setAdapter(reviewAdapter);
 
 
-        //Recent Reviews fetching from firebase
-        reviewDatabase = FirebaseDatabase.getInstance().getReference("Books").child(book.getParent()).child("reviews");
-        reviewDatabase.addListenerForSingleValueEvent(reviewValueEventListener);
+//        Recent Reviews fetching from firebase
+        reviewDatabase.addValueEventListener(reviewValueEventListener);
+
 
     }
 
@@ -67,8 +74,8 @@ public class BookProfile extends AppCompatActivity {
     ValueEventListener reviewValueEventListener = new ValueEventListener() {
         @Override
         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-            reviewArrayList.clear();
             if (dataSnapshot.exists()) {
+                reviewArrayList.clear();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     BookReview review = snapshot.getValue(BookReview.class);
                     reviewArrayList.add(review);
@@ -77,6 +84,7 @@ public class BookProfile extends AppCompatActivity {
                 reviewView.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
             }
+            else return;
         }
 
         @Override
@@ -85,4 +93,9 @@ public class BookProfile extends AppCompatActivity {
         }
     };
 
+    public void startPosting(View view) {
+        Intent intent = new Intent(this,PostReview.class);
+        intent.putExtra("bookParent",book);
+        startActivity(intent);
+    }
 }

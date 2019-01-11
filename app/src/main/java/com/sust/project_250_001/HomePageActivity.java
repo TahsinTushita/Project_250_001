@@ -9,8 +9,10 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -37,6 +39,7 @@ public class HomePageActivity extends AppCompatActivity {
     private ArrayList<Book> bookArrayList;
     private ArrayList<Review> reviewArrayList;
     private DatabaseReference database,reviewDatabase;
+    private FirebaseAuth firebaseAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +52,8 @@ public class HomePageActivity extends AppCompatActivity {
         adapter = new BookAdapter(this,bookArrayList,listener);
         recyclerView.setAdapter(adapter);
 
+        firebaseAuth = FirebaseAuth.getInstance();
+
         //Recent Reviews
         reviewView = findViewById(R.id.reviewView);
         reviewView.setLayoutManager(new LinearLayoutManager(this));
@@ -58,11 +63,11 @@ public class HomePageActivity extends AppCompatActivity {
 
         //Trending books fetching from firebase
         database = FirebaseDatabase.getInstance().getReference("Books");
-        database.addListenerForSingleValueEvent(valueEventListener);
+        database.addValueEventListener(valueEventListener);
 
         //Recent Reviews fetching from firebase
         reviewDatabase = FirebaseDatabase.getInstance().getReference("Reviews");
-        reviewDatabase.addListenerForSingleValueEvent(reviewValueEventListener);
+        reviewDatabase.addValueEventListener(reviewValueEventListener);
 
         //Set toolbar as actionbar
         toolbar = findViewById(R.id.toolbar);
@@ -166,7 +171,20 @@ public class HomePageActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        return super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.menu_main,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch (id) {
+            case R.id.idLogout:
+                firebaseAuth.signOut();
+                if(firebaseAuth.getCurrentUser() == null)
+                startActivity(new Intent(HomePageActivity.this,LoginActivity.class));
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void createListData() {

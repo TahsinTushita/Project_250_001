@@ -1,7 +1,6 @@
 package com.sust.project_250_001;
 
 public class Review {
-    private String coverUrl;
     private String bookTitle;
     private String userName;
 
@@ -19,19 +18,11 @@ public class Review {
     }
 
     public Review(String coverUrl, String bookTitle, String userName, String reviewText) {
-        this.coverUrl = coverUrl;
         this.bookTitle = bookTitle;
         this.userName = userName;
         this.reviewText = reviewText;
     }
 
-    public String getCoverUrl() {
-        return coverUrl;
-    }
-
-    public void setCoverUrl(String coverUrl) {
-        this.coverUrl = coverUrl;
-    }
 
     public String getUserName() {
         return userName;
