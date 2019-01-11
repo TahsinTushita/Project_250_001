@@ -50,6 +50,17 @@
                 android:text="ISBN"
                 />
 
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Add to wishlist"
+                />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Add to booklist"
+                />
+
 
         </LinearLayout>
 
@@ -57,9 +68,11 @@
     </LinearLayout>
 
 
+
     <FrameLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true">
 
@@ -70,15 +83,20 @@
             android:layout_gravity="end|bottom"
             android:layout_margin="16dp"
             android:src="@mipmap/ic_launcher" />
+
+
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/reviewView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/bookAuthor"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="-1dp" />
+
     </FrameLayout>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/reviewView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/bookAuthor"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="-1dp" />
+
 
 </LinearLayout>
