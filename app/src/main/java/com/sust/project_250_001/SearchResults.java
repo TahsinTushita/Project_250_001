@@ -1,7 +1,6 @@
 package com.sust.project_250_001;
 
 import android.content.Intent;
-import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -61,9 +60,7 @@ public class SearchResults extends AppCompatActivity {
                     BookAdapter adapter = new BookAdapter(SearchResults.this, bookArrayList,listener);
                     recyclerView.setAdapter(adapter);
                     adapter.notifyDataSetChanged();
-
                 }
-
             }
         }
 
@@ -71,8 +68,6 @@ public class SearchResults extends AppCompatActivity {
         public void onCancelled(@NonNull DatabaseError databaseError) {
 
         }
-
-
     };
 
 
