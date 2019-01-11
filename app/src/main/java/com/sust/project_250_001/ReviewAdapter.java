@@ -49,9 +49,9 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ReviewHold
     @NonNull
     @Override
     public ReviewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-//        CardView cardView = (CardView) LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.recent_review_row,viewGroup,false);
-        LinearLayout layout = (LinearLayout) LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.recent_review_row,viewGroup,false);
-        return new ReviewHolder(layout);
+        CardView cardView = (CardView) LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.recent_review_row,viewGroup,false);
+//        LinearLayout layout = (LinearLayout) LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.recent_review_row,viewGroup,false);
+        return new ReviewHolder(cardView);
     }
 
     @Override
