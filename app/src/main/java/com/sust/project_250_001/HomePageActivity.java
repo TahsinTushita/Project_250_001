@@ -2,6 +2,9 @@ package com.sust.project_250_001;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -27,7 +30,7 @@ import com.lapism.searchview.widget.SearchView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomePageActivity extends AppCompatActivity {
+public class HomePageActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     //Add the toolbar;
     private Toolbar toolbar;
@@ -40,10 +43,22 @@ public class HomePageActivity extends AppCompatActivity {
     private ArrayList<Review> reviewArrayList;
     private DatabaseReference database,reviewDatabase;
     private FirebaseAuth firebaseAuth;
+    private NavigationView navigationView;
+    private DrawerLayout drawer;
+    private ActionBarDrawerToggle drawerToggle;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
+
+        drawer = (DrawerLayout) findViewById(R.id.drawerid);
+        navigationView = (NavigationView) findViewById(R.id.navigation_drawer_id);
+        drawerToggle = new ActionBarDrawerToggle(this,drawer,R.string.nav_open,R.string.nav_close);
+
+        drawer.addDrawerListener(drawerToggle);
+        drawerToggle.syncState();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        navigationView.setNavigationItemSelectedListener(this);
 
         //Trending books
         recyclerView = findViewById(R.id.recyclerView);
@@ -186,6 +201,8 @@ public class HomePageActivity extends AppCompatActivity {
             case R.id.idMap:
                 startActivity(new Intent(HomePageActivity.this,MapActivity.class));
         }
+
+        if()
         return super.onOptionsItemSelected(item);
     }
 
@@ -200,4 +217,8 @@ public class HomePageActivity extends AppCompatActivity {
         }
     };
 
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        return false;
+    }
 }
