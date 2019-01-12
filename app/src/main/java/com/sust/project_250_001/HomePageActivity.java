@@ -65,7 +65,7 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
         drawer = (DrawerLayout) findViewById(R.id.drawerid);
         navigationView = (NavigationView) findViewById(R.id.navigation_drawer_id);
         drawerToggle = new ActionBarDrawerToggle(this,drawer,R.string.nav_open,R.string.nav_close);
-        drawerUserName = navigationView.getHeaderView(0).findViewById(R.id.userid);
+        drawerUserName = navigationView.getHeaderView(0).findViewById(R.id.navuserid);
         String user = LoginActivity.user.toUpperCase();
         drawerUserName.setText(user);
 
@@ -206,14 +206,13 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        switch (id) {
-            case R.id.idLogout:
+            if(id==R.id.idLogout) {
                 firebaseAuth.signOut();
-                if(firebaseAuth.getCurrentUser() == null)
-                startActivity(new Intent(HomePageActivity.this,LoginActivity.class));
-            case R.id.idMap:
+                if (firebaseAuth.getCurrentUser() == null)
+                    startActivity(new Intent(HomePageActivity.this, LoginActivity.class));
+            }
+            if(id==R.id.idMap)
                 startActivity(new Intent(HomePageActivity.this,MapActivity.class));
-        }
 
         if(drawerToggle.onOptionsItemSelected(item)){
             return true;
