@@ -7,9 +7,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,6 +37,8 @@ public class BookProfile extends AppCompatActivity implements View.OnClickListen
     private TextView bookTitle;
     private TextView availability;
     private Button booklistbtn,wishlishbtn;
+
+    private TextView popupReview;
 
     private RecyclerView reviewView;
     private BookReviewAdapter reviewAdapter;
@@ -108,7 +115,32 @@ public class BookProfile extends AppCompatActivity implements View.OnClickListen
     BookReviewAdapter.OnItemClickListener listener = new BookReviewAdapter.OnItemClickListener() {
         @Override
         public void onItemClick(BookReview book) {
-            startActivity(new Intent(BookProfile.this,Profile.class));
+
+            // inflate the layout of the popup window
+            LayoutInflater inflater = (LayoutInflater)
+                    getSystemService(LAYOUT_INFLATER_SERVICE);
+            View popupView = inflater.inflate(R.layout.popup_window, null);
+
+            popupReview = popupView.findViewById(R.id.popupReview);
+            // create the popup window
+            int width = LinearLayout.LayoutParams.WRAP_CONTENT;
+            int height = LinearLayout.LayoutParams.WRAP_CONTENT;
+            boolean focusable = true; // lets taps outside the popup also dismiss it
+            final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
+            popupReview.setText(book.getPostDesc());
+            // show the popup window
+            // which view you pass in doesn't matter, it is only used for the window tolken
+            popupWindow.showAtLocation(popupView, Gravity.CENTER, 0, 0);
+
+            // dismiss the popup window when touched
+            popupView.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    popupWindow.dismiss();
+                    return true;
+                }
+            });
+//            startActivity(new Intent(BookProfile.this,Profile.class));
         }
     };
 

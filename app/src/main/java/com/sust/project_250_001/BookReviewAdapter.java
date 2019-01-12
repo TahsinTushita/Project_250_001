@@ -29,12 +29,13 @@ public class BookReviewAdapter extends RecyclerView.Adapter<BookReviewAdapter.Bo
             username = itemView.findViewById(R.id.userName);
             posttitle = itemView.findViewById(R.id.bookTitle);
             postdesc = itemView.findViewById(R.id.bookPost);
+            postdesc.setMaxLines(4);
         }
 
         public void setDetails(BookReview bookReview) {
             username.setText(bookReview.getUsername());
             posttitle.setText(bookReview.getPostTitle());
-            postdesc.setText(bookReview.getPostDesc());
+            postdesc.setText(bookReview.getPostDesc() + "...");
         }
 
         public void bind(final BookReview book, final BookReviewAdapter.OnItemClickListener listener) {
