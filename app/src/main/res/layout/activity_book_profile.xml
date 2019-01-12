@@ -50,24 +50,26 @@
                 android:text="ISBN"
                 />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/mapID"
-                android:layout_marginTop="10dp"
-                android:text="Check availability"
-                android:clickable="true"
-                />
-
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Add to wishlist"
+                android:id="@+id/wishListid"
                 />
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Add to booklist"
+                android:id="@+id/bookListid"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/checkAvailability"
+                android:layout_marginTop="20dp"
+                android:text="Check availability"
+                android:clickable="true"
                 />
 
 

@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,7 +22,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-public class BookProfile extends AppCompatActivity {
+public class BookProfile extends AppCompatActivity implements View.OnClickListener{
 
     private Book book;
     public static final String EXTRA_BOOK = "bookObject";
@@ -29,6 +30,8 @@ public class BookProfile extends AppCompatActivity {
     private ImageView bookCover;
     private TextView bookAuthor;
     private TextView bookTitle;
+    private TextView availability;
+    private Button booklistbtn,wishlishbtn;
 
     private RecyclerView reviewView;
     private BookReviewAdapter reviewAdapter;
@@ -44,6 +47,13 @@ public class BookProfile extends AppCompatActivity {
         bookCover = findViewById(R.id.bookCover);
         bookTitle = findViewById(R.id.bookTitle);
         bookAuthor = findViewById(R.id.bookAuthor);
+        availability = findViewById(R.id.checkAvailability);
+        booklistbtn = findViewById(R.id.bookListid);
+        wishlishbtn = findViewById(R.id.wishListid);
+
+        availability.setOnClickListener(this);
+        booklistbtn.setOnClickListener(this);
+        wishlishbtn.setOnClickListener(this);
 
         Picasso.get().load(book.getImgurl()).into(bookCover);
 
@@ -101,4 +111,20 @@ public class BookProfile extends AppCompatActivity {
             startActivity(new Intent(BookProfile.this,Profile.class));
         }
     };
+
+    @Override
+    public void onClick(View v) {
+        int id = v.getId();
+
+        if(id==R.id.bookListid)
+            Toast.makeText(BookProfile.this,"Added to your Book list",Toast.LENGTH_SHORT).show();
+
+        if(id==R.id.wishListid)
+            Toast.makeText(BookProfile.this,"Added to your Wish list",Toast.LENGTH_SHORT).show();
+
+        if(id==R.id.checkAvailability){
+            Intent intent = new Intent(BookProfile.this,MapActivity.class);
+            startActivity(intent);
+        }
+    }
 }
