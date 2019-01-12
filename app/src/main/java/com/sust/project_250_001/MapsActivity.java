@@ -1,7 +1,6 @@
 package com.sust.project_250_001;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Build;
@@ -57,7 +56,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
-
     }
 
     @Override
