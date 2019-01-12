@@ -36,7 +36,6 @@
 
         </android.support.v7.widget.Toolbar>
         <com.lapism.searchview.widget.SearchView
-            app:search_logo="google"
             android:id="@+id/searchBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
