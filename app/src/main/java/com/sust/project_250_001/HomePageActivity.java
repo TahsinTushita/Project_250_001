@@ -52,6 +52,10 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
 
+        //Set toolbar as actionbar
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
         drawer = (DrawerLayout) findViewById(R.id.drawerid);
         navigationView = (NavigationView) findViewById(R.id.navigation_drawer_id);
         drawerToggle = new ActionBarDrawerToggle(this,drawer,R.string.nav_open,R.string.nav_close);
@@ -85,9 +89,6 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
         reviewDatabase = FirebaseDatabase.getInstance().getReference("Reviews");
         reviewDatabase.addValueEventListener(reviewValueEventListener);
 
-        //Set toolbar as actionbar
-        toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
         SearchItem suggestion = new SearchItem(this);
         suggestion.setTitle("Title");
