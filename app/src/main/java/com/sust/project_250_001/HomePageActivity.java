@@ -66,7 +66,7 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
         navigationView = (NavigationView) findViewById(R.id.navigation_drawer_id);
         drawerToggle = new ActionBarDrawerToggle(this,drawer,R.string.nav_open,R.string.nav_close);
         drawerUserName = navigationView.getHeaderView(0).findViewById(R.id.userid);
-        String user = LoginActivity.user;
+        String user = LoginActivity.user.toUpperCase();
         drawerUserName.setText(user);
 
         drawer.addDrawerListener(drawerToggle);
