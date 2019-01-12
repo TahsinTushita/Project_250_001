@@ -2,6 +2,7 @@ package com.sust.project_250_001;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -12,8 +13,11 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -47,6 +51,8 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
     private NavigationView navigationView;
     private DrawerLayout drawer;
     private ActionBarDrawerToggle drawerToggle;
+
+    private TextView drawerUserName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +65,9 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
         drawer = (DrawerLayout) findViewById(R.id.drawerid);
         navigationView = (NavigationView) findViewById(R.id.navigation_drawer_id);
         drawerToggle = new ActionBarDrawerToggle(this,drawer,R.string.nav_open,R.string.nav_close);
+        drawerUserName = navigationView.getHeaderView(0).findViewById(R.id.userid);
+        String user = LoginActivity.user;
+        drawerUserName.setText(user);
 
         drawer.addDrawerListener(drawerToggle);
         drawerToggle.syncState();
@@ -101,7 +110,9 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
         final SearchHistoryTable mHistoryDatabase = new SearchHistoryTable(this);
 
 
-        final SearchView searchView = findViewById(R.id.searchBar);
+        final SearchView searchView = findViewById( R.id.searchBar);
+        searchView.setLogoIcon(R.drawable.book_search);
+        searchView.setLogoColor(getResources().getColor(R.color.colorSearch));
         searchView.setOnQueryTextListener(new Search.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(CharSequence query) {

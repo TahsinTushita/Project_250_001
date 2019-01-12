@@ -27,7 +27,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText passWord;
     private Button loginBtn;
 
-    static String user;
+    static String user = "Anonymous";
 
     // Firebase related things
     private FirebaseDatabase database;
@@ -90,6 +90,9 @@ public class LoginActivity extends AppCompatActivity {
                 }
             });
         } else {
+
+            user = firebaseAuth.getCurrentUser().getEmail();
+            user = user.substring(0,user.lastIndexOf('@')).trim();
             startActivity(new Intent(LoginActivity.this, HomePageActivity.class));
             finish();
         }
