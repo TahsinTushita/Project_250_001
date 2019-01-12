@@ -14,7 +14,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
+
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -261,8 +261,8 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
                 break;
 
         }
-
-
+        startActivity(intent);
         return false;
     }
+
 }
