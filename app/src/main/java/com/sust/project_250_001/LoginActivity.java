@@ -27,6 +27,8 @@ public class LoginActivity extends AppCompatActivity {
     private EditText passWord;
     private Button loginBtn;
 
+    static String user;
+
     // Firebase related things
     private FirebaseDatabase database;
     private FirebaseAuth firebaseAuth;
@@ -54,7 +56,7 @@ public class LoginActivity extends AppCompatActivity {
             loginBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    String username = userName.getText().toString().trim();
+                    final String username = userName.getText().toString().trim();
                     String pwd = passWord.getText().toString();
 
                     //01 This part is to hide softkeyboard
@@ -73,6 +75,8 @@ public class LoginActivity extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
+                                    user = firebaseAuth.getCurrentUser().getEmail();
+                                    user = user.substring(0,user.lastIndexOf('@')).trim();
                                     Snackbar.make(findViewById(android.R.id.content), R.string.successful_login, Snackbar.LENGTH_SHORT).show();
                                     startActivity(new Intent(LoginActivity.this, HomePageActivity.class));
                                 } else {

@@ -30,10 +30,6 @@ public class BookProfile extends AppCompatActivity {
     private TextView bookAuthor;
     private TextView bookTitle;
 
-
-
-
-
     private RecyclerView reviewView;
     private BookReviewAdapter reviewAdapter;
     private ArrayList<BookReview> reviewArrayList;
@@ -60,7 +56,7 @@ public class BookProfile extends AppCompatActivity {
         reviewView = findViewById(R.id.reviewView);
         reviewView.setLayoutManager(new LinearLayoutManager(this));
         reviewArrayList = new ArrayList<>();
-        reviewAdapter = new BookReviewAdapter(BookProfile.this, reviewArrayList);
+        reviewAdapter = new BookReviewAdapter(BookProfile.this, reviewArrayList,listener);
         reviewView.setAdapter(reviewAdapter);
 
 
@@ -80,7 +76,7 @@ public class BookProfile extends AppCompatActivity {
                     BookReview review = snapshot.getValue(BookReview.class);
                     reviewArrayList.add(review);
                 }
-                BookReviewAdapter adapter = new BookReviewAdapter(BookProfile.this,reviewArrayList);
+                BookReviewAdapter adapter = new BookReviewAdapter(BookProfile.this,reviewArrayList,listener);
                 reviewView.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
             }
@@ -98,4 +94,11 @@ public class BookProfile extends AppCompatActivity {
         intent.putExtra("bookParent",book);
         startActivity(intent);
     }
+
+    BookReviewAdapter.OnItemClickListener listener = new BookReviewAdapter.OnItemClickListener() {
+        @Override
+        public void onItemClick(BookReview book) {
+            startActivity(new Intent(BookProfile.this,Profile.class));
+        }
+    };
 }

@@ -7,10 +7,14 @@
     android:layout_height="match_parent"
     tools:context=".Profile">
 
+    <android.support.v7.widget.AppCompatImageButton
+        android:layout_width=""
+        android:layout_height="" />
+    
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="PROFILE"
         />
-
+    
 </LinearLayout>
