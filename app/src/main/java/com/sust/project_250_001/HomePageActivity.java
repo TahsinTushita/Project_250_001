@@ -3,6 +3,7 @@ package com.sust.project_250_001;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -202,7 +203,10 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
                 startActivity(new Intent(HomePageActivity.this,MapActivity.class));
         }
 
-        if()
+        if(drawerToggle.onOptionsItemSelected(item)){
+            return true;
+        }
+
         return super.onOptionsItemSelected(item);
     }
 
@@ -217,8 +221,47 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
         }
     };
 
+
+
+    @Override
+    public void onBackPressed() {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawerid);
+
+        if(drawer.isDrawerOpen(GravityCompat.START)){
+            drawer.closeDrawer(GravityCompat.START);
+        }
+
+        else
+            super.onBackPressed();
+    }
+
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+
+
+        int id = menuItem.getItemId();
+        Intent intent = null;
+
+        switch(id) {
+
+            case R.id.profileid:
+                intent = new Intent(this, Profile.class);
+                drawer.closeDrawer(GravityCompat.START);
+                break;
+
+                case R.id.bookListid:
+                intent = new Intent(this, Profile.class);
+                drawer.closeDrawer(GravityCompat.START);
+                break;
+
+                case R.id.wishListid:
+                intent = new Intent(this, Profile.class);
+                drawer.closeDrawer(GravityCompat.START);
+                break;
+
+        }
+
+
         return false;
     }
 }

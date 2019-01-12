@@ -19,9 +19,4 @@
         android:icon="@drawable/wishlist"
         />
 
-    <item
-        android:title="Logout"
-        android:id="@+id/logoutid"
-        />
-
 </menu>

@@ -56,7 +56,9 @@
             android:label="@string/title_activity_maps" />
         <activity android:name=".PostReview" />
         <activity android:name=".MapActivity" />
-        <activity android:name=".Profile"></activity>
+        <activity android:name=".Profile" />
+        <activity android:name=".BookList" />
+        <activity android:name=".WishList"></activity>
     </application>
 
 </manifest>
