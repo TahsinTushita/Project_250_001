@@ -4,18 +4,16 @@ import java.io.Serializable;
 
 public class ProfileInfo implements Serializable {
 
-    String username,address,email,booklist,wishlist,parent;
+    String username,address,email,parent;
 
     public ProfileInfo(){
 
     }
 
-    public ProfileInfo(String username,String address,String email,String booklist,String wishlist){
+    public ProfileInfo(String username,String address,String email){
         this.address = address;
-        this.booklist = booklist;
         this.email = email;
         this.username = username;
-        this.wishlist = wishlist;
     }
 
     public void setUsername(String username){
@@ -39,22 +37,6 @@ public class ProfileInfo implements Serializable {
 
     public String getEmail(){
         return email;
-    }
-
-    public void setBooklist(String booklist){
-        this.booklist = booklist;
-    }
-
-    public String getBooklist(){
-        return booklist;
-    }
-
-    public void setWishlist(String wishlist){
-        this.wishlist = wishlist;
-    }
-
-    public String getWishlist(){
-        return wishlist;
     }
 
 

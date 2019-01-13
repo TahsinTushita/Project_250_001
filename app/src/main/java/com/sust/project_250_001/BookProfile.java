@@ -58,6 +58,7 @@ public class BookProfile extends AppCompatActivity implements View.OnClickListen
     private BookReviewAdapter reviewAdapter;
     private ArrayList<BookReview> reviewArrayList;
     private ArrayList<ProfileInfo> profileInfoArrayList;
+    private ArrayList<Users> usersArrayList;
     private DatabaseReference reviewDatabase,profileDatabase;
     private NavigationView navigationView;
     private DrawerLayout drawer;
@@ -133,6 +134,7 @@ public class BookProfile extends AppCompatActivity implements View.OnClickListen
 
 //        Recent Reviews fetching from firebase
         reviewDatabase.addValueEventListener(reviewValueEventListener);
+        bookDatabaseReference.addValueEventListener(usersValueEventListener);
 
 
     }
@@ -152,6 +154,24 @@ public class BookProfile extends AppCompatActivity implements View.OnClickListen
                 adapter.notifyDataSetChanged();
             }
             else return;
+        }
+
+        @Override
+        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+        }
+    };
+
+    ValueEventListener usersValueEventListener = new ValueEventListener() {
+        @Override
+        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+            if(dataSnapshot.exists()){
+                usersArrayList.clear();
+                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+                    Users user = snapshot.getValue(Users.class);
+                    usersArrayList.add(user);
+                }
+            }
         }
 
         @Override
@@ -236,6 +256,7 @@ public class BookProfile extends AppCompatActivity implements View.OnClickListen
         }
 
         if(id==R.id.checkAvailability){
+
             Intent intent = new Intent(BookProfile.this,MapActivity.class);
             startActivity(intent);
         }

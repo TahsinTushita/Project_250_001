@@ -1,6 +1,7 @@
 package com.sust.project_250_001;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Book implements Serializable{
     String title;
@@ -9,14 +10,16 @@ public class Book implements Serializable{
     String topReview;
     String parent;
     String imgurl;
+    String users;
 
-    public Book(String title, String author, String isbn, String topReview, String parent, String imgurl) {
+    public Book(String title, String author, String isbn, String topReview, String parent, String imgurl,String users) {
         this.title = title;
         this.author = author;
         this.isbn = isbn;
         this.topReview = topReview;
         this.parent = parent;
         this.imgurl = imgurl;
+        this.users = users;
     }
 
     public void setImgurl(String imgurl) {
@@ -70,6 +73,10 @@ public class Book implements Serializable{
 
     public void setTopReview(String topReview) {
         this.topReview = topReview;
+    }
+
+    public String getUsers(){
+        return users;
     }
 
 }
