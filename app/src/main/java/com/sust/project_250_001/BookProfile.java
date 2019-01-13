@@ -25,6 +25,8 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -50,6 +52,7 @@ public class BookProfile extends AppCompatActivity implements View.OnClickListen
     private TextView drawerUserName;
 
     private TextView popupReview;
+    private String userName;
 
     private RecyclerView reviewView;
     private BookReviewAdapter reviewAdapter;
@@ -59,6 +62,8 @@ public class BookProfile extends AppCompatActivity implements View.OnClickListen
     private NavigationView navigationView;
     private DrawerLayout drawer;
     private ActionBarDrawerToggle drawerToggle;
+
+    private DatabaseReference bookDatabaseReference,profileDatabaseReference;
 
 
     @Override
@@ -103,8 +108,19 @@ public class BookProfile extends AppCompatActivity implements View.OnClickListen
         bookTitle.setText(book.getTitle());
 
 
+        userName = "Anonymous";
+
+        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        if(firebaseUser != null)
+            userName = firebaseUser.getEmail();
+        userName = userName.substring(0,userName.lastIndexOf('@'));
+
         reviewDatabase = FirebaseDatabase.getInstance().getReference("Books").child(book.getParent()).child("reviews");
-        //profileDatabase = FirebaseDatabase.getInstance().getReference("Profile").child(profileInfo.getAddress()).child("address");
+        bookDatabaseReference = FirebaseDatabase.getInstance().getReference("Books").
+                child(book.getParent()).child("users");
+        profileDatabaseReference = FirebaseDatabase.getInstance().getReference("Profile")
+                .child(userName).child("booklist");
+
 
         //String adrr = profileDatabase.getDatabase().toString();
         //Recent Reviews
@@ -182,21 +198,49 @@ public class BookProfile extends AppCompatActivity implements View.OnClickListen
         }
     };
 
+
+    public void addToBooklist(){
+        DatabaseReference newBook,newUser;
+
+        newUser = bookDatabaseReference.child(userName);
+        newUser.child("username").setValue(userName);
+//
+//        newBook = profileDatabase.push();
+//        newBook.setValue(book.getParent());
+
+        newBook = FirebaseDatabase.getInstance().getReference().child("Profile").child(userName).child("booklist");
+        newBook.child(book.getParent()).setValue(book.getParent());
+
+
+    }
+
+    public void addToWishList(){
+        DatabaseReference newBook;
+        newBook = FirebaseDatabase.getInstance().getReference().child("Profile").child(userName).child("wishlist");
+        newBook.child(book.getParent()).setValue(book.getParent());
+    }
+
+
     @Override
     public void onClick(View v) {
         int id = v.getId();
 
-        if(id==R.id.bookListid)
-            Toast.makeText(BookProfile.this,"Added to your Book list",Toast.LENGTH_SHORT).show();
+        if(id==R.id.bookListid) {
+            addToBooklist();
+            Toast.makeText(BookProfile.this, "Added to your Book list", Toast.LENGTH_SHORT).show();
+        }
 
-        if(id==R.id.wishListid)
-            Toast.makeText(BookProfile.this,"Added to your Wish list",Toast.LENGTH_SHORT).show();
+        if(id==R.id.wishListid) {
+            addToWishList();
+            Toast.makeText(BookProfile.this, "Added to your Wish list", Toast.LENGTH_SHORT).show();
+        }
 
         if(id==R.id.checkAvailability){
             Intent intent = new Intent(BookProfile.this,MapActivity.class);
             startActivity(intent);
         }
     }
+
 
 
 
@@ -236,12 +280,17 @@ public class BookProfile extends AppCompatActivity implements View.OnClickListen
                 break;
 
             case R.id.bookListid:
-                intent = new Intent(this, Profile.class);
+                intent = new Intent(this, BookList.class);
                 drawer.closeDrawer(GravityCompat.START);
                 break;
 
             case R.id.wishListid:
-                intent = new Intent(this, Profile.class);
+                intent = new Intent(this, WishList.class);
+                drawer.closeDrawer(GravityCompat.START);
+                break;
+
+            case R.id.homePage:
+                intent = new Intent(this, HomePageActivity.class);
                 drawer.closeDrawer(GravityCompat.START);
                 break;
 

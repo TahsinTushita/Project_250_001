@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class ProfileInfo implements Serializable {
 
-    String username,address,email,booklist,wishlist;
+    String username,address,email,booklist,wishlist,parent;
 
     public ProfileInfo(){
 
@@ -49,12 +49,13 @@ public class ProfileInfo implements Serializable {
         return booklist;
     }
 
-    public void setWishlist(){
+    public void setWishlist(String wishlist){
         this.wishlist = wishlist;
     }
 
     public String getWishlist(){
         return wishlist;
     }
+
 
 }
