@@ -58,7 +58,9 @@
         <activity android:name=".MapActivity" />
         <activity android:name=".Profile" />
         <activity android:name=".BookList" />
-        <activity android:name=".WishList"></activity>
+        <activity android:name=".WishList" />
+        <activity android:name=".SignupActivity" />
+        <activity android:name=".EditProfileActivity"></activity>
     </application>
 
 </manifest>

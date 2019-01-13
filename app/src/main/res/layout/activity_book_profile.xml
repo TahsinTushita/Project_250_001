@@ -1,114 +1,141 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<android.support.v4.widget.DrawerLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:id="@+id/drawerid"
     tools:context=".BookProfile">
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         >
 
-        <ImageView
-            android:id="@+id/bookCover"
-            android:layout_width="150dp"
-            android:layout_height="200dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-             />
+        <include
+            layout="@layout/toolbar_layout"
+            android:id="@+id/toolbar"
+            />
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="20dp"
+            android:orientation="horizontal"
             >
 
-            <TextView
-                android:id="@+id/bookTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="TITLE" />
-
-            <TextView
-                android:id="@+id/bookAuthor"
+            <ImageView
+                android:id="@+id/bookCover"
+                android:layout_width="150dp"
+                android:layout_height="200dp"
+                android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="AUTHOR" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/bookISBN"
-                android:layout_marginTop="10dp"
-                android:text="ISBN"
                 />
-
-            <Button
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Add to wishlist"
-                android:id="@+id/wishListid"
-                />
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Add to booklist"
-                android:id="@+id/bookListid"
-                />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/checkAvailability"
+                android:orientation="vertical"
+                android:layout_marginLeft="15dp"
                 android:layout_marginTop="20dp"
-                android:text="Check availability"
-                android:clickable="true"
-                />
+                >
+
+                <TextView
+                    android:id="@+id/bookTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TITLE" />
+
+                <TextView
+                    android:id="@+id/bookAuthor"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="AUTHOR" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/bookISBN"
+                    android:layout_marginTop="10dp"
+                    android:text="ISBN"
+                    />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Add to wishlist"
+                    android:id="@+id/wishListid"
+                    />
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Add to booklist"
+                    android:id="@+id/bookListid"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/checkAvailability"
+                    android:layout_marginTop="20dp"
+                    android:text="Check availability"
+                    android:clickable="true"
+                    />
+
+
+            </LinearLayout>
 
 
         </LinearLayout>
 
 
-    </LinearLayout>
 
-
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="10dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true">
-
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end|bottom"
-            android:layout_margin="16dp"
-            android:src="@drawable/ic_add_white"
-            android:onClick="startPosting"/>
-
-
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/reviewView"
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/bookAuthor"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="0dp"
-            android:layout_marginTop="-1dp" />
+            android:layout_marginTop="10dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true">
 
-    </FrameLayout>
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|bottom"
+                android:layout_margin="16dp"
+                android:src="@drawable/ic_add_white"
+                android:onClick="startPosting"/>
 
 
 
-</LinearLayout>
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/reviewView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/bookAuthor"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="-1dp" />
+
+        </FrameLayout>
+
+
+
+    </LinearLayout>
+
+    <android.support.design.widget.NavigationView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:id="@+id/navigation_drawer_id"
+        app:headerLayout="@layout/nav_header"
+        android:layout_gravity="start"
+        app:menu="@menu/navigation_menu"
+        >
+
+    </android.support.design.widget.NavigationView>
+
+
+
+</android.support.v4.widget.DrawerLayout>

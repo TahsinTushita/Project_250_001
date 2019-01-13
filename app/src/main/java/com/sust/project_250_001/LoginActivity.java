@@ -25,7 +25,7 @@ public class LoginActivity extends AppCompatActivity {
     //Login box related things
     private EditText userName;
     private EditText passWord;
-    private Button loginBtn;
+    private Button loginBtn,regBtn;
 
     static String user = "Anonymous";
 
@@ -49,6 +49,7 @@ public class LoginActivity extends AppCompatActivity {
         userName = findViewById(R.id.userNameID);
         passWord = findViewById(R.id.passWordID);
         loginBtn = findViewById(R.id.btnLogin);
+        regBtn = findViewById(R.id.btnReg);
 
 
         firebaseAuth = FirebaseAuth.getInstance();
@@ -96,5 +97,13 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(new Intent(LoginActivity.this, HomePageActivity.class));
             finish();
         }
+
+        regBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this,SignupActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }

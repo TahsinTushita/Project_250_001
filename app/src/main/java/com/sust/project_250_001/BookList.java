@@ -1,13 +1,89 @@
 package com.sust.project_250_001;
 
+import android.content.Intent;
+import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
+import android.widget.TextView;
 
-public class BookList extends AppCompatActivity {
+public class BookList extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+
+    private Toolbar toolbar;
+
+    private NavigationView navigationView;
+    private DrawerLayout drawer;
+    private ActionBarDrawerToggle drawerToggle;
+
+    private TextView drawerUserName;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_list);
+
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Book List");
+
+        drawer = (DrawerLayout) findViewById(R.id.drawerid);
+        navigationView = (NavigationView) findViewById(R.id.navigation_drawer_id);
+        drawerToggle = new ActionBarDrawerToggle(this,drawer,R.string.nav_open,R.string.nav_close);
+        drawerUserName = navigationView.getHeaderView(0).findViewById(R.id.navuserid);
+        String user = LoginActivity.user.toUpperCase();
+        drawerUserName.setText(user);
+
+        drawer.addDrawerListener(drawerToggle);
+        drawerToggle.syncState();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        navigationView.setNavigationItemSelectedListener(this);
     }
+
+    @Override
+    public void onBackPressed() {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawerid);
+
+        if(drawer.isDrawerOpen(GravityCompat.START)){
+            drawer.closeDrawer(GravityCompat.START);
+        }
+
+        else
+            super.onBackPressed();
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+
+
+        int id = menuItem.getItemId();
+        Intent intent = null;
+
+        switch(id) {
+
+            case R.id.profileid:
+                intent = new Intent(this, Profile.class);
+                drawer.closeDrawer(GravityCompat.START);
+                break;
+
+            case R.id.bookListid:
+                intent = new Intent(this, Profile.class);
+                drawer.closeDrawer(GravityCompat.START);
+                break;
+
+            case R.id.wishListid:
+                intent = new Intent(this, Profile.class);
+                drawer.closeDrawer(GravityCompat.START);
+                break;
+
+        }
+        startActivity(intent);
+        return true;
+    }
+
 }

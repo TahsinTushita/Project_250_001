@@ -25,10 +25,20 @@ public class ProfileInfoAdapter extends RecyclerView.Adapter<ProfileInfoAdapter.
 
     public class ProfileInfoHolder extends RecyclerView.ViewHolder {
 
-        TextView username,email,booklist,wishlist,address;
+        private TextView username,email,address;
 
         public ProfileInfoHolder(@NonNull View itemView) {
             super(itemView);
+
+            username = itemView.findViewById(R.id.profileUsername);
+            email = itemView.findViewById(R.id.profileEmail);
+            address = itemView.findViewById(R.id.profileAddress);
+        }
+
+        public void setDetails(ProfileInfo profileInfo){
+            username.setText(profileInfo.getUsername());
+            email.setText(profileInfo.getEmail());
+            address.setText(profileInfo.getAddress());
         }
     }
 }
