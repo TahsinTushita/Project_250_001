@@ -6,6 +6,10 @@ public class Users {
 
     String username;
 
+    public Users(){
+
+    }
+
     public String getUsername() {
         return username;
     }

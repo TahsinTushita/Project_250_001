@@ -10,16 +10,14 @@ public class Book implements Serializable{
     String topReview;
     String parent;
     String imgurl;
-    String users;
 
-    public Book(String title, String author, String isbn, String topReview, String parent, String imgurl,String users) {
+    public Book(String title, String author, String isbn, String topReview, String parent, String imgurl) {
         this.title = title;
         this.author = author;
         this.isbn = isbn;
         this.topReview = topReview;
         this.parent = parent;
         this.imgurl = imgurl;
-        this.users = users;
     }
 
     public void setImgurl(String imgurl) {
@@ -75,8 +73,5 @@ public class Book implements Serializable{
         this.topReview = topReview;
     }
 
-    public String getUsers(){
-        return users;
-    }
 
 }

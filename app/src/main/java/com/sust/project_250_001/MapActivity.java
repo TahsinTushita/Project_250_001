@@ -28,6 +28,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -44,7 +45,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
     private GoogleMap mMap;
     private FusedLocationProviderClient mfusedLocationProviderClient;
-    private static final float DEFAULT_ZOOM = 15f;
+    private static final float DEFAULT_ZOOM = 25f;
 
     private EditText mSearchText;
     private ImageView mGps;
@@ -68,17 +69,25 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             //mMap.getUiSettings().setMyLocationButtonEnabled(false);
 
             Geocoder coder = new Geocoder(this);
+
+            ArrayList<Address> addresses = new ArrayList<Address>();
+            String address = null;
+
             try {
-                String address = "Mirpur-2,Dhaka,Bangladesh";
-                ArrayList<Address> adresses = (ArrayList<Address>) coder.getFromLocationName(address, 2);
 
-                for(Address add : adresses){
+                for(int i=0;i<HomePageActivity.profileInfoArrayList.size();i++){
+                    addresses.clear();
+                    address = HomePageActivity.profileInfoArrayList.get(i).getAddress();
+                    addresses = (ArrayList<Address>) coder.getFromLocationName(address,1);
+                    for(Address add : addresses){
 
-                    double longitude = add.getLongitude();
-                    double latitude = add.getLatitude();
-                    MarkerOptions options = new MarkerOptions().position(new LatLng(latitude,longitude)).title(address);
-                    mMap.addMarker(options);
+                        double longitude = add.getLongitude();
+                        double latitude = add.getLatitude();
+                        MarkerOptions options = new MarkerOptions().position(new LatLng(latitude,longitude)).title(address).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
+                        mMap.addMarker(options);
+                    }
                 }
+
             } catch (IOException e) {
                 e.printStackTrace();
             }

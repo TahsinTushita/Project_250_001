@@ -1,6 +1,7 @@
 package com.sust.project_250_001;
 
 import android.content.Intent;
+import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
@@ -45,7 +46,8 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
     private ReviewAdapter reviewAdapter;
     private ArrayList<Book> bookArrayList;
     private ArrayList<Review> reviewArrayList;
-    private DatabaseReference database,reviewDatabase;
+    public static ArrayList<ProfileInfo> profileInfoArrayList;
+    private DatabaseReference database,reviewDatabase,userDatabase;
     private FirebaseAuth firebaseAuth;
     private NavigationView navigationView;
     private DrawerLayout drawer;
@@ -79,6 +81,8 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
         bookArrayList = new ArrayList<>();
         adapter = new BookAdapter(this,bookArrayList,listener);
         recyclerView.setAdapter(adapter);
+
+        profileInfoArrayList = new ArrayList<>();
 
         firebaseAuth = FirebaseAuth.getInstance();
 
@@ -153,7 +157,8 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
 
 
     }
-    ValueEventListener reviewValueEventListener = new ValueEventListener() {
+
+        ValueEventListener reviewValueEventListener = new ValueEventListener() {
         @Override
         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
             reviewArrayList.clear();

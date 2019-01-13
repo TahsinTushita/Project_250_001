@@ -2,6 +2,7 @@ package com.sust.project_250_001;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
@@ -27,10 +28,12 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
@@ -58,13 +61,13 @@ public class BookProfile extends AppCompatActivity implements View.OnClickListen
     private BookReviewAdapter reviewAdapter;
     private ArrayList<BookReview> reviewArrayList;
     private ArrayList<ProfileInfo> profileInfoArrayList;
-    private ArrayList<Users> usersArrayList;
+    private ArrayList<Users> usersArrayList = new ArrayList<Users>();
     private DatabaseReference reviewDatabase,profileDatabase;
     private NavigationView navigationView;
     private DrawerLayout drawer;
     private ActionBarDrawerToggle drawerToggle;
 
-    private DatabaseReference bookDatabaseReference,profileDatabaseReference;
+    private DatabaseReference bookDatabaseReference,profileDatabaseReference,userDatabaseReference;
 
 
     @Override
@@ -121,6 +124,7 @@ public class BookProfile extends AppCompatActivity implements View.OnClickListen
                 child(book.getParent()).child("users");
         profileDatabaseReference = FirebaseDatabase.getInstance().getReference("Profile")
                 .child(userName).child("booklist");
+
 
 
         //String adrr = profileDatabase.getDatabase().toString();
@@ -256,6 +260,25 @@ public class BookProfile extends AppCompatActivity implements View.OnClickListen
         }
 
         if(id==R.id.checkAvailability){
+
+            HomePageActivity.profileInfoArrayList.clear();
+            for(int i=0;i<usersArrayList.size();i++){
+                Query mQuery = FirebaseDatabase.getInstance().getReference().child("Profile").orderByChild("username").equalTo(usersArrayList.get(i).getUsername());
+                mQuery.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
+                            ProfileInfo info = postSnapshot.getValue(ProfileInfo.class);
+                            HomePageActivity.profileInfoArrayList.add(info);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+            }
 
             Intent intent = new Intent(BookProfile.this,MapActivity.class);
             startActivity(intent);
