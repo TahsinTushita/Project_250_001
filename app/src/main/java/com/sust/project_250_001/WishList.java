@@ -57,6 +57,16 @@ public class WishList extends AppCompatActivity implements NavigationView.OnNavi
     }
 
     @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        if(drawerToggle.onOptionsItemSelected(item)){
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
 
 
@@ -71,12 +81,12 @@ public class WishList extends AppCompatActivity implements NavigationView.OnNavi
                 break;
 
             case R.id.bookListid:
-                intent = new Intent(this, Profile.class);
+                intent = new Intent(this, BookList.class);
                 drawer.closeDrawer(GravityCompat.START);
                 break;
 
             case R.id.wishListid:
-                intent = new Intent(this, Profile.class);
+                intent = new Intent(this, WishList.class);
                 drawer.closeDrawer(GravityCompat.START);
                 break;
 
