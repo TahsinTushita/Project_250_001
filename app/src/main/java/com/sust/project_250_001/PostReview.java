@@ -66,5 +66,7 @@ public class PostReview extends AppCompatActivity {
         recentReviewPost.child("reviewText").setValue(postDesc);
         progressDialog.dismiss();
 
+        onBackPressed();
+
     }
 }
