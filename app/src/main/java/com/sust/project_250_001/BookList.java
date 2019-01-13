@@ -91,6 +91,11 @@ public class BookList extends AppCompatActivity implements NavigationView.OnNavi
                 drawer.closeDrawer(GravityCompat.START);
                 break;
 
+            case R.id.homePage:
+                intent = new Intent(this, HomePageActivity.class);
+                drawer.closeDrawer(GravityCompat.START);
+                break;
+
         }
         startActivity(intent);
         return true;

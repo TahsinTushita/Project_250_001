@@ -107,6 +107,11 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
                 drawer.closeDrawer(GravityCompat.START);
                 break;
 
+            case R.id.homePage:
+                intent = new Intent(this, HomePageActivity.class);
+                drawer.closeDrawer(GravityCompat.START);
+                break;
+
         }
         startActivity(intent);
         return true;
