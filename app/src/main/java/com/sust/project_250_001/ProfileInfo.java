@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class ProfileInfo implements Serializable {
 
-    String username,address,email,parent;
+    String username,address,email;
 
     public ProfileInfo(){
 
