@@ -13,12 +13,14 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -209,7 +211,6 @@ public class BookProfile extends AppCompatActivity implements View.OnClickListen
             // show the popup window
             // which view you pass in doesn't matter, it is only used for the window tolken
             popupWindow.showAtLocation(popupView, Gravity.CENTER, 0, 0);
-
             // dismiss the popup window when touched
             popupView.setOnTouchListener(new View.OnTouchListener() {
                 @Override
@@ -339,7 +340,7 @@ public class BookProfile extends AppCompatActivity implements View.OnClickListen
                 break;
 
         }
-        startActivity(intent);
+        this.startActivity(intent);
 
         return true;
     }

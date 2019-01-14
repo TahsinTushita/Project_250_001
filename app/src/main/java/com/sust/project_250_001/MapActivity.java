@@ -29,6 +29,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -320,14 +321,17 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         }
 
         if(userMarker == null) {
-            userMarker = new MarkerOptions().position(new LatLng(latitude, longitude)).title("Current Location");
+            mMap.addCircle(new CircleOptions().center(new LatLng(latitude,longitude)).radius(1000).strokeWidth(0f).fillColor(0xE6FFBEBE));
 
+            userMarker = new MarkerOptions().position(new LatLng(latitude, longitude)).title("Current Location");
             myMarker = mMap.addMarker(userMarker);
         }
         else {
             myMarker.remove();
 
             userMarker = new MarkerOptions().position(new LatLng(latitude, longitude)).title("Current Location");
+            mMap.clear();
+            mMap.addCircle(new CircleOptions().center(new LatLng(latitude,longitude)).radius(1000).strokeWidth(0f).fillColor(0xE6FFBEBE));
 
             myMarker = mMap.addMarker(userMarker);
 

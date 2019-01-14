@@ -280,7 +280,7 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
                 break;
 
         }
-        startActivity(intent);
+        this.startActivity(intent);
         return false;
     }
 

@@ -8,4 +8,5 @@
     <color name="colorBG">#ffffff</color>
 
     <color name="colorBgLight">#dfffffff</color>
+    <color name="colorPink">#ffbebe</color>
 </resources>
