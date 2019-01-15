@@ -36,6 +36,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class MapActivity extends AppCompatActivity implements OnMapReadyCallback {
@@ -55,6 +56,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     Marker marker;
     ArrayList<Address> addresses = new ArrayList<Address>();
 
+    private HashMap<Marker, String> hs = new HashMap<>();
 
 
     @Override
@@ -75,6 +77,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                 @Override
                 public boolean onMarkerClick(Marker marker) {
                     Intent intent = new Intent(MapActivity.this,Profile.class);
+                    intent.putExtra("profileID",hs.get(marker));
                     startActivity(intent);
 
                     return false;
@@ -252,7 +255,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                     double longitude = add.getLongitude();
                     double latitude = add.getLatitude();
                     MarkerOptions options = new MarkerOptions().position(new LatLng(latitude,longitude)).title(address).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
-                    mMap.addMarker(options);
+                    Marker marker = mMap.addMarker(options);
+                    hs.put(marker,HomePageActivity.profileInfoArrayList.get(i).getUsername());
                 }
             }
 

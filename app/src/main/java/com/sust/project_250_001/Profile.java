@@ -30,6 +30,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
     private Toolbar toolbar;
 
     private String user;
+    private String EXTRA_PROFILE_ID = "profileID";
 
     private NavigationView navigationView;
     private DrawerLayout drawer;
@@ -68,7 +69,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
 
 
 
-        Query mQuery = FirebaseDatabase.getInstance().getReference().child("Profile").orderByChild("username").equalTo(LoginActivity.user);
+        Query mQuery = FirebaseDatabase.getInstance().getReference().child("Profile").orderByChild("username").equalTo(getIntent().getStringExtra(EXTRA_PROFILE_ID));
         mQuery.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
