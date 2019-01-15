@@ -15,6 +15,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -261,6 +262,7 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
 
             case R.id.profileid:
                 intent = new Intent(this, Profile.class);
+                intent.putExtra("profileID", LoginActivity.user);
                 drawer.closeDrawer(GravityCompat.START);
                 break;
 
