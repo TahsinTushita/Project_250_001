@@ -25,6 +25,8 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
+import javax.security.auth.login.LoginException;
+
 public class Profile extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private Toolbar toolbar;
@@ -91,15 +93,6 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
 
 
         user = LoginActivity.user;
-        editBtn = findViewById(R.id.profileEditBtn);
-        editBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Profile.this,EditProfileActivity.class);
-                startActivity(intent);
-            }
-        });
-
 
 
     }
@@ -139,6 +132,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
 
             case R.id.profileid:
                 intent = new Intent(this, Profile.class);
+                intent.putExtra("profileID", LoginActivity.user);
                 drawer.closeDrawer(GravityCompat.START);
                 break;
 

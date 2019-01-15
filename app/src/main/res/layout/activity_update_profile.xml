@@ -6,6 +6,9 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".UpdateProfile">
+    <include
+
+        />
     <EditText
         android:id="@+id/idName"
         android:layout_width="match_parent"
