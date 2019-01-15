@@ -60,7 +60,6 @@
         <activity android:name=".BookList" />
         <activity android:name=".WishList" />
         <activity android:name=".SignupActivity" />
-        <activity android:name=".EditProfileActivity" />
     </application>
 
 </manifest>
