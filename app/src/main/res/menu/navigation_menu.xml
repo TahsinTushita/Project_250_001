@@ -24,5 +24,9 @@
         android:id="@+id/wishListid"
         android:icon="@drawable/wishlist"
         />
+    <item
+        android:title="Update Profile"
+        android:id="@+id/updProfile"
+        />
 
 </menu>

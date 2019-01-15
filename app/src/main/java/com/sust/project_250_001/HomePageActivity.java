@@ -280,6 +280,9 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
                 intent = new Intent(this,HomePageActivity.class);
                 drawer.closeDrawer(GravityCompat.START);
                 break;
+            case R.id.updProfile:
+                intent = new Intent(this,UpdateProfile.class);
+                drawer.closeDrawer(GravityCompat.START);
 
         }
         this.startActivity(intent);

@@ -10,24 +10,46 @@
         layout="@layout/toolbar_layout"
         android:id="@+id/toolbar"
         />
-    <EditText
-        android:id="@+id/idName"
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Name"/>
-    <EditText
-        android:id="@+id/idPwd"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Password"/>
-    <EditText
-        android:id="@+id/idAdress"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Adress"/>
-    <Button
-        android:id="@+id/btnUpdate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="UPDATE"/>
+        android:layout_height="match_parent">
+
+        <EditText
+            android:id="@+id/idName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Name" />
+        <EditText
+            android:id="@+id/idEmail"
+            android:layout_below="@+id/idName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="E-mail" />
+
+        <EditText
+            android:layout_below="@id/idEmail"
+            android:id="@+id/idPwd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Password"
+            android:inputType="textPassword" />
+
+        <EditText
+            android:layout_below="@id/idPwd"
+            android:id="@+id/idAdress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Adress" />
+
+        <Button
+            android:layout_centerInParent="true"
+            android:id="@+id/btnUpdate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/idAdress"
+            android:layout_marginTop="3dp"
+            android:text="UPDATE"
+            android:onClick="update"/>
+    </RelativeLayout>
 </LinearLayout>

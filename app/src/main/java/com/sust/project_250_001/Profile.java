@@ -148,7 +148,6 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
                 intent = new Intent(this, HomePageActivity.class);
                 drawer.closeDrawer(GravityCompat.START);
                 break;
-
         }
         startActivity(intent);
         return true;
