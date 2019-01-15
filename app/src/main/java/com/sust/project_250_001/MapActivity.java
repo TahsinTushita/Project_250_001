@@ -132,6 +132,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
 
         hideSoftKeyboard(MapActivity.this);
+        drawNearby();
     }
 
     private void geolocate() {
