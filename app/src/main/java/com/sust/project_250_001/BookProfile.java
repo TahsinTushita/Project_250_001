@@ -235,9 +235,7 @@ public class BookProfile extends AppCompatActivity implements View.OnClickListen
 
         newBook = FirebaseDatabase.getInstance().getReference().child("Profile").child(userName).child("booklist");
         newBook.child(book.getParent()).setValue(book.getParent());
-
-
-    }
+        }
 
     public void addToWishList(){
         DatabaseReference newBook;

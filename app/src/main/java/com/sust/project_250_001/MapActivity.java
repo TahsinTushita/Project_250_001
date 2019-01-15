@@ -69,30 +69,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             mMap.setMyLocationEnabled(true);
             //mMap.getUiSettings().setMyLocationButtonEnabled(false);
 
-            Geocoder coder = new Geocoder(this);
-
-            ArrayList<Address> addresses = new ArrayList<Address>();
-            String address = null;
-
-            try {
-
-                for(int i=0;i<HomePageActivity.profileInfoArrayList.size();i++){
-                    addresses.clear();
-                    address = HomePageActivity.profileInfoArrayList.get(i).getAddress();
-                    addresses = (ArrayList<Address>) coder.getFromLocationName(address,1);
-                    for(Address add : addresses){
-
-                        double longitude = add.getLongitude();
-                        double latitude = add.getLatitude();
-                        MarkerOptions options = new MarkerOptions().position(new LatLng(latitude,longitude)).title(address).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
-                        mMap.addMarker(options);
-                    }
-                }
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
 
             googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
 
@@ -108,6 +84,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
 
             init();
+            getCurrentLocation();
         }
 
     }
@@ -258,6 +235,34 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     private MarkerOptions userMarker;
     private Marker myMarker;
 
+    private void drawNearby() {
+
+        ArrayList<Address> addresses = new ArrayList<Address>();
+        String address = null;
+
+        try {
+
+            Geocoder coder = new Geocoder(this);
+            for(int i=0;i<HomePageActivity.profileInfoArrayList.size();i++){
+                addresses.clear();
+                address = HomePageActivity.profileInfoArrayList.get(i).getAddress();
+                addresses = (ArrayList<Address>) coder.getFromLocationName(address,1);
+                for(Address add : addresses){
+
+                    double longitude = add.getLongitude();
+                    double latitude = add.getLatitude();
+                    MarkerOptions options = new MarkerOptions().position(new LatLng(latitude,longitude)).title(address).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
+                    mMap.addMarker(options);
+                }
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
     private void getCurrentLocation(){
 
 
@@ -325,6 +330,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
             userMarker = new MarkerOptions().position(new LatLng(latitude, longitude)).title("Current Location");
             myMarker = mMap.addMarker(userMarker);
+            myMarker.showInfoWindow();
         }
         else {
             myMarker.remove();
@@ -334,11 +340,14 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             mMap.addCircle(new CircleOptions().center(new LatLng(latitude,longitude)).radius(1000).strokeWidth(0f).fillColor(0xE6FFBEBE));
 
             myMarker = mMap.addMarker(userMarker);
+            myMarker.showInfoWindow();
 
         }
         //Toast.makeText(this,"lat:"+latitude+" long:"+longitude,Toast.LENGTH_SHORT).show();
         moveCamera(new LatLng(latitude, longitude),15f
                 , "my location");
+
+        drawNearby();
     }
 
 }

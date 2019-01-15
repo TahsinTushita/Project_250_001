@@ -2,7 +2,6 @@ package com.sust.project_250_001;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -16,7 +15,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.google.firebase.database.ChildEventListener;
+import com.google.android.gms.location.LocationServices;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -74,6 +73,9 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
                 for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
                     ProfileInfo info = postSnapshot.getValue(ProfileInfo.class);
                     profileInfo = info;
+                    username.setText(profileInfo.getUsername());
+                    address.setText(profileInfo.getAddress());
+                    email.setText(profileInfo.getEmail());
                 }
             }
 
@@ -83,10 +85,6 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
             }
         });
 
-
-        username.setText(profileInfo.getUsername());
-        address.setText(profileInfo.getAddress());
-        email.setText(profileInfo.getEmail());
 
 
         user = LoginActivity.user;
