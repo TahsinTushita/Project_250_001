@@ -91,9 +91,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
         });
 
 
-
         user = LoginActivity.user;
-
 
     }
 
