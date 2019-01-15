@@ -237,13 +237,13 @@ public class BookProfile extends AppCompatActivity implements View.OnClickListen
 //        newBook.setValue(book.getParent());
 
         newBook = FirebaseDatabase.getInstance().getReference().child("Profile").child(userName).child("booklist");
-        newBook.child(book.getParent()).setValue(book.getParent());
+        newBook.child(book.getParent()).child("parent").setValue(book.getParent());
         }
 
     public void addToWishList(){
         DatabaseReference newBook;
         newBook = FirebaseDatabase.getInstance().getReference().child("Profile").child(userName).child("wishlist");
-        newBook.child(book.getParent()).setValue(book.getParent());
+        newBook.child(book.getParent()).child("parent").setValue(book.getParent());
     }
 
 
