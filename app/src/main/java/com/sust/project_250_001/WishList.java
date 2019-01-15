@@ -77,6 +77,7 @@ public class WishList extends AppCompatActivity implements NavigationView.OnNavi
 
             case R.id.profileid:
                 intent = new Intent(this, Profile.class);
+                intent.putExtra("profileID",LoginActivity.user);
                 drawer.closeDrawer(GravityCompat.START);
                 break;
 
