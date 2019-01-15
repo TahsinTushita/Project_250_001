@@ -51,9 +51,6 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <activity
-            android:name=".MapsActivity"
-            android:label="@string/title_activity_maps" />
         <activity android:name=".PostReview" />
         <activity android:name=".MapActivity" />
         <activity android:name=".Profile" />
