@@ -9,49 +9,27 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
-import com.google.android.gms.location.LocationServices;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
-
-import java.util.ArrayList;
-
-import javax.security.auth.login.LoginException;
-
-public class Profile extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class WishList extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private Toolbar toolbar;
-
-    private String user;
-    private String EXTRA_PROFILE_ID = "profileID";
 
     private NavigationView navigationView;
     private DrawerLayout drawer;
     private ActionBarDrawerToggle drawerToggle;
 
-    private TextView drawerUserName,username,email,address;
-    private Button editBtn;
-    private ProfileInfo profileInfo = new ProfileInfo();
-    private DatabaseReference profileInfodatabase;
+    private TextView drawerUserName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile);
+        setContentView(R.layout.activity_wish_list);
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Profile");
-
+        getSupportActionBar().setTitle("Wish List");
 
         drawer = (DrawerLayout) findViewById(R.id.drawerid);
         navigationView = (NavigationView) findViewById(R.id.navigation_drawer_id);
@@ -64,40 +42,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
         drawerToggle.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         navigationView.setNavigationItemSelectedListener(this);
-
-        username = findViewById(R.id.profileUsername);
-        email = findViewById(R.id.profileAddress);
-        address = findViewById(R.id.profileEmail);
-
-
-
-        Query mQuery = FirebaseDatabase.getInstance().getReference().child("Profile").orderByChild("username").equalTo(getIntent().getStringExtra(EXTRA_PROFILE_ID));
-        mQuery.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
-                    ProfileInfo info = postSnapshot.getValue(ProfileInfo.class);
-                    profileInfo = info;
-                    username.setText(profileInfo.getUsername());
-                    address.setText(profileInfo.getAddress());
-                    email.setText(profileInfo.getEmail());
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-
-
-        user = LoginActivity.user;
-
-
     }
-
-
 
     @Override
     public void onBackPressed() {
@@ -132,7 +77,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
 
             case R.id.profileid:
                 intent = new Intent(this, Profile.class);
-                intent.putExtra("profileID", LoginActivity.user);
+                intent.putExtra("profileID",LoginActivity.user);
                 drawer.closeDrawer(GravityCompat.START);
                 break;
 

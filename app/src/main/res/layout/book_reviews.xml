@@ -15,18 +15,25 @@
             android:orientation="vertical">
 
             <TextView
+                android:textStyle="bold"
+                android:textColor="#FF00"
                 android:id="@+id/userName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="username" />
+                android:text="username"/>
 
             <TextView
+                android:textStyle="bold"
+                android:textColor="#000"
                 android:id="@+id/bookTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="title"
                 />
             <TextView
+                android:layout_margin="5dp"
+                android:textAlignment="center"
+                android:shadowColor="@android:color/darker_gray"
                 android:id="@+id/bookPost"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

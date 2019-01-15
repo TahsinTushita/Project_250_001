@@ -1,6 +1,7 @@
 package com.sust.project_250_001;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Book implements Serializable{
     String title;
@@ -71,5 +72,6 @@ public class Book implements Serializable{
     public void setTopReview(String topReview) {
         this.topReview = topReview;
     }
+
 
 }

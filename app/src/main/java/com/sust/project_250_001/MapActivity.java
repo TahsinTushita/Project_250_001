@@ -28,12 +28,15 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class MapActivity extends AppCompatActivity implements OnMapReadyCallback {
@@ -44,7 +47,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
     private GoogleMap mMap;
     private FusedLocationProviderClient mfusedLocationProviderClient;
-    private static final float DEFAULT_ZOOM = 15f;
+    private static final float DEFAULT_ZOOM = 25f;
 
     private EditText mSearchText;
     private ImageView mGps;
@@ -53,6 +56,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     Marker marker;
     ArrayList<Address> addresses = new ArrayList<Address>();
 
+    private HashMap<Marker, String> hs = new HashMap<>();
 
 
     @Override
@@ -67,28 +71,13 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             mMap.setMyLocationEnabled(true);
             //mMap.getUiSettings().setMyLocationButtonEnabled(false);
 
-            Geocoder coder = new Geocoder(this);
-            try {
-                String address = "Mirpur-2,Dhaka,Bangladesh";
-                ArrayList<Address> adresses = (ArrayList<Address>) coder.getFromLocationName(address, 2);
-
-                for(Address add : adresses){
-
-                    double longitude = add.getLongitude();
-                    double latitude = add.getLatitude();
-                    MarkerOptions options = new MarkerOptions().position(new LatLng(latitude,longitude)).title(address);
-                    mMap.addMarker(options);
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
 
             googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
 
                 @Override
                 public boolean onMarkerClick(Marker marker) {
                     Intent intent = new Intent(MapActivity.this,Profile.class);
+                    intent.putExtra("profileID",hs.get(marker));
                     startActivity(intent);
 
                     return false;
@@ -98,6 +87,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
 
             init();
+            getCurrentLocation();
         }
 
     }
@@ -248,6 +238,35 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     private MarkerOptions userMarker;
     private Marker myMarker;
 
+    private void drawNearby() {
+
+        ArrayList<Address> addresses = new ArrayList<Address>();
+        String address = null;
+
+        try {
+
+            Geocoder coder = new Geocoder(this);
+            for(int i=0;i<HomePageActivity.profileInfoArrayList.size();i++){
+                addresses.clear();
+                address = HomePageActivity.profileInfoArrayList.get(i).getAddress();
+                addresses = (ArrayList<Address>) coder.getFromLocationName(address,1);
+                for(Address add : addresses){
+
+                    double longitude = add.getLongitude();
+                    double latitude = add.getLatitude();
+                    MarkerOptions options = new MarkerOptions().position(new LatLng(latitude,longitude)).title(address).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
+                    Marker marker = mMap.addMarker(options);
+                    hs.put(marker,HomePageActivity.profileInfoArrayList.get(i).getUsername());
+                }
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
     private void getCurrentLocation(){
 
 
@@ -311,21 +330,28 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         }
 
         if(userMarker == null) {
-            userMarker = new MarkerOptions().position(new LatLng(latitude, longitude)).title("Current Location");
+            mMap.addCircle(new CircleOptions().center(new LatLng(latitude,longitude)).radius(1000).strokeWidth(0f).fillColor(0xE6FFBEBE));
 
+            userMarker = new MarkerOptions().position(new LatLng(latitude, longitude)).title("Current Location");
             myMarker = mMap.addMarker(userMarker);
+            myMarker.showInfoWindow();
         }
         else {
             myMarker.remove();
 
             userMarker = new MarkerOptions().position(new LatLng(latitude, longitude)).title("Current Location");
+            mMap.clear();
+            mMap.addCircle(new CircleOptions().center(new LatLng(latitude,longitude)).radius(1000).strokeWidth(0f).fillColor(0xE6FFBEBE));
 
             myMarker = mMap.addMarker(userMarker);
+            myMarker.showInfoWindow();
 
         }
         //Toast.makeText(this,"lat:"+latitude+" long:"+longitude,Toast.LENGTH_SHORT).show();
         moveCamera(new LatLng(latitude, longitude),15f
                 , "my location");
+
+        drawNearby();
     }
 
 }

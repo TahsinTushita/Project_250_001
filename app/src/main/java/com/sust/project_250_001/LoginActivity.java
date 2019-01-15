@@ -15,6 +15,7 @@ import android.widget.EditText;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
@@ -25,7 +26,9 @@ public class LoginActivity extends AppCompatActivity {
     //Login box related things
     private EditText userName;
     private EditText passWord;
-    private Button loginBtn;
+    private Button loginBtn,regBtn;
+
+    static String user = "Anonymous";
 
     // Firebase related things
     private FirebaseDatabase database;
@@ -37,6 +40,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        FirebaseApp.initializeApp(this);
         setContentView(R.layout.activity_login);
 
         //Find and set Toolbar
@@ -47,6 +51,7 @@ public class LoginActivity extends AppCompatActivity {
         userName = findViewById(R.id.userNameID);
         passWord = findViewById(R.id.passWordID);
         loginBtn = findViewById(R.id.btnLogin);
+        regBtn = findViewById(R.id.btnReg);
 
 
         firebaseAuth = FirebaseAuth.getInstance();
@@ -54,7 +59,7 @@ public class LoginActivity extends AppCompatActivity {
             loginBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    String username = userName.getText().toString().trim();
+                    final String username = userName.getText().toString().trim();
                     String pwd = passWord.getText().toString();
 
                     //01 This part is to hide softkeyboard
@@ -73,6 +78,8 @@ public class LoginActivity extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
+                                    user = firebaseAuth.getCurrentUser().getEmail();
+                                    user = user.substring(0,user.lastIndexOf('@')).trim();
                                     Snackbar.make(findViewById(android.R.id.content), R.string.successful_login, Snackbar.LENGTH_SHORT).show();
                                     startActivity(new Intent(LoginActivity.this, HomePageActivity.class));
                                 } else {
@@ -86,8 +93,19 @@ public class LoginActivity extends AppCompatActivity {
                 }
             });
         } else {
+
+            user = firebaseAuth.getCurrentUser().getEmail();
+            user = user.substring(0,user.lastIndexOf('@')).trim();
             startActivity(new Intent(LoginActivity.this, HomePageActivity.class));
             finish();
         }
+
+        regBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this,SignupActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }

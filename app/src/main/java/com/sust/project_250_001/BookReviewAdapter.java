@@ -13,6 +13,11 @@ import java.util.ArrayList;
 
 public class BookReviewAdapter extends RecyclerView.Adapter<BookReviewAdapter.BookReviewHolder> {
 
+    public interface OnItemClickListener {
+        void onItemClick(BookReview book);
+    }
+
+
     public class BookReviewHolder extends RecyclerView.ViewHolder{
 
         private TextView username,posttitle,postdesc;
@@ -24,22 +29,35 @@ public class BookReviewAdapter extends RecyclerView.Adapter<BookReviewAdapter.Bo
             username = itemView.findViewById(R.id.userName);
             posttitle = itemView.findViewById(R.id.bookTitle);
             postdesc = itemView.findViewById(R.id.bookPost);
+            postdesc.setMaxLines(4);
         }
 
         public void setDetails(BookReview bookReview) {
             username.setText(bookReview.getUsername());
             posttitle.setText(bookReview.getPostTitle());
-            postdesc.setText(bookReview.getPostDesc());
+            postdesc.setText(bookReview.getPostDesc() + "...");
+        }
+
+        public void bind(final BookReview book, final BookReviewAdapter.OnItemClickListener listener) {
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override public void onClick(View v) {
+                    listener.onItemClick(book);
+                }
+            });
+
         }
 
     }
 
+
     private Context context;
+    private final BookReviewAdapter.OnItemClickListener listener;
 
     private ArrayList<BookReview> booksReviews;
-    public BookReviewAdapter(Context context, ArrayList<BookReview> booksReviews) {
+    public BookReviewAdapter(Context context, ArrayList<BookReview> booksReviews, BookReviewAdapter.OnItemClickListener listener) {
         this.context = context;
         this.booksReviews = booksReviews;
+        this.listener = listener;
     }
 
 
@@ -54,6 +72,7 @@ public class BookReviewAdapter extends RecyclerView.Adapter<BookReviewAdapter.Bo
     public void onBindViewHolder(@NonNull BookReviewHolder book, int i) {
         BookReview mBook = booksReviews.get(i);
         book.setDetails(mBook);
+        book.bind(booksReviews.get(i),listener);
     }
 
     @Override

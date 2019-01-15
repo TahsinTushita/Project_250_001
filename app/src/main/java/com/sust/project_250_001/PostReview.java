@@ -1,9 +1,9 @@
 package com.sust.project_250_001;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,6 +14,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class PostReview extends AppCompatActivity {
+
+    private Toolbar toolbar;
 
     private EditText reviewTitle,reviewDesc;
     private Button postBtn;
@@ -29,6 +31,10 @@ public class PostReview extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_review);
+
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
         reviewTitle = findViewById(R.id.reviewTitle) ;
         reviewDesc = findViewById(R.id.reviewDesc);
         postBtn = findViewById(R.id.postBtn);
@@ -66,6 +72,8 @@ public class PostReview extends AppCompatActivity {
         recentReviewPost.child("userName").setValue(userName);
         recentReviewPost.child("reviewText").setValue(postDesc);
         progressDialog.dismiss();
+
+        onBackPressed();
 
     }
 }
