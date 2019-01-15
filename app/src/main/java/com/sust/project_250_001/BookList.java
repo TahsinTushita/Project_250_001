@@ -12,6 +12,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.google.firebase.database.DatabaseReference;
+
 public class BookList extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private Toolbar toolbar;
@@ -21,6 +23,7 @@ public class BookList extends AppCompatActivity implements NavigationView.OnNavi
     private ActionBarDrawerToggle drawerToggle;
 
     private TextView drawerUserName;
+    private DatabaseReference booklist;
 
 
     @Override

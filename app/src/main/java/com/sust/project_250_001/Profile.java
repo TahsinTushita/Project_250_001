@@ -66,6 +66,8 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
         email = findViewById(R.id.profileAddress);
         address = findViewById(R.id.profileEmail);
 
+
+
         Query mQuery = FirebaseDatabase.getInstance().getReference().child("Profile").orderByChild("username").equalTo(LoginActivity.user);
         mQuery.addValueEventListener(new ValueEventListener() {
             @Override
