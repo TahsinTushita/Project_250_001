@@ -68,7 +68,7 @@ public class BookList extends AppCompatActivity implements NavigationView.OnNavi
         recyclerView = findViewById(R.id.search_recyclerView);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 1, GridLayoutManager.VERTICAL, false));
         bookArrayList = new ArrayList<>();
-        searchresultsAdapter = new SearchresultsAdapter(this, bookArrayList);
+        searchresultsAdapter = new SearchresultsAdapter(this, bookArrayList,listener);
 
         DatabaseReference database = FirebaseDatabase.getInstance().getReference("Profile").child(LoginActivity.user).child("booklist");
         database.addValueEventListener(new ValueEventListener() {
@@ -179,6 +179,13 @@ public class BookList extends AppCompatActivity implements NavigationView.OnNavi
         return true;
     }
 
-
+    SearchresultsAdapter.OnItemClickListener listener = new SearchresultsAdapter.OnItemClickListener() {
+        @Override
+        public void onItemClick(Book book) {
+            Intent i = new Intent(BookList.this,BookProfile.class);
+            i.putExtra("bookObject",book);
+            startActivity(i);
+        }
+    };
 
 }

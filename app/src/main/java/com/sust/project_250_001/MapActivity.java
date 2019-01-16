@@ -336,6 +336,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             userMarker = new MarkerOptions().position(new LatLng(latitude, longitude)).title("Current Location");
             myMarker = mMap.addMarker(userMarker);
             myMarker.showInfoWindow();
+            hs.put(myMarker,LoginActivity.user);
         }
         else {
             myMarker.remove();
@@ -347,6 +348,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             myMarker = mMap.addMarker(userMarker);
             myMarker.showInfoWindow();
 
+            hs.put(myMarker,LoginActivity.user);
         }
         //Toast.makeText(this,"lat:"+latitude+" long:"+longitude,Toast.LENGTH_SHORT).show();
         moveCamera(new LatLng(latitude, longitude),15f

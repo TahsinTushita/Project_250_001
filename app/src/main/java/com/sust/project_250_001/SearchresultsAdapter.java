@@ -17,9 +17,14 @@ import java.util.ArrayList;
 
 public class SearchresultsAdapter extends RecyclerView.Adapter<SearchresultsAdapter.SearchresultsHolder> {
 
+    public interface OnItemClickListener {
+        void onItemClick(Book book);
+    }
+
 
     private Context context;
     private ArrayList<Book> books;
+    private final OnItemClickListener listener;
 
     @NonNull
     @Override
@@ -33,6 +38,7 @@ public class SearchresultsAdapter extends RecyclerView.Adapter<SearchresultsAdap
     public void onBindViewHolder(@NonNull SearchresultsHolder searchresults, int i) {
         Book mBook = books.get(i);
         searchresults.setDetails(mBook);
+        searchresults.bind(books.get(i),listener);
     }
 
     @Override
@@ -61,11 +67,21 @@ public class SearchresultsAdapter extends RecyclerView.Adapter<SearchresultsAdap
             bookISBN.setText(book.getIsbn());
             Picasso.get().load(book.getImgurl()).into(imgurl);
         }
+
+        public void bind(final Book book, final SearchresultsAdapter.OnItemClickListener listener) {
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override public void onClick(View v) {
+                    listener.onItemClick(book);
+                }
+            });
+
+        }
     }
 
-    public SearchresultsAdapter(Context context,ArrayList<Book> books){
+    public SearchresultsAdapter(Context context,ArrayList<Book> books,OnItemClickListener listener){
         this.context = context;
         this.books = books;
+        this.listener = listener;
     }
 
 

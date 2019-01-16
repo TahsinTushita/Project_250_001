@@ -43,7 +43,7 @@ public class SearchResults extends AppCompatActivity {
         recyclerView = findViewById(R.id.search_recyclerView);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 1, GridLayoutManager.VERTICAL, false));
         bookArrayList = new ArrayList<>();
-        searchresultsAdapter = new SearchresultsAdapter(this, bookArrayList);
+        searchresultsAdapter = new SearchresultsAdapter(this, bookArrayList,listener);
         recyclerView.setAdapter(searchresultsAdapter);
 
         searchText = (String) getIntent().getExtras().get(EXTRA_SEARCHID);
@@ -64,7 +64,7 @@ public class SearchResults extends AppCompatActivity {
                         Book book = snapshot.getValue(Book.class);
                         bookArrayList.add(book);
                     }
-                    SearchresultsAdapter adapter = new SearchresultsAdapter(SearchResults.this, bookArrayList);
+                    SearchresultsAdapter adapter = new SearchresultsAdapter(SearchResults.this, bookArrayList,listener);
                     recyclerView.setAdapter(adapter);
                     adapter.notifyDataSetChanged();
                 }
@@ -74,6 +74,15 @@ public class SearchResults extends AppCompatActivity {
         @Override
         public void onCancelled(@NonNull DatabaseError databaseError) {
 
+        }
+    };
+
+    SearchresultsAdapter.OnItemClickListener listener = new SearchresultsAdapter.OnItemClickListener() {
+        @Override
+        public void onItemClick(Book book) {
+            Intent i = new Intent(SearchResults.this,BookProfile.class);
+            i.putExtra("bookObject",book);
+            startActivity(i);
         }
     };
 
