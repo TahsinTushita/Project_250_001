@@ -13,53 +13,115 @@
         android:id="@+id/toolbar"
         />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:orientation="horizontal"
+        >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/user"
+            android:layout_marginTop="10dp"
+            />
+
 
         <EditText
             android:id="@+id/signUpUserNameID"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:background="@drawable/round_corner_bg"
             android:ems="10"
             android:hint="Username"
             android:inputType="textPersonName"
             android:padding="10dp"
             android:singleLine="true" />
 
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/password"
+            android:layout_marginTop="10dp"
+            />
+
         <EditText
             android:id="@+id/signUpPassWordID"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:background="@drawable/round_corner_bg"
             android:ems="10"
             android:hint="Password"
             android:inputType="textPassword"
             android:padding="10dp"
             android:singleLine="true" />
 
-    <EditText
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/email"
+            />
+
+        <EditText
             android:id="@+id/signUpEmailID"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:background="@drawable/round_corner_bg"
             android:ems="10"
             android:hint="email"
             android:inputType="textEmailAddress"
             android:padding="10dp"
             android:singleLine="true" />
 
-    <EditText
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/address"
+            />
+
+        <EditText
             android:id="@+id/signUpAddressID"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:background="@drawable/round_corner_bg"
             android:ems="10"
             android:hint="Address"
             android:padding="10dp"
             android:singleLine="true" />
+
+    </LinearLayout>
+
 
 
         <Button
@@ -68,6 +130,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:background="@drawable/round_corner_bg"
+            android:layout_marginTop="10dp"
             android:text="Register" />
 
 
