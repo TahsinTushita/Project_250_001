@@ -65,18 +65,61 @@ public class BookList extends AppCompatActivity implements NavigationView.OnNavi
 
         bookList = new ArrayList<>();
 
-        //Trending books
         recyclerView = findViewById(R.id.search_recyclerView);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 1, GridLayoutManager.VERTICAL, false));
         bookArrayList = new ArrayList<>();
         searchresultsAdapter = new SearchresultsAdapter(this, bookArrayList);
-        recyclerView.setAdapter(searchresultsAdapter);
 
         DatabaseReference database = FirebaseDatabase.getInstance().getReference("Profile").child(LoginActivity.user).child("booklist");
-        database.addValueEventListener(valueEventListener);
+        database.addValueEventListener(new ValueEventListener() {
 
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                    bookList.clear();
+                    if (dataSnapshot.exists()) {
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                            String book = (String) snapshot.getValue(Book.class).getParent();
+                            bookList.add(book);
+                            System.out.println(book);
+                         }
+                    }
+                }
+                updateRecyclerView();
+            }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
 
+            }
+        });
+
+        recyclerView.setAdapter(searchresultsAdapter);
+
+    }
+
+    private void updateRecyclerView() {
+//        bookArrayList.clear();
+        for (String st : bookList) {
+            DatabaseReference db = FirebaseDatabase.getInstance().getReference("Books").child(st);
+            db.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                    Book book1 = dataSnapshot.getValue(Book.class);
+                    if(book1!=null) {
+                        bookArrayList.add(book1);
+                        System.out.println(book1.getAuthor());
+                    }
+                    searchresultsAdapter.notifyDataSetChanged();
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+        }
     }
 
     @Override
@@ -136,46 +179,6 @@ public class BookList extends AppCompatActivity implements NavigationView.OnNavi
         return true;
     }
 
-    ValueEventListener valueEventListener = new ValueEventListener() {
-        @Override
-        public void onDataChange(DataSnapshot dataSnapshot) {
-            for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                bookList.clear();
-                if (dataSnapshot.exists()) {
-                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                        String book = (String) snapshot.getValue(Book.class).getParent();
-                        bookList.add(book);
-                    }
-                    }
-                for (String st : bookList) {
-
-                    DatabaseReference db = FirebaseDatabase.getInstance().getReference("Books").child(st);
-                    bookArrayList.clear();
-                    db.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                            Book book1 = dataSnapshot.getValue(Book.class);
-                            if(book1!=null) {
-                                bookArrayList.add(book1);
-                                System.out.println(book1.getAuthor());
-                            }
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                        }
-                    });
-                }
-            }
-        }
-
-        @Override
-        public void onCancelled(@NonNull DatabaseError databaseError) {
-
-        }
-    };
 
 
 }
