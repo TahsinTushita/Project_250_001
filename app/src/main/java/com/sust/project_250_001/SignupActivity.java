@@ -69,13 +69,13 @@ public class SignupActivity extends AppCompatActivity {
                     return;
                 }
 
-                if(TextUtils.isEmpty(address)){
-                    Toast.makeText(SignupActivity.this,"Enter address",Toast.LENGTH_SHORT).show();
+                if(TextUtils.isEmpty(email)){
+                    Toast.makeText(SignupActivity.this,"Enter email",Toast.LENGTH_SHORT).show();
                     return;
                 }
 
-                if(TextUtils.isEmpty(email)){
-                    Toast.makeText(SignupActivity.this,"Enter email",Toast.LENGTH_SHORT).show();
+                if(TextUtils.isEmpty(address)){
+                    Toast.makeText(SignupActivity.this,"Enter address",Toast.LENGTH_SHORT).show();
                     return;
                 }
 

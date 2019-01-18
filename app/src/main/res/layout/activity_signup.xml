@@ -17,6 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
+        android:layout_marginLeft="25dp"
         android:orientation="horizontal"
         >
 
@@ -25,12 +26,13 @@
             android:layout_height="wrap_content"
             android:src="@drawable/user"
             android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
             />
 
 
         <EditText
             android:id="@+id/signUpUserNameID"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:ems="10"
@@ -47,6 +49,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginTop="10dp"
+        android:layout_marginLeft="25dp"
         >
 
         <ImageView
@@ -54,11 +57,12 @@
             android:layout_height="wrap_content"
             android:src="@drawable/password"
             android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
             />
 
         <EditText
             android:id="@+id/signUpPassWordID"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:ems="10"
@@ -75,17 +79,19 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginTop="10dp"
+        android:layout_marginLeft="25dp"
         >
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/email"
+            android:layout_marginLeft="10dp"
             />
 
         <EditText
             android:id="@+id/signUpEmailID"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:ems="10"
@@ -102,17 +108,19 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginTop="10dp"
+        android:layout_marginLeft="25dp"
         >
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/address"
+            android:layout_marginLeft="10dp"
             />
 
         <EditText
             android:id="@+id/signUpAddressID"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:ems="10"
