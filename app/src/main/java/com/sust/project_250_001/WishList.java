@@ -8,9 +8,19 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.TextView;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 public class WishList extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -21,6 +31,12 @@ public class WishList extends AppCompatActivity implements NavigationView.OnNavi
     private ActionBarDrawerToggle drawerToggle;
 
     private TextView drawerUserName;
+
+    private SearchresultsAdapter searchresultsAdapter;
+    private ArrayList<Book> bookArrayList;
+
+    private ArrayList<String> wishList;
+    private RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +58,64 @@ public class WishList extends AppCompatActivity implements NavigationView.OnNavi
         drawerToggle.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         navigationView.setNavigationItemSelectedListener(this);
+
+        wishList = new ArrayList<>();
+
+        recyclerView = findViewById(R.id.search_recyclerView);
+        recyclerView.setLayoutManager(new GridLayoutManager(this, 1, GridLayoutManager.VERTICAL, false));
+        bookArrayList = new ArrayList<>();
+        searchresultsAdapter = new SearchresultsAdapter(this, bookArrayList,listener);
+
+        DatabaseReference database = FirebaseDatabase.getInstance().getReference("Profile").child(LoginActivity.user).child("wishlist");
+        database.addValueEventListener(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                    wishList.clear();
+                    if (dataSnapshot.exists()) {
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                            String book = (String) snapshot.getValue(Book.class).getParent();
+                            wishList.add(book);
+                            System.out.println(book);
+                        }
+                    }
+                }
+                updateRecyclerView();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        recyclerView.setAdapter(searchresultsAdapter);
+
+    }
+
+    private void updateRecyclerView() {
+//        bookArrayList.clear();
+        for (String st : wishList) {
+            DatabaseReference db = FirebaseDatabase.getInstance().getReference("Books").child(st);
+            db.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                    Book book1 = dataSnapshot.getValue(Book.class);
+                    if(book1!=null) {
+                        bookArrayList.add(book1);
+                        System.out.println(book1.getAuthor());
+                    }
+                    searchresultsAdapter.notifyDataSetChanged();
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+        }
     }
 
     @Override
@@ -100,5 +174,14 @@ public class WishList extends AppCompatActivity implements NavigationView.OnNavi
         startActivity(intent);
         return true;
     }
+
+    SearchresultsAdapter.OnItemClickListener listener = new SearchresultsAdapter.OnItemClickListener() {
+        @Override
+        public void onItemClick(Book book) {
+            Intent i = new Intent(WishList.this,BookProfile.class);
+            i.putExtra("bookObject",book);
+            startActivity(i);
+        }
+    };
 
 }
