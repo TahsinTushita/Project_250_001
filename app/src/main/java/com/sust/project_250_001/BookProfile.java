@@ -52,6 +52,7 @@ public class BookProfile extends AppCompatActivity implements View.OnClickListen
     private ImageView bookCover;
     private TextView bookAuthor;
     private TextView bookTitle;
+    private TextView bookISBN;
     private TextView availability;
     private Button booklistbtn,wishlishbtn;
     private TextView drawerUserName;
@@ -100,6 +101,7 @@ public class BookProfile extends AppCompatActivity implements View.OnClickListen
         bookCover = findViewById(R.id.bookCover);
         bookTitle = findViewById(R.id.bookTitle);
         bookAuthor = findViewById(R.id.bookAuthor);
+        bookISBN = findViewById(R.id.bookISBN);
         availability = findViewById(R.id.checkAvailability);
         booklistbtn = findViewById(R.id.bookListid);
         wishlishbtn = findViewById(R.id.wishListid);
@@ -112,6 +114,7 @@ public class BookProfile extends AppCompatActivity implements View.OnClickListen
 
         bookAuthor.setText(book.getAuthor());
         bookTitle.setText(book.getTitle());
+        bookISBN.setText(book.getIsbn());
 
 
         userName = "Anonymous";
@@ -234,13 +237,13 @@ public class BookProfile extends AppCompatActivity implements View.OnClickListen
 //        newBook.setValue(book.getParent());
 
         newBook = FirebaseDatabase.getInstance().getReference().child("Profile").child(userName).child("booklist");
-        newBook.child(book.getParent()).setValue(book.getParent());
+        newBook.child(book.getParent()).child("parent").setValue(book.getParent());
         }
 
     public void addToWishList(){
         DatabaseReference newBook;
         newBook = FirebaseDatabase.getInstance().getReference().child("Profile").child(userName).child("wishlist");
-        newBook.child(book.getParent()).setValue(book.getParent());
+        newBook.child(book.getParent()).child("parent").setValue(book.getParent());
     }
 
 

@@ -24,7 +24,8 @@
             android:layout_height="wrap_content"
             android:text="Title:"
             android:textStyle="bold"
-            android:textSize="18dp"
+            android:textSize="18sp"
+            android:layout_marginLeft="10dp"
             />
 
         <EditText
@@ -41,8 +42,9 @@
         android:layout_height="wrap_content"
         android:text="Description"
         android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
         android:textStyle="bold"
-        android:textSize="18dp"
+        android:textSize="18sp"
         />
 
 

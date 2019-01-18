@@ -66,8 +66,8 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
         navigationView.setNavigationItemSelectedListener(this);
 
         username = findViewById(R.id.profileUsername);
-        email = findViewById(R.id.profileAddress);
-        address = findViewById(R.id.profileEmail);
+        email = findViewById(R.id.profileEmail);
+        address = findViewById(R.id.profileAddress);
 
 
 
@@ -91,9 +91,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
         });
 
 
-
         user = LoginActivity.user;
-
 
     }
 
@@ -150,7 +148,6 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
                 intent = new Intent(this, HomePageActivity.class);
                 drawer.closeDrawer(GravityCompat.START);
                 break;
-
         }
         startActivity(intent);
         return true;

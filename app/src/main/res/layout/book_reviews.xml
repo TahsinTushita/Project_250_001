@@ -16,18 +16,22 @@
 
             <TextView
                 android:textStyle="bold"
-                android:textColor="#FF00"
+                android:textColor="#FF9800"
                 android:id="@+id/userName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:layout_marginBottom="7dp"
                 android:text="username"/>
 
             <TextView
                 android:textStyle="bold"
+                android:textSize="15dp"
                 android:textColor="#000"
                 android:id="@+id/bookTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
                 android:text="title"
                 />
             <TextView
