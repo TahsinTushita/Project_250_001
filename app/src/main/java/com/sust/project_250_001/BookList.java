@@ -99,7 +99,6 @@ public class BookList extends AppCompatActivity implements NavigationView.OnNavi
     }
 
     private void updateRecyclerView() {
-//        bookArrayList.clear();
         for (String st : bookList) {
             DatabaseReference db = FirebaseDatabase.getInstance().getReference("Books").child(st);
             db.addValueEventListener(new ValueEventListener() {
