@@ -10,7 +10,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -68,12 +71,33 @@ public class SearchresultsAdapter extends RecyclerView.Adapter<SearchresultsAdap
             Picasso.get().load(book.getImgurl()).into(imgurl);
         }
 
+        void removeAt(int position)
+        {
+            books.remove(position);
+            notifyItemRemoved(position);
+            notifyItemRangeChanged(position,books.size());
+        }
+
         public void bind(final Book book, final SearchresultsAdapter.OnItemClickListener listener) {
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override public void onClick(View v) {
-                    listener.onItemClick(book);
+            itemView.findViewById(R.id.btnRemove).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Profile")
+                            .child(LoginActivity.user)
+                            .child("booklist")
+                            .child(book.getParent());
+                    databaseReference.setValue(null);
+
+                    removeAt(getAdapterPosition());
+                    Toast.makeText(v.getContext(),"Book Has Been Removed",Toast.LENGTH_LONG).show();
                 }
             });
+//            itemView.setOnClickListener(new View.OnClickListener() {
+//                @Override public void onClick(View v) {
+//                    listener.onItemClick(book);
+//                }
+//            });
+
 
         }
     }
@@ -83,6 +107,7 @@ public class SearchresultsAdapter extends RecyclerView.Adapter<SearchresultsAdap
         this.books = books;
         this.listener = listener;
     }
+
 
 
 }
