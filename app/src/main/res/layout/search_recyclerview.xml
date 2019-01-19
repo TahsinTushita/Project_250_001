@@ -49,6 +49,12 @@
                 android:layout_marginTop="15dp"
                 android:text="ISBN"
                 />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="remove"
+                android:id="@+id/btnRemove"
+                android:visibility="visible"/>
 
 
         </LinearLayout>
