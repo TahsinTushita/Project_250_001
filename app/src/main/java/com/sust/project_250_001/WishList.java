@@ -25,16 +25,12 @@ import java.util.ArrayList;
 public class WishList extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private Toolbar toolbar;
-
     private NavigationView navigationView;
     private DrawerLayout drawer;
     private ActionBarDrawerToggle drawerToggle;
-
     private TextView drawerUserName;
-
     private SearchresultsAdapter searchresultsAdapter;
     private ArrayList<Book> bookArrayList;
-
     private ArrayList<String> wishList;
     private RecyclerView recyclerView;
 
@@ -42,33 +38,26 @@ public class WishList extends AppCompatActivity implements NavigationView.OnNavi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wish_list);
-
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Wish List");
-
         drawer = (DrawerLayout) findViewById(R.id.drawerid);
         navigationView = (NavigationView) findViewById(R.id.navigation_drawer_id);
         drawerToggle = new ActionBarDrawerToggle(this,drawer,R.string.nav_open,R.string.nav_close);
         drawerUserName = navigationView.getHeaderView(0).findViewById(R.id.navuserid);
         String user = LoginActivity.user.toUpperCase();
         drawerUserName.setText(user);
-
         drawer.addDrawerListener(drawerToggle);
         drawerToggle.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         navigationView.setNavigationItemSelectedListener(this);
-
         wishList = new ArrayList<>();
-
         recyclerView = findViewById(R.id.search_recyclerView);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 1, GridLayoutManager.VERTICAL, false));
         bookArrayList = new ArrayList<>();
         searchresultsAdapter = new SearchresultsAdapter(this, bookArrayList,listener);
-
         DatabaseReference database = FirebaseDatabase.getInstance().getReference("Profile").child(LoginActivity.user).child("wishlist");
         database.addValueEventListener(new ValueEventListener() {
-
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
@@ -89,9 +78,7 @@ public class WishList extends AppCompatActivity implements NavigationView.OnNavi
 
             }
         });
-
         recyclerView.setAdapter(searchresultsAdapter);
-
     }
 
     private void updateRecyclerView() {
@@ -101,7 +88,6 @@ public class WishList extends AppCompatActivity implements NavigationView.OnNavi
             db.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
                     Book book1 = dataSnapshot.getValue(Book.class);
                     if(book1!=null) {
                         bookArrayList.add(book1);
@@ -121,7 +107,6 @@ public class WishList extends AppCompatActivity implements NavigationView.OnNavi
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawerid);
-
         if(drawer.isDrawerOpen(GravityCompat.START)){
             drawer.closeDrawer(GravityCompat.START);
         }
@@ -136,7 +121,6 @@ public class WishList extends AppCompatActivity implements NavigationView.OnNavi
         if(drawerToggle.onOptionsItemSelected(item)){
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 

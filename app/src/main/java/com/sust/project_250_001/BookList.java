@@ -85,15 +85,13 @@ public class BookList extends AppCompatActivity implements NavigationView.OnNavi
                     }
                     updateRecyclerView();
                 }
-                if(dataSnapshot.getChildrenCount() == 0) Toast.makeText(BookList.this,"No more",Toast.LENGTH_LONG).show();
+                if(dataSnapshot.getChildrenCount() == 0) searchresultsAdapter.notifyDataSetChanged();
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
         });
-
         recyclerView.setAdapter(searchresultsAdapter);
 
     }
