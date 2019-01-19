@@ -75,6 +75,13 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
             requestBtn.setVisibility(View.VISIBLE);
         }
 
+        requestBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
 
         Query mQuery = FirebaseDatabase.getInstance().getReference().child("Profile").orderByChild("username").equalTo(getIntent().getStringExtra(EXTRA_PROFILE_ID));
         mQuery.addValueEventListener(new ValueEventListener() {
