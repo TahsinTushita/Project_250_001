@@ -13,6 +13,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -70,22 +71,21 @@ public class BookList extends AppCompatActivity implements NavigationView.OnNavi
         bookArrayList = new ArrayList<>();
         searchresultsAdapter = new SearchresultsAdapter(this, bookArrayList,listener);
 
-        DatabaseReference database = FirebaseDatabase.getInstance().getReference("Profile").child(LoginActivity.user).child("booklist");
+        final DatabaseReference database = FirebaseDatabase.getInstance().getReference("Profile").child(LoginActivity.user).child("booklist");
         database.addValueEventListener(new ValueEventListener() {
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     bookList.clear();
-                    if (dataSnapshot.exists()) {
-                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                            String book = (String) snapshot.getValue(Book.class).getParent();
-                            bookList.add(book);
-                            System.out.println(book);
-                         }
+                    if (postSnapshot.exists()) {
+                        String book = (String) postSnapshot.getValue(Book.class).getParent();
+                        bookList.add(book);
+                        System.out.println(book);
                     }
+                    updateRecyclerView();
                 }
-                updateRecyclerView();
+                if(dataSnapshot.getChildrenCount() == 0) Toast.makeText(BookList.this,"No more",Toast.LENGTH_LONG).show();
             }
 
             @Override
@@ -99,7 +99,10 @@ public class BookList extends AppCompatActivity implements NavigationView.OnNavi
     }
 
     private void updateRecyclerView() {
+        if(bookList.size() == 0 ) Toast.makeText(this,"No More Items",Toast.LENGTH_LONG).show();
         for (String st : bookList) {
+
+            bookArrayList.clear();
             DatabaseReference db = FirebaseDatabase.getInstance().getReference("Books").child(st);
             db.addValueEventListener(new ValueEventListener() {
                 @Override
