@@ -40,7 +40,7 @@
             android:id="@+id/idAdress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Adress" />
+            android:hint="Address" />
 
         <Button
             android:layout_centerInParent="true"
@@ -50,6 +50,7 @@
             android:layout_below="@id/idAdress"
             android:layout_marginTop="3dp"
             android:text="UPDATE"
-            android:onClick="update"/>
+            android:onClick="update"
+            />
     </RelativeLayout>
 </LinearLayout>
