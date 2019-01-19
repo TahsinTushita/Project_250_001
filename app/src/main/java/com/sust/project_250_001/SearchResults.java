@@ -57,6 +57,7 @@ public class SearchResults extends AppCompatActivity {
     ValueEventListener valueEventListener = new ValueEventListener() {
         @Override
         public void onDataChange(DataSnapshot dataSnapshot) {
+            bookArrayList.clear();
             for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                 bookArrayList.clear();
                 if (dataSnapshot.exists()) {
