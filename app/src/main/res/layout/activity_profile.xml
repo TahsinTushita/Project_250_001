@@ -105,6 +105,15 @@
 
         </LinearLayout>
 
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:text="Request"
+            android:id="@+id/requestBtnid"
+            android:visibility="invisible"
+            />
+
     </LinearLayout>
 
     <android.support.design.widget.NavigationView

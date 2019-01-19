@@ -22,6 +22,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -78,6 +79,10 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                 public boolean onMarkerClick(Marker marker) {
                     Intent intent = new Intent(MapActivity.this,Profile.class);
                     intent.putExtra("profileID",hs.get(marker));
+                    if(hs.get(marker).equals(LoginActivity.user)) {
+                        intent.putExtra("from", "");
+                    }
+                    else intent.putExtra("from", "MapActivity");
                     startActivity(intent);
 
                     return false;
@@ -270,7 +275,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     }
 
     private void getCurrentLocation(){
-
 
         if (ActivityCompat.checkSelfPermission
                 (this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
