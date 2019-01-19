@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class ProfileInfoAdapter extends RecyclerView.Adapter<ProfileInfoAdapter.ProfileInfoHolder> {
@@ -26,6 +27,7 @@ public class ProfileInfoAdapter extends RecyclerView.Adapter<ProfileInfoAdapter.
     public class ProfileInfoHolder extends RecyclerView.ViewHolder {
 
         private TextView username,email,address;
+        private Button requestBtn;
 
         public ProfileInfoHolder(@NonNull View itemView) {
             super(itemView);

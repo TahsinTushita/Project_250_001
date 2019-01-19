@@ -42,6 +42,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
     private Button editBtn;
     private ProfileInfo profileInfo = new ProfileInfo();
     private DatabaseReference profileInfodatabase;
+    Button requestBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +69,11 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
         username = findViewById(R.id.profileUsername);
         email = findViewById(R.id.profileEmail);
         address = findViewById(R.id.profileAddress);
-
+        requestBtn = findViewById(R.id.requestBtnid);
+        String map = (String) getIntent().getExtras().get("from");
+        if (map.equals("MapActivity")){
+            requestBtn.setVisibility(View.VISIBLE);
+        }
 
 
         Query mQuery = FirebaseDatabase.getInstance().getReference().child("Profile").orderByChild("username").equalTo(getIntent().getStringExtra(EXTRA_PROFILE_ID));
