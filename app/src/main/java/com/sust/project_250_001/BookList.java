@@ -2,6 +2,7 @@ package com.sust.project_250_001;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -15,6 +16,7 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -73,7 +75,6 @@ public class BookList extends AppCompatActivity implements NavigationView.OnNavi
 
         final DatabaseReference database = FirebaseDatabase.getInstance().getReference("Profile").child(LoginActivity.user).child("booklist");
         database.addValueEventListener(new ValueEventListener() {
-
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
@@ -83,9 +84,8 @@ public class BookList extends AppCompatActivity implements NavigationView.OnNavi
                         bookList.add(book);
                         System.out.println(book);
                     }
-                    updateRecyclerView();
                 }
-                if(dataSnapshot.getChildrenCount() == 0) searchresultsAdapter.notifyDataSetChanged();
+                updateRecyclerView();
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -97,21 +97,29 @@ public class BookList extends AppCompatActivity implements NavigationView.OnNavi
     }
 
     private void updateRecyclerView() {
-        if(bookList.size() == 0 ) Toast.makeText(this,"No More Items",Toast.LENGTH_LONG).show();
+//        if(bookList.size() == 0 ) Toast.makeText(this,"No More Items",Toast.LENGTH_LONG).show();
+        bookArrayList.clear();
         for (String st : bookList) {
-
-            bookArrayList.clear();
-            DatabaseReference db = FirebaseDatabase.getInstance().getReference("Books").child(st);
-            db.addValueEventListener(new ValueEventListener() {
+            Query db = FirebaseDatabase.getInstance().getReference("Books").equalTo(st);
+            db.addChildEventListener(new ChildEventListener() {
                 @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                    bookArrayList.add(dataSnapshot.getValue(Book.class));
+                    recyclerView.setAdapter(searchresultsAdapter);
+                }
 
-                    Book book1 = dataSnapshot.getValue(Book.class);
-                    if(book1!=null) {
-                        bookArrayList.add(book1);
-                        System.out.println(book1.getAuthor());
-                    }
-                    searchresultsAdapter.notifyDataSetChanged();
+                @Override
+                public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+                }
+
+                @Override
+                public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+                }
+
+                @Override
+                public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
                 }
 
                 @Override
