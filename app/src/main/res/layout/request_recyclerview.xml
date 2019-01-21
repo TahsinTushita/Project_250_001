@@ -27,6 +27,7 @@
             android:layout_marginLeft="10dp"
             android:text="book name"
             android:textSize="17dp"
+            android:id="@+id/bookTitle"
             />
 
     </LinearLayout>
@@ -52,6 +53,7 @@
             android:layout_marginLeft="10dp"
             android:text="username"
             android:textSize="17dp"
+            android:id="@+id/userName"
             />
 
     </LinearLayout>
