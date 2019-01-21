@@ -71,6 +71,7 @@ public class BookProfile extends AppCompatActivity implements View.OnClickListen
     private NavigationView navigationView;
     private DrawerLayout drawer;
     private ActionBarDrawerToggle drawerToggle;
+    public static Book currentBook;
 
     private DatabaseReference bookDatabaseReference,profileDatabaseReference,userDatabaseReference,newUser;
 
@@ -99,6 +100,7 @@ public class BookProfile extends AppCompatActivity implements View.OnClickListen
 
 
         book = (Book) getIntent().getExtras().getSerializable(EXTRA_BOOK);
+        currentBook = book;
 
         bookCover = findViewById(R.id.bookCover);
         bookTitle = findViewById(R.id.bookTitle);

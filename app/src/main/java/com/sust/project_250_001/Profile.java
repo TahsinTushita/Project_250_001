@@ -70,6 +70,9 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
         email = findViewById(R.id.profileEmail);
         address = findViewById(R.id.profileAddress);
         requestBtn = findViewById(R.id.requestBtnid);
+
+        profileInfodatabase = FirebaseDatabase.getInstance().getReference("Profile");
+
         String map = (String) getIntent().getExtras().get("from");
         if (map != null)
         if (map.equals("MapActivity")){
@@ -79,6 +82,10 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
         requestBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                profileInfodatabase = profileInfodatabase.child(getIntent().getStringExtra(EXTRA_PROFILE_ID)).child("booklist")
+                        .child(BookProfile.currentBook.getParent()).child("requests").child(LoginActivity.user);
+                profileInfodatabase.child("username").setValue(LoginActivity.user);
+                profileInfodatabase.child("book").setValue(BookProfile.currentBook.getParent());
 
             }
         });
