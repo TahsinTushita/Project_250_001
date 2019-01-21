@@ -71,20 +71,19 @@ public class BookList extends AppCompatActivity implements NavigationView.OnNavi
         recyclerView = findViewById(R.id.search_recyclerView);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 1, GridLayoutManager.VERTICAL, false));
         bookArrayList = new ArrayList<>();
-        searchresultsAdapter = new SearchresultsAdapter(this, bookArrayList,listener);
-
         final DatabaseReference database = FirebaseDatabase.getInstance().getReference("Profile").child(LoginActivity.user).child("booklist");
         database.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                bookList.clear();
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                    bookList.clear();
                     if (postSnapshot.exists()) {
                         String book = (String) postSnapshot.getValue(Book.class).getParent();
                         bookList.add(book);
-                        System.out.println(book);
+                        System.out.println("Book Name " + book);
                     }
                 }
+
                 updateRecyclerView();
             }
             @Override
@@ -92,18 +91,20 @@ public class BookList extends AppCompatActivity implements NavigationView.OnNavi
 
             }
         });
-        recyclerView.setAdapter(searchresultsAdapter);
 
     }
 
     private void updateRecyclerView() {
 //        if(bookList.size() == 0 ) Toast.makeText(this,"No More Items",Toast.LENGTH_LONG).show();
+//        Toast.makeText(this,"Item Count " + bookList.size(),Toast.LENGTH_LONG);
+        System.out.println("Ki aaacccheee jibone???");
         bookArrayList.clear();
         for (String st : bookList) {
-            Query db = FirebaseDatabase.getInstance().getReference("Books").equalTo(st);
+            Query db = FirebaseDatabase.getInstance().getReference("Books").orderByChild("parent").equalTo(st);
             db.addChildEventListener(new ChildEventListener() {
                 @Override
                 public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                    System.out.println("Data " + dataSnapshot.getChildrenCount());
                     bookArrayList.add(dataSnapshot.getValue(Book.class));
                     recyclerView.setAdapter(searchresultsAdapter);
                 }
@@ -127,6 +128,10 @@ public class BookList extends AppCompatActivity implements NavigationView.OnNavi
 
                 }
             });
+
+            searchresultsAdapter = new SearchresultsAdapter(this, bookArrayList,listener);
+            recyclerView.setAdapter(searchresultsAdapter);
+            searchresultsAdapter.notifyDataSetChanged();
         }
     }
 
