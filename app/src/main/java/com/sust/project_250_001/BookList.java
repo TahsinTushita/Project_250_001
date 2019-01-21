@@ -95,16 +95,12 @@ public class BookList extends AppCompatActivity implements NavigationView.OnNavi
     }
 
     private void updateRecyclerView() {
-//        if(bookList.size() == 0 ) Toast.makeText(this,"No More Items",Toast.LENGTH_LONG).show();
-//        Toast.makeText(this,"Item Count " + bookList.size(),Toast.LENGTH_LONG);
-        System.out.println("Ki aaacccheee jibone???");
         bookArrayList.clear();
         for (String st : bookList) {
             Query db = FirebaseDatabase.getInstance().getReference("Books").orderByChild("parent").equalTo(st);
             db.addChildEventListener(new ChildEventListener() {
                 @Override
                 public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                    System.out.println("Data " + dataSnapshot.getChildrenCount());
                     bookArrayList.add(dataSnapshot.getValue(Book.class));
                     recyclerView.setAdapter(searchresultsAdapter);
                 }
