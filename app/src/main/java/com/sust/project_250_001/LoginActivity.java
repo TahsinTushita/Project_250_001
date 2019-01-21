@@ -34,6 +34,7 @@ public class LoginActivity extends AppCompatActivity {
     private FirebaseDatabase database;
     private FirebaseAuth firebaseAuth;
 
+
     //Toolbar related things
     Toolbar toolbar;
 

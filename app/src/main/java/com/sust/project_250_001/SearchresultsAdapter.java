@@ -90,6 +90,10 @@ public class SearchresultsAdapter extends RecyclerView.Adapter<SearchresultsAdap
                                 .child(book.getParent());
                         databaseReference.setValue(null);
 
+                        DatabaseReference database = FirebaseDatabase.getInstance().getReference("Books")
+                                                        .child(book.getParent()).child("users").child(LoginActivity.user);
+                        database.setValue(null);
+
 //                        removeAt(getAdapterPosition());
                         Toast.makeText(v.getContext(), "Book Has Been Removed", Toast.LENGTH_LONG).show();
                     }

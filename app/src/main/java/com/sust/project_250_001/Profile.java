@@ -71,6 +71,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
         address = findViewById(R.id.profileAddress);
         requestBtn = findViewById(R.id.requestBtnid);
         String map = (String) getIntent().getExtras().get("from");
+        if (map != null)
         if (map.equals("MapActivity")){
             requestBtn.setVisibility(View.VISIBLE);
         }
