@@ -24,6 +24,15 @@
         android:id="@+id/wishListid"
         android:icon="@drawable/wishlist"
         />
+
+    <item
+        android:title="Requests"
+        />
+
+    <item
+        android:title="Requested Books"
+        />
+
     <item
         android:title="Update Profile"
         android:id="@+id/updProfile"

@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.location.LocationServices;
 import com.google.firebase.database.DataSnapshot;
@@ -41,7 +42,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
     private TextView drawerUserName,username,email,address;
     private Button editBtn;
     private ProfileInfo profileInfo = new ProfileInfo();
-    private DatabaseReference profileInfodatabase;
+    private DatabaseReference profileInfodatabase,profileDatabase;
     Button requestBtn;
 
     @Override
@@ -72,6 +73,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
         requestBtn = findViewById(R.id.requestBtnid);
 
         profileInfodatabase = FirebaseDatabase.getInstance().getReference("Profile");
+        profileDatabase = FirebaseDatabase.getInstance().getReference("Profile");
 
         String map = (String) getIntent().getExtras().get("from");
         if (map != null)
@@ -82,11 +84,15 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
         requestBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                profileInfodatabase = profileInfodatabase.child(getIntent().getStringExtra(EXTRA_PROFILE_ID)).child("booklist")
+                DatabaseReference db = profileInfodatabase.child(getIntent().getStringExtra(EXTRA_PROFILE_ID)).child("booklist")
                         .child(BookProfile.currentBook.getParent()).child("requests").child(LoginActivity.user);
-                profileInfodatabase.child("username").setValue(LoginActivity.user);
-                profileInfodatabase.child("book").setValue(BookProfile.currentBook.getParent());
+                db.child("username").setValue(LoginActivity.user);
+                db.child("book").setValue(BookProfile.currentBook.getParent());
 
+                db = profileDatabase.child(LoginActivity.user).child("requestedBooks")
+                                    .child(BookProfile.currentBook.getParent());
+                db.child("username").setValue(getIntent().getStringExtra(EXTRA_PROFILE_ID));
+                Toast.makeText(Profile.this,"Request sent",Toast.LENGTH_LONG).show();
             }
         });
 
