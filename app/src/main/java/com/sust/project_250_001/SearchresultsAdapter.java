@@ -78,23 +78,26 @@ public class SearchresultsAdapter extends RecyclerView.Adapter<SearchresultsAdap
             notifyItemRangeChanged(position,books.size());
         }
 
+        void removeFromDatabase(Book book){
+            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Profile")
+                    .child(LoginActivity.user)
+                    .child("booklist")
+                    .child(book.getParent());
+            databaseReference.setValue(null);
+
+            DatabaseReference database = FirebaseDatabase.getInstance().getReference("Books")
+                    .child(book.getParent()).child("users").child(LoginActivity.user);
+            database.setValue(null);
+        }
+
         public void bind(final Book book, final SearchresultsAdapter.OnItemClickListener listener) {
             if(context instanceof SearchResults) itemView.findViewById(R.id.btnRemove).setVisibility(View.GONE);
             else {
                 itemView.findViewById(R.id.btnRemove).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Profile")
-                                .child(LoginActivity.user)
-                                .child("booklist")
-                                .child(book.getParent());
-                        databaseReference.setValue(null);
-
-                        DatabaseReference database = FirebaseDatabase.getInstance().getReference("Books")
-                                                        .child(book.getParent()).child("users").child(LoginActivity.user);
-                        database.setValue(null);
-
-//                        removeAt(getAdapterPosition());
+                        removeAt(getAdapterPosition());
+                        removeFromDatabase(book);
                         Toast.makeText(v.getContext(), "Book Has Been Removed", Toast.LENGTH_LONG).show();
                     }
                 });
