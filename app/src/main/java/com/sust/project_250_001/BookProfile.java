@@ -72,7 +72,7 @@ public class BookProfile extends AppCompatActivity implements View.OnClickListen
     private DrawerLayout drawer;
     private ActionBarDrawerToggle drawerToggle;
 
-    private DatabaseReference bookDatabaseReference,profileDatabaseReference,userDatabaseReference;
+    private DatabaseReference bookDatabaseReference,profileDatabaseReference,userDatabaseReference,newUser;
 
 
     @Override
@@ -230,10 +230,7 @@ public class BookProfile extends AppCompatActivity implements View.OnClickListen
 
 
     public void addToBooklist(){
-        DatabaseReference newBook,newUser;
-
-        newUser = bookDatabaseReference.child(userName);
-        newUser.child("username").setValue(userName);
+        DatabaseReference newBook;
 //
 //        newBook = profileDatabase.push();
 //        newBook.setValue(book.getParent());
@@ -258,19 +255,19 @@ public class BookProfile extends AppCompatActivity implements View.OnClickListen
             AlertDialog alertDialog = new AlertDialog.Builder(BookProfile.this).create();
             alertDialog.setTitle("Alert");
             alertDialog.setMessage("Do you want to make this book available to borrow?");
-            alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "NO", new DialogInterface.OnClickListener() {
+            alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "NO", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     dialog.dismiss();
                     Toast.makeText(BookProfile.this, "Added to your Book list", Toast.LENGTH_SHORT).show();
                 }
             });
-            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "YES", new DialogInterface.OnClickListener() {
+            alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "YES", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    DatabaseReference profileDatabase = FirebaseDatabase.getInstance().getReference("Profile").child("booklist")
-                                                            .child(book.getParent());
-                    profileDatabase.child("availability").setValue("true");
+                    newUser = bookDatabaseReference.child(userName);
+                    newUser.child("username").setValue(userName);
+                    profileDatabaseReference.child(book.getParent()).child("availability").setValue("true");
                     dialog.dismiss();
                     Toast.makeText(BookProfile.this, "Added to your Book list", Toast.LENGTH_SHORT).show();
                 }

@@ -69,7 +69,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 return;
             }
-            mMap.setMyLocationEnabled(true);
             //mMap.getUiSettings().setMyLocationButtonEnabled(false);
 
 
@@ -288,8 +287,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         else {
 
             // enable location buttons
-            mMap.setMyLocationEnabled(true);
-            mMap.getUiSettings().setMyLocationButtonEnabled(true);
 
             // fetch last location if any from provider - GPS.
             final LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
