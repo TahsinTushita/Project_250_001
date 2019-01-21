@@ -268,7 +268,9 @@ public class BookProfile extends AppCompatActivity implements View.OnClickListen
             alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "YES", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-
+                    DatabaseReference profileDatabase = FirebaseDatabase.getInstance().getReference("Profile").child("booklist")
+                                                            .child(book.getParent());
+                    profileDatabase.child("availability").setValue("true");
                     dialog.dismiss();
                     Toast.makeText(BookProfile.this, "Added to your Book list", Toast.LENGTH_SHORT).show();
                 }
