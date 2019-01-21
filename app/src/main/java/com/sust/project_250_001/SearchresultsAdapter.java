@@ -78,7 +78,7 @@ public class SearchresultsAdapter extends RecyclerView.Adapter<SearchresultsAdap
             notifyItemRangeChanged(position,books.size());
         }
 
-        void removeFromDatabase(Book book){
+        void removeFromBooklistDatabase(Book book){
             DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Profile")
                     .child(LoginActivity.user)
                     .child("booklist")
@@ -90,6 +90,14 @@ public class SearchresultsAdapter extends RecyclerView.Adapter<SearchresultsAdap
             database.setValue(null);
         }
 
+        void removeFromWishlistDatabase(Book book){
+            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Profile")
+                    .child(LoginActivity.user)
+                    .child("wishlist")
+                    .child(book.getParent());
+            databaseReference.setValue(null);
+        }
+
         public void bind(final Book book, final SearchresultsAdapter.OnItemClickListener listener) {
             if(context instanceof SearchResults) itemView.findViewById(R.id.btnRemove).setVisibility(View.GONE);
             else {
@@ -97,16 +105,17 @@ public class SearchresultsAdapter extends RecyclerView.Adapter<SearchresultsAdap
                     @Override
                     public void onClick(View v) {
                         removeAt(getAdapterPosition());
-                        removeFromDatabase(book);
+                        removeFromBooklistDatabase(book);
+                        removeFromWishlistDatabase(book);
                         Toast.makeText(v.getContext(), "Book Has Been Removed", Toast.LENGTH_LONG).show();
                     }
                 });
             }
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override public void onClick(View v) {
-                    listener.onItemClick(book);
-                }
-            });
+//            temView.setOnClickListener(new View.OnClickListener() {
+//                @Override public void onClick(View v) {
+//                    listener.onItemClick(book);
+//                }
+//            });
 
 
         }
