@@ -84,15 +84,16 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
         requestBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DatabaseReference db = profileInfodatabase.child(getIntent().getStringExtra(EXTRA_PROFILE_ID)).child("requests").child(LoginActivity.user);
+                DatabaseReference db = profileInfodatabase.child(getIntent().getStringExtra(EXTRA_PROFILE_ID)).child("booklist")
+                        .child(BookProfile.currentBook.getParent()).child("requests").child(LoginActivity.user);
                 db.child("username").setValue(LoginActivity.user);
                 db.child("book").setValue(BookProfile.currentBook.getParent());
-                db.child("title").setValue(BookProfile.currentBook.getTitle());
+                db.child("bookTitle").setValue(BookProfile.currentBook.getTitle());
 
                 db = profileDatabase.child(LoginActivity.user).child("requestedBooks")
                                     .child(BookProfile.currentBook.getParent());
                 db.child("username").setValue(getIntent().getStringExtra(EXTRA_PROFILE_ID));
-                db.child("title").setValue(BookProfile.currentBook.getTitle());
+                db.child("bookTitle").setValue(BookProfile.currentBook.getTitle());
                 Toast.makeText(Profile.this,"Request sent",Toast.LENGTH_LONG).show();
             }
         });
@@ -173,16 +174,6 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
 
             case R.id.homePage:
                 intent = new Intent(this, HomePageActivity.class);
-                drawer.closeDrawer(GravityCompat.START);
-                break;
-
-            case R.id.requestsid:
-                intent = new Intent(this,RequestsActivity.class);
-                drawer.closeDrawer(GravityCompat.START);
-                break;
-
-            case R.id.requestedBooksid:
-                intent = new Intent(this,RequestedBooksActivity.class);
                 drawer.closeDrawer(GravityCompat.START);
                 break;
         }

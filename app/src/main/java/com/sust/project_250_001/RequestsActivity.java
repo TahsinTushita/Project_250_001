@@ -25,7 +25,6 @@ public class RequestsActivity extends AppCompatActivity {
 
     private ArrayList<Request> requestList = new ArrayList();
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,19 +38,47 @@ public class RequestsActivity extends AppCompatActivity {
         adapter = new RequestAdapter(this,requestList);
         recyclerView.setAdapter(adapter);
 
-        fetchRequest();
+        fetchBooks();
 
     }
-    private void fetchRequest() {
-        databaseReference.getReference("Profile/"+LoginActivity.user+"/requests").addChildEventListener(new ChildEventListener() {
+
+    private void fetchRequests(final DatabaseReference database){
+        database.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 Request request = dataSnapshot.getValue(Request.class);
                 requestList.add(request);
                 adapter.notifyDataSetChanged();
-                System.out.println("Book Title " + request.getBookTitle());
-                System.out.println("UserName " + request.getUsername());
-                System.out.println("Items : " + adapter.getItemCount());
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    private void fetchBooks() {
+        databaseReference.getReference("Profile/"+LoginActivity.user+"/booklist").addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                Book book = dataSnapshot.getValue(Book.class);
+                fetchRequests(databaseReference.getReference("Profile/"+LoginActivity.user+"/booklist/"+book.getParent()+"/requests"));
             }
 
             @Override
