@@ -28,16 +28,19 @@
     <item
         android:title="Requests"
         android:id="@+id/requestsid"
+        android:icon="@drawable/request"
         />
 
     <item
         android:title="Requested Books"
         android:id="@+id/requestedBooksid"
+        android:icon="@drawable/requested_books"
         />
 
     <item
         android:title="Update Profile"
         android:id="@+id/updProfile"
+        android:icon="@drawable/update_profile"
         />
 
 </menu>
