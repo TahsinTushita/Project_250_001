@@ -5,8 +5,4 @@
         android:id="@+id/idLogout"
         android:title="Logout"
         app:showAsAction="never"/>
-    <item
-        android:id="@+id/idMap"
-        android:title="Map"
-        app:showAsAction="never"/>
 </menu>
