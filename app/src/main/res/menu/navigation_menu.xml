@@ -10,7 +10,7 @@
     <item
         android:title="Profile"
         android:id="@+id/profileid"
-        android:icon="@drawable/profile"
+        android:icon="@drawable/person"
         />
 
     <item
@@ -28,13 +28,13 @@
     <item
         android:title="Requests"
         android:id="@+id/requestsid"
-        android:icon="@drawable/request"
+        android:icon="@drawable/profile"
         />
 
     <item
         android:title="Requested Books"
         android:id="@+id/requestedBooksid"
-        android:icon="@drawable/requested_books"
+        android:icon="@drawable/request"
         />
 
     <item
