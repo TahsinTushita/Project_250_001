@@ -5,14 +5,26 @@ import java.io.Serializable;
 public class Request implements Serializable {
     private String username;
     private String bookTitle;
+    private String status;
 
-    public Request() {
-    }
-
-    public Request(String username, String bookTitle) {
+    public Request(String username, String bookTitle, String status) {
         this.username = username;
         this.bookTitle = bookTitle;
+        this.status = status;
     }
+
+    public Request() {
+
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
 
     public String getUsername() {
         return username;

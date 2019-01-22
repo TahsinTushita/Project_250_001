@@ -36,7 +36,7 @@ public class RequestedBooksActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Requested Books");
 
-        recyclerView = findViewById(R.id.request_recyclerView);
+        recyclerView = findViewById(R.id.requestedbooks_recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new RequestAdapter(this,requestList);
         recyclerView.setAdapter(adapter);
