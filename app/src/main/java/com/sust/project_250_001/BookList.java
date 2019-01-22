@@ -197,7 +197,6 @@ public class BookList extends AppCompatActivity implements NavigationView.OnNavi
                 intent = new Intent(this,RequestedBooksActivity.class);
                 drawer.closeDrawer(GravityCompat.START);
                 break;
-
         }
         startActivity(intent);
         return true;
@@ -211,5 +210,4 @@ public class BookList extends AppCompatActivity implements NavigationView.OnNavi
             startActivity(i);
         }
     };
-
 }

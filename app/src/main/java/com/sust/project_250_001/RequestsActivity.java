@@ -22,6 +22,7 @@ public class RequestsActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private RequestAdapter adapter;
     private FirebaseDatabase databaseReference = FirebaseDatabase.getInstance();
+    RequestAdapter.OnItemClickListener listener;
 
     private ArrayList<Request> requestList = new ArrayList();
 
@@ -31,15 +32,14 @@ public class RequestsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_requests);
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Requested Books");
+        getSupportActionBar().setTitle("Requests");
 
         recyclerView = findViewById(R.id.request_recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new RequestAdapter(this,requestList);
+        adapter = new RequestAdapter(this,requestList, listener,databaseReference);
         recyclerView.setAdapter(adapter);
 
         fetchBooks();
-
     }
 
     private void fetchRequests(final DatabaseReference database){
@@ -58,7 +58,6 @@ public class RequestsActivity extends AppCompatActivity {
 
             @Override
             public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-
             }
 
             @Override
@@ -102,6 +101,4 @@ public class RequestsActivity extends AppCompatActivity {
             }
         });
     }
-
 }
-

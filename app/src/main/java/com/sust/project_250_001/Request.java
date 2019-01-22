@@ -5,9 +5,28 @@ import java.io.Serializable;
 public class Request implements Serializable {
     private String username;
     private String bookTitle;
-    private String status;
 
-    public Request(String username, String bookTitle, String status) {
+    public void setStatus(long status) {
+        this.status = status;
+    }
+
+    private long status;
+
+    public long getStatus() {
+        return status;
+    }
+
+    private String parent;
+
+    public String getParent() {
+        return parent;
+    }
+
+    public void setParent(String parent) {
+        this.parent = parent;
+    }
+
+    public Request(String username, String bookTitle, long status) {
         this.username = username;
         this.bookTitle = bookTitle;
         this.status = status;
@@ -16,15 +35,6 @@ public class Request implements Serializable {
     public Request() {
 
     }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
 
     public String getUsername() {
         return username;

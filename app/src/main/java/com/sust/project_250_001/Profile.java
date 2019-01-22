@@ -87,13 +87,14 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
                 DatabaseReference db = profileInfodatabase.child(getIntent().getStringExtra(EXTRA_PROFILE_ID)).child("booklist")
                         .child(BookProfile.currentBook.getParent()).child("requests").child(LoginActivity.user);
                 db.child("username").setValue(LoginActivity.user);
-                db.child("book").setValue(BookProfile.currentBook.getParent());
+                db.child("parent").setValue(BookProfile.currentBook.getParent());
                 db.child("bookTitle").setValue(BookProfile.currentBook.getTitle());
 
                 db = profileDatabase.child(LoginActivity.user).child("requestedBooks")
                                     .child(BookProfile.currentBook.getParent());
                 db.child("username").setValue(getIntent().getStringExtra(EXTRA_PROFILE_ID));
                 db.child("bookTitle").setValue(BookProfile.currentBook.getTitle());
+                db.child("parent").setValue(BookProfile.currentBook.getParent());
                 Toast.makeText(Profile.this,"Request sent",Toast.LENGTH_LONG).show();
             }
         });

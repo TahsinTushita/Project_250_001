@@ -93,18 +93,24 @@
         >
 
         <Button
+            android:id="@+id/btnApprove"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Approve"
             />
 
         <Button
+            android:id="@+id/btnCancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Cancel"
             android:layout_marginLeft="70dp"
-            />
-
+            android:text="Cancel" />
+        <Button
+            android:id="@+id/btnConfirmSent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:text="Confirm Exchange"/>
 
     </LinearLayout>
 

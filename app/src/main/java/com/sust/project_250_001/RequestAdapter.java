@@ -8,17 +8,29 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
 public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.RequestHolder> {
 
+    public interface OnItemClickListener {
+        void onItemClick(RequestAdapter requestAdapter);
+    }
+
     private Context context;
     private ArrayList<Request> requestArrayList;
+    private final RequestAdapter.OnItemClickListener listener;
+    private FirebaseDatabase database;
 
-    public RequestAdapter(Context context,ArrayList<Request> requestArrayList) {
+    public RequestAdapter(Context context, ArrayList<Request> requestArrayList, OnItemClickListener listener, FirebaseDatabase databaseReference) {
         this.context = context;
         this.requestArrayList = requestArrayList;
+        this.listener = listener;
+        database = databaseReference;
     }
 
     @NonNull
@@ -32,6 +44,8 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.RequestH
     @Override
     public void onBindViewHolder(@NonNull RequestHolder requestHolder, int i) {
         requestHolder.setDetails(requestArrayList.get(i));
+        requestHolder.bind(requestArrayList.get(i),listener);
+        requestHolder.setVisibility(requestArrayList.get(i));
     }
 
     @Override
@@ -43,6 +57,7 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.RequestH
 
         private TextView username,bookTitle;
 
+
         public RequestHolder(@NonNull View itemView) {
             super(itemView);
             username = itemView.findViewById(R.id.userName);
@@ -52,6 +67,47 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.RequestH
         public void setDetails(Request request){
             bookTitle.setText(request.getBookTitle());
             username.setText(request.getUsername());
+        }
+
+        public void bind(final Request request, OnItemClickListener listener) {
+
+            itemView.findViewById(R.id.btnApprove).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    DatabaseReference db = database.getReference("Profile/"+LoginActivity.user
+                            +"/booklist/"+request.getParent()
+                            +"/requests/"+request.getUsername());
+                    db.child("status").setValue(1); //0 for pending,1 for approved,2 for confirmed
+                    request.setStatus(1);
+                    setVisibility(request);
+                }
+            });
+
+            itemView.findViewById(R.id.btnCancel).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    requestArrayList.remove(request);
+                    notifyItemRemoved(getAdapterPosition());
+                    DatabaseReference db = database.getReference("Profile/"+LoginActivity.user
+                            +"/booklist/"+request.getParent()
+                            +"/requests/"+request.getUsername());
+                    db.setValue(null); //0 for pending,1 for approved,2 for confirmed
+
+                    db = database.getReference("Profile/"+LoginActivity.user
+                            +"/requestedBooks/"+request.getParent());
+                    db.setValue(null); //0 for pending,1 for approved,2 for confirmed
+
+                }
+            });
+
+        }
+
+        public void setVisibility(Request request) {
+            if(request.getStatus()!=0)
+                itemView.findViewById(R.id.btnApprove).setVisibility(View.GONE);
+//                itemView.findViewById(R.id.btnCancel).setVisibility(View.GONE);
+            if(request.getStatus()==1)
+                itemView.findViewById(R.id.btnConfirmSent).setVisibility(View.VISIBLE);
         }
     }
 }

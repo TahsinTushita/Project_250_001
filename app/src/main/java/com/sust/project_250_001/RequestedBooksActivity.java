@@ -11,7 +11,6 @@ import android.support.v7.widget.Toolbar;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
@@ -38,11 +37,12 @@ public class RequestedBooksActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.requestedbooks_recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new RequestAdapter(this,requestList);
+        adapter = new RequestAdapter(this,requestList, listener, databaseReference);
         recyclerView.setAdapter(adapter);
 
-
-         databaseReference.getReference("Profile/"+LoginActivity.user+"/requestedBooks").addChildEventListener(new ChildEventListener() {
+    }
+    private void fetchRequest() {
+        databaseReference.getReference("Profile/"+LoginActivity.user+"/requestedBooks").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 Request request = dataSnapshot.getValue(Request.class);
@@ -75,9 +75,12 @@ public class RequestedBooksActivity extends AppCompatActivity {
         });
 
     }
-    private void fetchRequest() {
 
-
-    }
+    private RequestAdapter.OnItemClickListener listener = new RequestAdapter.OnItemClickListener() {
+        @Override
+        public void onItemClick(RequestAdapter requestAdapter) {
+            //TODO add what to do
+        }
+    };
 
 }
