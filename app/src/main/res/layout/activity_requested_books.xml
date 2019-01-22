@@ -5,11 +5,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".RequestedBooksActivity">
 
     <include
         layout="@layout/toolbar_layout"
         android:id="@+id/toolbar"
         />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/request_recyclerView"
+        android:elevation="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
 </LinearLayout>
