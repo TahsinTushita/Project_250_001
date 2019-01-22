@@ -2,6 +2,7 @@ package com.sust.project_250_001;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -18,11 +19,16 @@ public class UpdateProfile extends AppCompatActivity {
     private String name,pwd,email,address,username;
     private DatabaseReference database;
     private EditText fieldName,fieldPwd,fieldAdress,fieldEmail;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_profile);
+
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Update Profile");
 
         firebaseAuth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance().getReference("Profile").child(LoginActivity.user);

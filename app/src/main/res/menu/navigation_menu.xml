@@ -27,10 +27,12 @@
 
     <item
         android:title="Requests"
+        android:id="@+id/requestsid"
         />
 
     <item
         android:title="Requested Books"
+        android:id="@+id/requestedBooksid"
         />
 
     <item

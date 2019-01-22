@@ -21,15 +21,6 @@
             android:textSize="15dp"
             />
 
-        <ImageView
-            android:layout_width="15dp"
-            android:layout_height="20dp"
-            android:scaleType="fitXY"
-            android:layout_marginLeft="10dp"
-            android:id="@+id/bookCover"
-            android:src="@drawable/angels_and_demons"
-            />
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
