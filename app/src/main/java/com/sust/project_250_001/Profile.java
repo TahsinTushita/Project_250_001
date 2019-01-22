@@ -84,14 +84,15 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
         requestBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DatabaseReference db = profileInfodatabase.child(getIntent().getStringExtra(EXTRA_PROFILE_ID)).child("booklist")
-                        .child(BookProfile.currentBook.getParent()).child("requests").child(LoginActivity.user);
+                DatabaseReference db = profileInfodatabase.child(getIntent().getStringExtra(EXTRA_PROFILE_ID)).child("requests").child(LoginActivity.user);
                 db.child("username").setValue(LoginActivity.user);
                 db.child("book").setValue(BookProfile.currentBook.getParent());
+                db.child("title").setValue(BookProfile.currentBook.getTitle());
 
                 db = profileDatabase.child(LoginActivity.user).child("requestedBooks")
                                     .child(BookProfile.currentBook.getParent());
                 db.child("username").setValue(getIntent().getStringExtra(EXTRA_PROFILE_ID));
+                db.child("title").setValue(BookProfile.currentBook.getTitle());
                 Toast.makeText(Profile.this,"Request sent",Toast.LENGTH_LONG).show();
             }
         });
