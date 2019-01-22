@@ -216,8 +216,6 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
                 if (firebaseAuth.getCurrentUser() == null)
                     startActivity(new Intent(HomePageActivity.this, LoginActivity.class));
             }
-            if(id==R.id.idMap)
-                startActivity(new Intent(HomePageActivity.this,MapActivity.class));
 
         if(drawerToggle.onOptionsItemSelected(item)){
             return true;
