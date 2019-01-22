@@ -42,7 +42,7 @@ public class RequestedBooksActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
 
-        final DatabaseReference database = (DatabaseReference) databaseReference.getReference("Profile/"+LoginActivity.user+"/requestedBooks").addChildEventListener(new ChildEventListener() {
+         databaseReference.getReference("Profile/"+LoginActivity.user+"/requestedBooks").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 Request request = dataSnapshot.getValue(Request.class);

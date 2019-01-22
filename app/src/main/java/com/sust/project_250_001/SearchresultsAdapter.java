@@ -111,11 +111,11 @@ public class SearchresultsAdapter extends RecyclerView.Adapter<SearchresultsAdap
                     }
                 });
             }
-//            temView.setOnClickListener(new View.OnClickListener() {
-//                @Override public void onClick(View v) {
-//                    listener.onItemClick(book);
-//                }
-//            });
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override public void onClick(View v) {
+                    listener.onItemClick(book);
+                }
+            });
 
 
         }

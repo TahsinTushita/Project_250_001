@@ -24,7 +24,8 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.RequestH
     @NonNull
     @Override
     public RequestHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        LinearLayout linearLayout = (LinearLayout) LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.request_recyclerview,viewGroup,false);
+        LinearLayout linearLayout = (LinearLayout) LayoutInflater.from(viewGroup.getContext()).
+                inflate(R.layout.request_recyclerview,viewGroup,false);
         return new RequestAdapter.RequestHolder(linearLayout);
     }
 
