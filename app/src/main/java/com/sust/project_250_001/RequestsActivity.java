@@ -3,7 +3,7 @@ package com.sust.project_250_001;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class Requests extends AppCompatActivity {
+public class RequestsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
