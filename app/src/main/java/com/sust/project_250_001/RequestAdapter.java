@@ -38,7 +38,7 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.RequestH
         }
 
         public void setDetails(){
-            username.setText();
+
         }
     }
 }
