@@ -19,7 +19,7 @@ public class RequestsActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private RequestAdapter adapter;
-    private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+    private FirebaseDatabase databaseReference = FirebaseDatabase.getInstance();
 
     private ArrayList requestList = new ArrayList();
 
@@ -39,10 +39,15 @@ public class RequestsActivity extends AppCompatActivity {
 
     private void fetchRequest() {
 
-        final DatabaseReference database = databaseReference.child("Profile").child(LoginActivity.user).child("requestedBooks");
+        final DatabaseReference database = databaseReference.getReference("Profile/"+LoginActivity.user+"/requestedBooks");
         database.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                Request request = dataSnapshot.getValue(Request.class);
+                requestList.add(request);
+                adapter.notifyDataSetChanged();
+                System.out.println("Book Title " + request.getBookTitle());
+                System.out.println("UserName " + request.getUsername());
             }
 
             @Override
