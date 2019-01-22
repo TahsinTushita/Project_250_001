@@ -4,7 +4,19 @@ import java.io.Serializable;
 
 public class ProfileInfo implements Serializable {
 
-    String username,address,email;
+    String username;
+    String address;
+    String email;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    String name;
 
     public ProfileInfo(){
 

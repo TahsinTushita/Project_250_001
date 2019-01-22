@@ -6,6 +6,9 @@ public class Request implements Serializable {
     private String username;
     private String bookTitle;
 
+    public Request() {
+    }
+
     public Request(String username, String bookTitle) {
         this.username = username;
         this.bookTitle = bookTitle;

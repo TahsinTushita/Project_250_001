@@ -104,7 +104,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
                 for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
                     ProfileInfo info = postSnapshot.getValue(ProfileInfo.class);
                     profileInfo = info;
-                    username.setText(profileInfo.getUsername());
+                    username.setText(profileInfo.getName());
                     address.setText(profileInfo.getAddress());
                     email.setText(profileInfo.getEmail());
                 }
