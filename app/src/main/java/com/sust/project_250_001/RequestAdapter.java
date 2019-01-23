@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -100,6 +99,18 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.RequestH
                 }
             });
 
+            itemView.findViewById(R.id.btnConfirmSent).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    DatabaseReference db = database.getReference("Profile/"+LoginActivity.user
+                            +"/booklist/"+request.getParent()
+                            +"/requests/"+request.getUsername());
+                    db.child("status").setValue(2); //0 for pending,1 for approved,2 for confirmed
+                    request.setStatus(2);
+                    setVisibility(request);
+                }
+            });
+
         }
 
         public void setVisibility(Request request) {
@@ -108,6 +119,8 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.RequestH
 //                itemView.findViewById(R.id.btnCancel).setVisibility(View.GONE);
             if(request.getStatus()==1)
                 itemView.findViewById(R.id.btnConfirmSent).setVisibility(View.VISIBLE);
+            if(request.getStatus()==2)
+                itemView.findViewById(R.id.btnConfirmSent).setVisibility(View.GONE);
         }
     }
 }
