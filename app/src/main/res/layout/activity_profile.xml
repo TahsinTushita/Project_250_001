@@ -20,6 +20,7 @@
             />
 
         <LinearLayout
+            android:background="@drawable/round_corner_bg"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -28,7 +29,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="NAME: "
+                android:text="Name: "
                 android:layout_marginTop="20dp"
                 android:layout_marginLeft="20dp"
                 android:textStyle="bold"
@@ -41,7 +42,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:textSize="15sp"
-                android:text="username"
+                android:text="loading..."
                 android:id="@+id/profileUsername"
                 />
 
@@ -49,6 +50,7 @@
 
 
         <LinearLayout
+            android:background="@drawable/round_corner_bg"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -57,7 +59,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="email: "
+                android:text="Email: "
                 android:layout_marginTop="20dp"
                 android:layout_marginLeft="20dp"
                 android:textStyle="bold"
@@ -70,13 +72,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:textSize="15sp"
-                android:text="email"
+                android:text="loading..."
                 android:id="@+id/profileEmail"
                 />
 
         </LinearLayout>
 
         <LinearLayout
+            android:background="@drawable/round_corner_bg"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -86,7 +89,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="ADDRESS: "
+                android:text="Adress: "
                 android:layout_marginTop="20dp"
                 android:layout_marginLeft="20dp"
                 android:textStyle="bold"
@@ -99,7 +102,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:textSize="15sp"
-                android:text="address"
+                android:text="loading..."
                 android:id="@+id/profileAddress"
                 />
 
@@ -111,7 +114,7 @@
             android:layout_marginLeft="20dp"
             android:text="Request"
             android:id="@+id/requestBtnid"
-            android:visibility="invisible"
+            android:visibility="gone"
             />
 
     </LinearLayout>

@@ -50,7 +50,7 @@ public class BookProfile extends AppCompatActivity implements View.OnClickListen
     private TextView bookAuthor;
     private TextView bookTitle;
     private TextView bookISBN;
-    private TextView availability;
+    private Button availability;
     private Button booklistbtn,wishlishbtn;
     private TextView drawerUserName;
     private TextView popupReview;
