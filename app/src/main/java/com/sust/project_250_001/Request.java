@@ -6,6 +6,7 @@ public class Request implements Serializable {
     private String username;
     private String bookTitle;
 
+
     public void setStatus(long status) {
         this.status = status;
     }

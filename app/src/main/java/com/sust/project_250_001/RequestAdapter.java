@@ -11,10 +11,12 @@ import android.widget.TextView;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 
 import java.util.ArrayList;
 
 public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.RequestHolder> {
+
 
     public interface OnItemClickListener {
         void onItemClick(RequestAdapter requestAdapter);
@@ -54,18 +56,27 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.RequestH
 
     public class RequestHolder extends RecyclerView.ViewHolder {
 
-        private TextView username,bookTitle;
+        private TextView username,bookTitle,status;
 
 
         public RequestHolder(@NonNull View itemView) {
             super(itemView);
             username = itemView.findViewById(R.id.userName);
             bookTitle = itemView.findViewById(R.id.bookTitle);
+            status = itemView.findViewById(R.id.statusid);
         }
 
         public void setDetails(Request request){
             bookTitle.setText(request.getBookTitle());
             username.setText(request.getUsername());
+            if(request.getStatus()==0){
+                status.setText("pending");
+            }
+            else if(request.getStatus()==1){
+                status.setText("approved");
+            }
+            else
+                status.setText("confirmed");
         }
 
         public void bind(final Request request, OnItemClickListener listener) {
