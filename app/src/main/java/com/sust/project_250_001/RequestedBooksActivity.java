@@ -20,10 +20,11 @@ public class RequestedBooksActivity extends AppCompatActivity {
     private Toolbar toolbar;
 
     private RecyclerView recyclerView;
-    private RequestAdapter adapter;
+    private RequestedBooksAdapter adapter;
     private FirebaseDatabase databaseReference = FirebaseDatabase.getInstance();
+    RequestedBooksAdapter.OnItemClickListener listener;
 
-    private ArrayList<Request> requestList = new ArrayList();
+    private ArrayList<Request> requestedBooksList = new ArrayList();
 
 
     @Override
@@ -37,20 +38,22 @@ public class RequestedBooksActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.requestedbooks_recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new RequestAdapter(this,requestList, listener, databaseReference);
+        adapter = new RequestedBooksAdapter(this,requestedBooksList, listener,databaseReference);
         recyclerView.setAdapter(adapter);
 
+        fetchBooks();
+
     }
-    private void fetchRequest() {
+
+
+    private void fetchBooks(){
         databaseReference.getReference("Profile/"+LoginActivity.user+"/requestedBooks").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 Request request = dataSnapshot.getValue(Request.class);
-                requestList.add(request);
+                System.out.println("BOokTitle " + request.getBookTitle());
+                requestedBooksList.add(request);
                 adapter.notifyDataSetChanged();
-                System.out.println("Book Title " + request.getBookTitle());
-                System.out.println("UserName " + request.getUsername());
-                System.out.println("Items : " + adapter.getItemCount());
             }
 
             @Override
@@ -73,14 +76,8 @@ public class RequestedBooksActivity extends AppCompatActivity {
 
             }
         });
-
     }
 
-    private RequestAdapter.OnItemClickListener listener = new RequestAdapter.OnItemClickListener() {
-        @Override
-        public void onItemClick(RequestAdapter requestAdapter) {
-            //TODO add what to do
-        }
-    };
+
 
 }

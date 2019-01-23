@@ -9,6 +9,9 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
 
 public class RequestedBooksAdapter extends RecyclerView.Adapter<RequestedBooksAdapter.RequestedBooksHolder> {
@@ -19,10 +22,15 @@ public class RequestedBooksAdapter extends RecyclerView.Adapter<RequestedBooksAd
 
     private Context context;
     private ArrayList<Request> requestArrayList;
+    private FirebaseDatabase database;
+    private final RequestedBooksAdapter.OnItemClickListener listener;
 
-    public RequestedBooksAdapter(Context context, ArrayList<Request> requestArrayList) {
+
+    public RequestedBooksAdapter(Context context, ArrayList<Request> requestArrayList,OnItemClickListener listener,FirebaseDatabase database) {
         this.context = context;
         this.requestArrayList = requestArrayList;
+        this.database = database;
+        this.listener = listener;
     }
 
     @NonNull
@@ -36,6 +44,8 @@ public class RequestedBooksAdapter extends RecyclerView.Adapter<RequestedBooksAd
     @Override
     public void onBindViewHolder(@NonNull RequestedBooksHolder requestedBooksHolder, int i) {
         requestedBooksHolder.setDetails(requestArrayList.get(i));
+        requestedBooksHolder.bind(requestArrayList.get(i),listener);
+        requestedBooksHolder.setVisibility(requestArrayList.get(i));
     }
 
     @Override
@@ -45,7 +55,7 @@ public class RequestedBooksAdapter extends RecyclerView.Adapter<RequestedBooksAd
 
     public class RequestedBooksHolder extends RecyclerView.ViewHolder {
 
-        private TextView requestedUser,requestedBook,status;
+        private TextView requestedUser, requestedBook, status;
 
         public RequestedBooksHolder(@NonNull View itemView) {
             super(itemView);
@@ -54,14 +64,69 @@ public class RequestedBooksAdapter extends RecyclerView.Adapter<RequestedBooksAd
             status = itemView.findViewById(R.id.statusid);
         }
 
-        public void setDetails(Request request){
+        public void setDetails(Request request) {
             requestedUser.setText(request.getUsername());
             requestedBook.setText(request.getBookTitle());
-            //status.setText(request.getStatus());
+
+            if (request.getStatus() == 0) {
+                status.setText("pending");
+            } else if (request.getStatus() == 1) {
+                status.setText("approved");
+            } else if (request.getStatus() == 2) {
+                status.setText("confirmed sent");
+            } else if (request.getStatus() == 3) {
+                status.setText("confirm recieved");
+            }
         }
 
-        public void bind(final Request request,final RequestedBooksAdapter.OnItemClickListener listener){
 
+        public void bind(final Request request, OnItemClickListener listener) {
+            itemView.findViewById(R.id.cancelBtn).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    requestArrayList.remove(request);
+                    notifyItemRemoved(getAdapterPosition());
+                    DatabaseReference db = database.getReference("Profile/" + request.getUsername()
+                            + "/booklist/" + request.getParent()
+                            + "/requests/" + LoginActivity.user);
+                    db.setValue(null); //0 for pending,1 for approved,2 for confirmed
+
+                    db = database.getReference("Profile/" + LoginActivity.user
+                            + "/requestedBooks/" + request.getParent());
+                    db.setValue(null); //0 for pending,1 for approved,2 for confirmed
+
+
+                }
+            });
+
+            itemView.findViewById(R.id.confirmBtn).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    DatabaseReference databaseReference = database.getReference("Profile/" + request.getUsername() +
+                            "/booklist/" + request.getParent() + "/requests/" + LoginActivity.user);
+                    databaseReference.child("status").setValue(3);
+
+                    databaseReference = database.getReference("Profile/" + LoginActivity.user + "/requestedBooks/" +
+                            request.getParent());
+                    databaseReference.child("status").setValue(3);
+
+                    request.setStatus(3);
+                    setVisibility(request);
+                    setDetails(request);
+                }
+            });
+
+        }
+        public void setVisibility(Request request){
+            if(request.getStatus()==2){
+                itemView.findViewById(R.id.confirmBtn).setVisibility(View.VISIBLE);
+            }
+            if(request.getStatus()==3){
+                itemView.findViewById(R.id.cancelBtn).setVisibility(View.GONE);
+                itemView.findViewById(R.id.confirmBtn).setVisibility(View.GONE);
+            }
         }
     }
-}
+
+
+    }

@@ -90,6 +90,11 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.RequestH
                             +"/booklist/"+request.getParent()
                             +"/requests/"+request.getUsername());
                     db.child("status").setValue(1); //0 for pending,1 for approved,2 for confirmed
+
+                    db = database.getReference("Profile/"+request.getUsername()+"/requestedBooks/"+request.getParent());
+                    db.child("status").setValue(1);
+
+
                     request.setStatus(1);
                     setVisibility(request);
                     setDetails(request);
@@ -106,9 +111,10 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.RequestH
                             +"/requests/"+request.getUsername());
                     db.setValue(null); //0 for pending,1 for approved,2 for confirmed
 
-                    db = database.getReference("Profile/"+LoginActivity.user
+                    db = database.getReference("Profile/"+request.getUsername()
                             +"/requestedBooks/"+request.getParent());
                     db.setValue(null); //0 for pending,1 for approved,2 for confirmed
+
 
                 }
             });
@@ -120,6 +126,9 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.RequestH
                             +"/booklist/"+request.getParent()
                             +"/requests/"+request.getUsername());
                     db.child("status").setValue(2); //0 for pending,1 for approved,2 for confirmed
+
+                    db = database.getReference("Profile/"+request.getUsername()+"/requestedBooks/"+request.getParent());
+                    db.child("status").setValue(2);
                     request.setStatus(2);
                     setVisibility(request);
                     setDetails(request);
