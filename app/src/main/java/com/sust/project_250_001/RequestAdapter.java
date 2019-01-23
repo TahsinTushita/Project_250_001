@@ -75,8 +75,10 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.RequestH
             else if(request.getStatus()==1){
                 status.setText("approved");
             }
-            else
-                status.setText("confirmed");
+            else if(request.getStatus()==2)
+                status.setText("confirm sent");
+            else if(request.getStatus()==3)
+                status.setText("confirm recieved");
         }
 
         public void bind(final Request request, OnItemClickListener listener) {
@@ -90,6 +92,7 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.RequestH
                     db.child("status").setValue(1); //0 for pending,1 for approved,2 for confirmed
                     request.setStatus(1);
                     setVisibility(request);
+                    setDetails(request);
                 }
             });
 
@@ -119,6 +122,7 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.RequestH
                     db.child("status").setValue(2); //0 for pending,1 for approved,2 for confirmed
                     request.setStatus(2);
                     setVisibility(request);
+                    setDetails(request);
                 }
             });
 
