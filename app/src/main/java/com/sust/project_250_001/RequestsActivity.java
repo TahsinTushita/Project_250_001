@@ -33,7 +33,6 @@ public class RequestsActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Requests");
-
         recyclerView = findViewById(R.id.request_recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new RequestAdapter(this,requestList, listener,databaseReference);
@@ -79,25 +78,17 @@ public class RequestsActivity extends AppCompatActivity {
                 Book book = dataSnapshot.getValue(Book.class);
                 fetchRequests(databaseReference.getReference("Profile/"+LoginActivity.user+"/booklist/"+book.getParent()+"/requests"));
             }
-
             @Override
             public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
             }
-
             @Override
             public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-
             }
-
             @Override
             public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
             }
         });
     }

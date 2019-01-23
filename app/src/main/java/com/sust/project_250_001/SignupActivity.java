@@ -22,10 +22,10 @@ public class SignupActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
 
-    private EditText userName,passWord,userAddress,userEmail;
+    private EditText userName,passWord,userAddress,userEmail,personName;
     private Button regBtn;
     private FirebaseAuth firebaseAuth;
-    String username,password,address,email,username1;
+    String username,password,address,email,username1,name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +40,7 @@ public class SignupActivity extends AppCompatActivity {
         userAddress = findViewById(R.id.signUpAddressID);
         userEmail = findViewById(R.id.signUpEmailID);
         regBtn = findViewById(R.id.btnReg);
+        personName = findViewById(R.id.signUpNameID);
 
 
         firebaseAuth = FirebaseAuth.getInstance();
@@ -53,6 +54,7 @@ public class SignupActivity extends AppCompatActivity {
                 password = passWord.getText().toString().trim();
                 address =  userAddress.getText().toString().trim();
                 email = userEmail.getText().toString().trim();
+                name = personName.getText().toString().trim();
 
                 if(TextUtils.isEmpty(username)){
                     Toast.makeText(SignupActivity.this,"Enter username",Toast.LENGTH_SHORT).show();
@@ -95,6 +97,7 @@ public class SignupActivity extends AppCompatActivity {
                                     profileDatabase.child("username").setValue(username1);
                                     profileDatabase.child("address").setValue(address);
                                     profileDatabase.child("email").setValue(email);
+                                    profileDatabase.child("name").setValue(name);
 
                                     startActivity(new Intent(SignupActivity.this,LoginActivity.class));
                                     finish();
