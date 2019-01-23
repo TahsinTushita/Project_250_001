@@ -55,10 +55,9 @@
             <item
                 android:title="Lent Books"
                 android:id="@+id/lentBooksid"
+                android:icon="@drawable/lent"
                 />
         </menu>
-
-
     </item>
 
 
