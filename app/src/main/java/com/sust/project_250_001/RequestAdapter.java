@@ -146,7 +146,7 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.RequestH
             if(request.getStatus()==2)
                 itemView.findViewById(R.id.btnConfirmSent).setVisibility(View.GONE);
             if(request.getStatus()==3)
-                itemView.findViewById(R.id.cancelBtn).setVisibility(View.GONE);
+                itemView.findViewById(R.id.btnCancel).setVisibility(View.GONE);
         }
     }
 }
