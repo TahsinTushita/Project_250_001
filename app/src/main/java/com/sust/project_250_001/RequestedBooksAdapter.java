@@ -113,6 +113,7 @@ public class RequestedBooksAdapter extends RecyclerView.Adapter<RequestedBooksAd
                     request.setStatus(3);
                     setVisibility(request);
                     setDetails(request);
+
                 }
             });
 
