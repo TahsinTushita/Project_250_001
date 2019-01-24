@@ -24,6 +24,7 @@
 
         <LinearLayout
             android:layout_width="wrap_content"
+            android:background="@android:color/background_light"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             >
@@ -36,6 +37,7 @@
                 android:layout_marginTop="10dp"
                 />
             <LinearLayout
+                android:background="@android:color/background_light"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
@@ -56,20 +58,19 @@
                     android:layout_height="wrap_content"
                     android:text="AUTHOR" />
                 <Button
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Add to wishlist"
                     android:id="@+id/wishListid"
                     android:background="@android:color/background_light"
-                    android:elevation="15dp"
+
                     />
                 <Button
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Add to booklist"
                     android:background="@android:color/background_light"
                     android:id="@+id/bookListid"
-                    android:elevation="15dp"
                     />
 
                 <Button
@@ -78,7 +79,6 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/checkAvailability"
                     android:text="Check availability"
-                    android:elevation="15dp"
                     />
 
 

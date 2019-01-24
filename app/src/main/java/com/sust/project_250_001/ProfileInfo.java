@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 public class ProfileInfo implements Serializable {
 
+    String name;
     String username;
     String address;
     String email;
@@ -16,16 +17,15 @@ public class ProfileInfo implements Serializable {
         this.name = name;
     }
 
-    String name;
-
     public ProfileInfo(){
 
     }
 
-    public ProfileInfo(String username,String address,String email){
+    public ProfileInfo(String username,String address,String email,String name){
         this.address = address;
         this.email = email;
         this.username = username;
+        this.name = name;
     }
 
     public void setUsername(String username){

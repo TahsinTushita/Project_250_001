@@ -371,7 +371,7 @@ public class BookProfile extends AppCompatActivity implements View.OnClickListen
             case R.id.profileid:
                 intent = new Intent(this, Profile.class);
                 drawer.closeDrawer(GravityCompat.START);
-                intent.putExtra("from","xyz");
+                intent.putExtra("profileID",LoginActivity.user);
                 break;
             case R.id.bookListid:
                 intent = new Intent(this, BookList.class);
