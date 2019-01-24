@@ -202,6 +202,16 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
                 intent = new Intent(this,LentBooks.class);
                 drawer.closeDrawer(GravityCompat.START);
                 break;
+
+            case R.id.allBooks:
+                intent = new Intent(this,AllBooksActivity.class);
+                drawer.closeDrawer(GravityCompat.START);
+                break;
+
+            case R.id.requestForBook:
+                intent = new Intent(this,RequestForBookActivity.class);
+                drawer.closeDrawer(GravityCompat.START);
+                break;
         }
         startActivity(intent);
         return true;
