@@ -213,13 +213,13 @@ public class BookProfile extends AppCompatActivity implements View.OnClickListen
             // which view you pass in doesn't matter, it is only used for the window tolken
             popupWindow.showAtLocation(popupView, Gravity.CENTER, 0, 0);
             // dismiss the popup window when touched
-            popupView.setOnTouchListener(new View.OnTouchListener() {
-                @Override
-                public boolean onTouch(View v, MotionEvent event) {
-                    popupWindow.dismiss();
-                    return true;
-                }
-            });
+//            popupView.setOnTouchListener(new View.OnTouchListener() {
+//                @Override
+//                public boolean onTouch(View v, MotionEvent event) {
+//                    popupWindow.dismiss();
+//                    return true;
+//                }
+//            });
 //            startActivity(new Intent(BookProfile.this,Profile.class));
         }
     };
