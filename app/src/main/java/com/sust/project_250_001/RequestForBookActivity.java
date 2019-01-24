@@ -27,7 +27,7 @@ public class RequestForBookActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Send Request");
 
-        database = FirebaseDatabase.getInstance().getReference("Requests");
+
 
         TitleText = findViewById(R.id.idBookName);
         AuthorText = findViewById(R.id.idBookAuthor);
@@ -43,9 +43,10 @@ public class RequestForBookActivity extends AppCompatActivity {
             title = TitleText.getText().toString().trim();
             author = AuthorText.getText().toString().trim();
             if(title.isEmpty()==false) {
-                database.push();
+                database = FirebaseDatabase.getInstance().getReference("Requests").push();
                 database.child("title").setValue(title);
                 database.child("author").setValue(author);
+                onBackPressed();
             } else
                 Snackbar.make(view.getRootView(),"Please specify a valid book name",Snackbar.LENGTH_LONG).show();
         }

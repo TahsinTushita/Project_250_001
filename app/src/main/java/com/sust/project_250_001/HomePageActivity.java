@@ -208,7 +208,7 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
 
             }
         });
-        Snackbar.make(findViewById(android.R.id.content),"Welcome " + LoginActivity.user.toUpperCase(),Snackbar.LENGTH_LONG).show();
+//        Snackbar.make(findViewById(android.R.id.content),"Welcome " + LoginActivity.user.toUpperCase(),Snackbar.LENGTH_LONG).show();
     }
 
         ValueEventListener reviewValueEventListener = new ValueEventListener() {
