@@ -100,7 +100,10 @@ public class LentBooksAdapter extends RecyclerView.Adapter<LentBooksAdapter.Lent
 
                     databaseReference = database.getReference("Profile/"+LoginActivity.user+"/booklist/"+
                             request.getParent());
-                    databaseReference.child("availability").setValue("true");
+                    databaseReference.child("availability").setValue(1);
+
+                    databaseReference = database.getReference("Books/"+request.getParent()+"/users/"+LoginActivity.user);
+                    databaseReference.child("availability").setValue(1);
                 }
             });
         }

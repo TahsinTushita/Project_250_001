@@ -173,7 +173,9 @@ public class BookProfile extends AppCompatActivity implements View.OnClickListen
             if(dataSnapshot.exists()){
                 usersArrayList.clear();
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+
                     Users user = snapshot.getValue(Users.class);
+                    if(user.getAvailability() == 1)
                     usersArrayList.add(user);
                 }
             }
@@ -277,6 +279,12 @@ public class BookProfile extends AppCompatActivity implements View.OnClickListen
             alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "NO", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
+
+                    newUser = bookDatabaseReference.child(userName);
+                    newUser.child("username").setValue(userName);
+                    newUser.child("availability").setValue(0);
+                    profileDatabaseReference.child(book.getParent()).child("availability").setValue(0);//0 not available 1 available
+
                     dialog.dismiss();
                     Toast.makeText(BookProfile.this, "Added to your Book list", Toast.LENGTH_SHORT).show();
                 }
@@ -286,7 +294,9 @@ public class BookProfile extends AppCompatActivity implements View.OnClickListen
                 public void onClick(DialogInterface dialog, int which) {
                     newUser = bookDatabaseReference.child(userName);
                     newUser.child("username").setValue(userName);
-                    profileDatabaseReference.child(book.getParent()).child("availability").setValue("true");
+                    newUser.child("availability").setValue(1);
+                    profileDatabaseReference.child(book.getParent()).child("availability").setValue(1);//0 not available 1 available
+
                     dialog.dismiss();
                     Toast.makeText(BookProfile.this, "Added to your Book list", Toast.LENGTH_SHORT).show();
                 }

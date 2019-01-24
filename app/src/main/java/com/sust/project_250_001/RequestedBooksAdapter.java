@@ -112,7 +112,9 @@ public class RequestedBooksAdapter extends RecyclerView.Adapter<RequestedBooksAd
 
                     databaseReference = database.getReference("Profile/"+request.getUsername()+"/booklist/"+
                                         request.getParent());
-                    databaseReference.child("availability").setValue("false");
+                    databaseReference.child("availability").setValue(0);
+                    databaseReference = database.getReference("Books/"+request.getParent()+"/users/"+request.getUsername());
+                    databaseReference.child("availability").setValue(0);
 
                     request.setStatus(3);
                     setVisibility(request);
