@@ -99,7 +99,6 @@ public class BookProfile extends AppCompatActivity implements View.OnClickListen
         bookCover = findViewById(R.id.bookCover);
         bookTitle = findViewById(R.id.bookTitle);
         bookAuthor = findViewById(R.id.bookAuthor);
-        bookISBN = findViewById(R.id.bookISBN);
         availability = findViewById(R.id.checkAvailability);
         booklistbtn = findViewById(R.id.bookListid);
         wishlishbtn = findViewById(R.id.wishListid);
@@ -112,7 +111,6 @@ public class BookProfile extends AppCompatActivity implements View.OnClickListen
 
         bookAuthor.setText(book.getAuthor());
         bookTitle.setText(book.getTitle());
-        bookISBN.setText(book.getIsbn());
 
 
         userName = "Anonymous";

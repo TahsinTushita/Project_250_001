@@ -6,15 +6,13 @@ import java.util.ArrayList;
 public class Book implements Serializable{
     String title;
     String author;
-    String isbn;
     String topReview;
     String parent;
     String imgurl;
 
-    public Book(String title, String author, String isbn, String topReview, String parent, String imgurl) {
+    public Book(String title, String author, String topReview, String parent, String imgurl) {
         this.title = title;
         this.author = author;
-        this.isbn = isbn;
         this.topReview = topReview;
         this.parent = parent;
         this.imgurl = imgurl;
@@ -57,13 +55,6 @@ public class Book implements Serializable{
         this.author = author;
     }
 
-    public String  getIsbn() {
-        return isbn;
-    }
-
-    public void setIsbn(String isbn) {
-        this.isbn = isbn;
-    }
 
     public String getTopReview() {
         return topReview;

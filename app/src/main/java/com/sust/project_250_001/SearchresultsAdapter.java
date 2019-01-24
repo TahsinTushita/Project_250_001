@@ -67,7 +67,6 @@ public class SearchresultsAdapter extends RecyclerView.Adapter<SearchresultsAdap
         public void setDetails(Book book){
             bookTitle.setText(book.getTitle());
             bookAuthor.setText(book.getAuthor());
-            bookISBN.setText(book.getIsbn());
             Picasso.get().load(book.getImgurl()).into(imgurl);
         }
 
