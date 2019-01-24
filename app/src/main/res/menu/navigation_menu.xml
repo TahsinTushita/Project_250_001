@@ -5,6 +5,26 @@
         android:id="@+id/homePage"
         android:icon="@drawable/home"
         />
+
+    <item
+        android:title="All Books"
+        android:id="@+id/allBooks"
+        android:icon="@drawable/allbooks"
+        />
+
+    <item
+        android:title="Update Profile"
+        android:id="@+id/updProfile"
+        android:icon="@drawable/update_profile"
+        />
+
+    <item
+        android:title="Request for a book"
+        android:id="@+id/requestForBook"
+        android:icon="@drawable/request_book"
+        />
+
+
     <item android:title="Info">
         <menu>
             <item
@@ -57,14 +77,4 @@
         </menu>
     </item>
 
-
-    <item android:title="Settings">
-        <menu>
-            <item
-                android:title="Update Profile"
-                android:id="@+id/updProfile"
-                android:icon="@drawable/update_profile"
-                />
-        </menu>
-    </item>
 </menu>

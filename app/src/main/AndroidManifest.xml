@@ -25,7 +25,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".RequestForBookActivity"></activity>
+        <activity android:name=".AllBooksActivity"></activity>
+        <activity android:name=".RequestForBookActivity" />
         <activity android:name=".LentBooks" />
         <activity android:name=".BorrowedBooks" />
         <!--
