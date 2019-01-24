@@ -171,7 +171,7 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
                             for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                                 Book book = snapshot.getValue(Book.class);
                                 if(bookArrayList.contains(book)==false)
-                                bookArrayList.add(book);
+                                bookArrayList.add(0,book);
                             }
                             BookAdapter adapter = new BookAdapter(HomePageActivity.this,bookArrayList,listener);
                             recyclerView.setAdapter(adapter);
