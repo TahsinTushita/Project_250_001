@@ -109,6 +109,11 @@ public class RequestedBooksAdapter extends RecyclerView.Adapter<RequestedBooksAd
                     databaseReference = database.getReference("Profile/" + LoginActivity.user + "/requestedBooks/" +
                             request.getParent());
                     databaseReference.child("status").setValue(3);
+
+                    databaseReference = database.getReference("Profile/"+request.getUsername()+"/booklist/"+
+                                        request.getParent());
+                    databaseReference.child("availability").setValue("false");
+
                     request.setStatus(3);
                     setVisibility(request);
                     setDetails(request);
@@ -116,10 +121,14 @@ public class RequestedBooksAdapter extends RecyclerView.Adapter<RequestedBooksAd
                     databaseReference = database.getReference("Profile/"+LoginActivity.user+"/borrowedBooks/"+
                                                                     request.getParent());
                     databaseReference.child("username").setValue(request.getUsername());
+                    databaseReference.child("parent").setValue(request.getParent());
+                    databaseReference.child("bookTitle").setValue(request.getBookTitle());
 
                     databaseReference = database.getReference("Profile/"+request.getUsername()+"/lentBooks/"+
                                                                 request.getParent());
                     databaseReference.child("username").setValue(LoginActivity.user);
+                    databaseReference.child("parent").setValue(request.getParent());
+                    databaseReference.child("bookTitle").setValue(request.getBookTitle());
                 }
             });
 
