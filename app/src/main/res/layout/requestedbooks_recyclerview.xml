@@ -26,6 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:text="username"
+            android:textStyle="bold"
             android:textSize="17dp"
             android:id="@+id/requestedUser"
             />
@@ -53,6 +54,7 @@
             android:layout_marginLeft="10dp"
             android:text="bookTitle"
             android:textSize="17dp"
+            android:textStyle="bold"
             android:id="@+id/requestedBook"
             />
 
@@ -71,6 +73,7 @@
             android:layout_height="wrap_content"
             android:text="status: "
             android:textSize="15dp"
+            android:textStyle="bold"
             />
 
         <TextView
@@ -112,5 +115,10 @@
 
     </LinearLayout>
 
+    <View
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background="#000000"/>
 
 </LinearLayout>
