@@ -1,9 +1,11 @@
 package com.sust.project_250_001;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 
@@ -17,8 +19,17 @@ import java.util.ArrayList;
 
 public class AllBooksActivity extends AppCompatActivity {
 
-    private Toolbar toolbar;
+    SearchresultsAdapter.OnItemClickListener listener = new SearchresultsAdapter.OnItemClickListener() {
+        @Override
+        public void onItemClick(Book book) {
+            Intent i = new Intent(AllBooksActivity.this,BookProfile.class);
+            i.putExtra("bookObject",book);
+            startActivity(i);
+        }
+    };
 
+    private Toolbar toolbar;
+    private ArrayList<Book> booklist = new ArrayList<>();
     private RecyclerView recyclerView;
 
 
@@ -31,6 +42,27 @@ public class AllBooksActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("All Books");
 
+        final SearchresultsAdapter adapter = new SearchresultsAdapter(this,booklist,listener);
 
+        recyclerView = findViewById(R.id.all_books_recyclerView);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Books");
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                    Book book = ds.getValue(Book.class);
+                    booklist.add(book);
+                    adapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 }

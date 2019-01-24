@@ -60,7 +60,6 @@ public class SearchresultsAdapter extends RecyclerView.Adapter<SearchresultsAdap
             super(itemView);
             bookTitle = itemView.findViewById(R.id.bookTitle);
             bookAuthor = itemView.findViewById(R.id.bookAuthor);
-            bookISBN = itemView.findViewById(R.id.bookISBN);
             imgurl = itemView.findViewById(R.id.bookCover);
         }
 
@@ -98,7 +97,7 @@ public class SearchresultsAdapter extends RecyclerView.Adapter<SearchresultsAdap
         }
 
         public void bind(final Book book, final SearchresultsAdapter.OnItemClickListener listener) {
-            if(context instanceof SearchResults) itemView.findViewById(R.id.btnRemove).setVisibility(View.GONE);
+            if(context instanceof SearchResults || context instanceof AllBooksActivity) itemView.findViewById(R.id.btnRemove).setVisibility(View.GONE);
             else {
                 itemView.findViewById(R.id.btnRemove).setOnClickListener(new View.OnClickListener() {
                     @Override
