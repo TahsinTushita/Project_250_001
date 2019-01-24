@@ -103,6 +103,7 @@
             android:id="@+id/confirmBtn"
             android:layout_marginRight="150dp"
             android:visibility="gone"
+            style="@android:style/Widget.Holo.Button"
             />
 
         <Button
@@ -111,15 +112,16 @@
             android:text="Cancel"
             android:id="@+id/cancelBtn"
             android:visibility="visible"
+            style="@android:style/Widget.Holo.Button"
             />
 
 
     </LinearLayout>
 
     <View
-        android:layout_marginTop="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="5dp"
+        android:layout_width="350dp"
+        android:layout_gravity="center"
+        android:layout_height="2dp"
         android:background="#000000"/>
 
 </LinearLayout>

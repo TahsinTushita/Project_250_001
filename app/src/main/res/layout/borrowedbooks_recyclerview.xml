@@ -101,15 +101,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Return"
+            style="@android:style/Widget.Holo.Button"
             />
 
 
     </LinearLayout>
 
     <View
-        android:layout_marginTop="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="5dp"
+        android:layout_width="350dp"
+        android:layout_gravity="center"
+        android:layout_height="2dp"
         android:background="#000000"/>
 
 </LinearLayout>
