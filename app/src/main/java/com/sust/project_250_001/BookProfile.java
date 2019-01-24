@@ -3,6 +3,7 @@ package com.sust.project_250_001;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -28,6 +29,7 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -221,6 +223,7 @@ public class BookProfile extends AppCompatActivity implements View.OnClickListen
 //            startActivity(new Intent(BookProfile.this,Profile.class));
         }
     };
+    Integer cnt = 0;
 
 
     public void addToBooklist(){
@@ -231,6 +234,30 @@ public class BookProfile extends AppCompatActivity implements View.OnClickListen
 
         newBook = FirebaseDatabase.getInstance().getReference().child("Profile").child(userName).child("booklist");
         newBook.child(book.getParent()).child("parent").setValue(book.getParent());
+        newBook = FirebaseDatabase.getInstance().getReference("TopBooks/"+currentBook.getParent());
+        newBook.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                cnt = dataSnapshot.getValue(Integer.class);
+            }
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        newBook.child("count").setValue(cnt+1);
         }
 
     public void addToWishList(){
@@ -333,55 +360,44 @@ public class BookProfile extends AppCompatActivity implements View.OnClickListen
         Intent intent = null;
 
         switch(id) {
-
             case R.id.profileid:
                 intent = new Intent(this, Profile.class);
                 drawer.closeDrawer(GravityCompat.START);
                 break;
-
             case R.id.bookListid:
                 intent = new Intent(this, BookList.class);
                 drawer.closeDrawer(GravityCompat.START);
                 break;
-
             case R.id.wishListid:
                 intent = new Intent(this, WishList.class);
                 drawer.closeDrawer(GravityCompat.START);
                 break;
-
             case R.id.homePage:
                 intent = new Intent(this, HomePageActivity.class);
                 drawer.closeDrawer(GravityCompat.START);
                 break;
-
             case R.id.updProfile:
                 intent = new Intent(this,UpdateProfile.class);
                 drawer.closeDrawer(GravityCompat.START);
                 break;
-
             case R.id.requestsid:
                 intent = new Intent(this,RequestsActivity.class);
                 drawer.closeDrawer(GravityCompat.START);
                 break;
-
             case R.id.requestedBooksid:
                 intent = new Intent(this,RequestedBooksActivity.class);
                 drawer.closeDrawer(GravityCompat.START);
                 break;
-
             case R.id.borrowedBooksid:
                 intent = new Intent(this,BorrowedBooks.class);
                 drawer.closeDrawer(GravityCompat.START);
                 break;
-
             case R.id.lentBooksid:
                 intent = new Intent(this,LentBooks.class);
                 drawer.closeDrawer(GravityCompat.START);
                 break;
-
         }
         this.startActivity(intent);
-
         return true;
     }
 }

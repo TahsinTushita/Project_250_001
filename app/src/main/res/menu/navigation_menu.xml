@@ -1,15 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-
     <item
         android:title="Home"
         android:id="@+id/homePage"
         android:icon="@drawable/home"
         />
-
     <item android:title="Info">
         <menu>
-
             <item
                 android:title="Profile"
                 android:id="@+id/profileid"
@@ -70,6 +67,4 @@
                 />
         </menu>
     </item>
-
-
 </menu>

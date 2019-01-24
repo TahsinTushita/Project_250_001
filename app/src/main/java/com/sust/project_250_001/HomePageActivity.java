@@ -22,10 +22,12 @@ import android.widget.TextView;
 
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.lapism.searchview.Search;
 import com.lapism.searchview.database.SearchHistoryTable;
@@ -40,6 +42,7 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
 
     //Add the toolbar;
     private Toolbar toolbar;
+    private ArrayList<String> trendingList = new ArrayList<>();
 
     private RecyclerView recyclerView;
     private RecyclerView reviewView;
@@ -96,7 +99,6 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
 
         //Trending books fetching from firebase
         database = FirebaseDatabase.getInstance().getReference("Books");
-        database.addValueEventListener(valueEventListener);
 
         //Recent Reviews fetching from firebase
         reviewDatabase = FirebaseDatabase.getInstance().getReference("Reviews");
@@ -156,7 +158,54 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
 
         searchView.setAdapter(searchAdapter);
 
+        Query database = FirebaseDatabase.getInstance().getReference("TopBooks").orderByChild("count");
+        database.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                System.out.println(dataSnapshot.getKey());
+                Query query = FirebaseDatabase.getInstance().getReference("Books");
+                query.orderByChild("parent").equalTo(dataSnapshot.getKey()).addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.exists()) {
+                            for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                                Book book = snapshot.getValue(Book.class);
+                                if(bookArrayList.contains(book)==false)
+                                bookArrayList.add(book);
+                            }
+                            BookAdapter adapter = new BookAdapter(HomePageActivity.this,bookArrayList,listener);
+                            recyclerView.setAdapter(adapter);
+                            adapter.notifyDataSetChanged();
+                        }
+                    }
 
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
         ValueEventListener reviewValueEventListener = new ValueEventListener() {
@@ -166,32 +215,10 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
             if (dataSnapshot.exists()) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Review review = snapshot.getValue(Review.class);
-                    reviewArrayList.add(review);
+                    reviewArrayList.add(0,review);
                 }
                 ReviewAdapter adapter = new ReviewAdapter(HomePageActivity.this,reviewArrayList);
                 reviewView.setAdapter(adapter);
-                adapter.notifyDataSetChanged();
-            }
-        }
-
-        @Override
-        public void onCancelled(@NonNull DatabaseError databaseError) {
-
-        }
-    };
-
-
-    ValueEventListener valueEventListener = new ValueEventListener() {
-        @Override
-        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-            bookArrayList.clear();
-            if (dataSnapshot.exists()) {
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    Book book = snapshot.getValue(Book.class);
-                    bookArrayList.add(book);
-                }
-                BookAdapter adapter = new BookAdapter(HomePageActivity.this,bookArrayList,listener);
-                recyclerView.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
             }
         }

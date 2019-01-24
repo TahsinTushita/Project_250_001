@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -28,7 +29,20 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ReviewHold
             bookTitle = itemView.findViewById(R.id.bookTitle);
             userName = itemView.findViewById(R.id.userName);
             reviewText = itemView.findViewById(R.id.reviewText);
-            reviewText.setMaxLines(5);
+            reviewText.setOnTouchListener(new View.OnTouchListener() {
+
+                public boolean onTouch(View v, MotionEvent event) {
+                    if (reviewText.hasFocus()) {
+                        v.getParent().requestDisallowInterceptTouchEvent(true);
+                        switch (event.getAction() & MotionEvent.ACTION_MASK){
+                            case MotionEvent.ACTION_SCROLL:
+                                v.getParent().requestDisallowInterceptTouchEvent(false);
+                                return true;
+                        }
+                    }
+                    return false;
+                }
+            });
         }
         public void setDetails(Review review) {
             bookTitle.setText(review.getBookTitle());
