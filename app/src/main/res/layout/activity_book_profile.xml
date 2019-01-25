@@ -60,29 +60,32 @@
                     android:layout_height="wrap_content"
                     android:textSize="17dp"
                     android:textStyle="bold"
+                    android:layout_marginBottom="10dp"
                     android:text="AUTHOR" />
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Add to wishlist"
                     android:id="@+id/wishListid"
-                    android:background="@android:color/background_light"
-
+                    android:background="@android:color/transparent"
+                    style="@style/Base.V7.Widget.AppCompat.EditText"
                     />
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Add to booklist"
-                    android:background="@android:color/background_light"
+                    android:background="@android:color/transparent"
                     android:id="@+id/bookListid"
+                    style="@style/Base.V7.Widget.AppCompat.EditText"
                     />
 
                 <Button
-                    android:background="@android:color/background_light"
+                    android:background="@android:color/transparent"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/checkAvailability"
                     android:text="Check availability"
+                    style="@style/Base.V7.Widget.AppCompat.EditText"
                     />
 
 
@@ -90,6 +93,13 @@
 
 
         </LinearLayout>
+
+        <View
+            android:layout_width="380dp"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center"
+            android:layout_height="2dp"
+            android:background="#000000"/>
 
 
 

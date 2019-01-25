@@ -18,10 +18,11 @@
         >
 
         <TextView
+            android:fontFamily="@font/special_request"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="book request to"
-            android:textSize="15dp"
+            android:textSize="25dp"
             />
 
         <TextView
@@ -45,10 +46,11 @@
         >
 
         <TextView
+            android:fontFamily="@font/special_request"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="for"
-            android:textSize="15dp"
+            android:textSize="25dp"
             />
 
         <TextView
@@ -74,17 +76,18 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="status: "
+            android:text="Status: "
             android:textSize="15dp"
             android:textStyle="bold"
             />
 
         <TextView
+            android:fontFamily="@font/justanotherhand"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:text="pending"
-            android:textSize="17dp"
+            android:textSize="25dp"
             android:id="@+id/statusid"
             />
 
@@ -99,22 +102,26 @@
         >
 
         <Button
+            android:textColor="@android:color/holo_green_dark"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Confirm"
             android:id="@+id/confirmBtn"
             android:layout_marginRight="150dp"
             android:visibility="gone"
-            style="@android:style/Widget.Holo.Button"
+            android:background="@android:color/transparent"
+            android:fontFamily="@font/patrickhandsc"
             />
 
         <Button
+            android:fontFamily="@font/patrickhandsc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Cancel"
             android:id="@+id/cancelBtn"
             android:visibility="visible"
-            style="@android:style/Widget.Holo.Button"
+            android:textColor="@android:color/holo_red_dark"
+            android:background="@android:color/transparent"
             />
 
 

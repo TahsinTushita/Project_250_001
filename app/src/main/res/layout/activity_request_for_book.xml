@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+
     tools:context=".RequestForBookActivity">
 
     <include
@@ -13,20 +14,28 @@
         />
 
     <EditText
+        android:layout_centerInParent="true"
         android:id="@+id/idBookName"
-        android:layout_width="match_parent"
+        android:layout_width="200dp"
         android:hint="Title (Required)"
         android:layout_height="wrap_content" />
 
     <EditText
+        android:layout_below="@id/idBookName"
+        android:layout_centerInParent="true"
         android:id="@+id/idBookAuthor"
-        android:layout_width="match_parent"
+        android:layout_width="200dp"
         android:hint="Author (Optional)"
         android:layout_height="wrap_content" />
 
     <Button
+        android:background="@android:color/transparent"
+        android:layout_centerInParent="true"
+        android:layout_below="@id/idBookAuthor"
         android:id="@+id/idBookReq"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Submit Request"/>
-</LinearLayout>
+</RelativeLayout>
+
+    <!--android:background="#E2D69D61"-->

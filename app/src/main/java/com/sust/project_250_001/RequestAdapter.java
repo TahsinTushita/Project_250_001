@@ -2,6 +2,7 @@ package com.sust.project_250_001;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -71,14 +72,21 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.RequestH
             username.setText(request.getUsername());
             if(request.getStatus()==0){
                 status.setText("pending");
+                status.setTextColor(ContextCompat.getColor(context,android.R.color.holo_red_dark));
             }
             else if(request.getStatus()==1){
+                status.setTextColor(ContextCompat.getColor(context,android.R.color.holo_green_dark));
                 status.setText("approved");
             }
-            else if(request.getStatus()==2)
+            else if(request.getStatus()==2) {
                 status.setText("confirm sent");
-            else if(request.getStatus()==3)
+                status.setTextColor(ContextCompat.getColor(context,android.R.color.holo_blue_dark));
+            }
+            else if(request.getStatus()==3) {
                 status.setText("confirm recieved");
+                status.setTextColor(ContextCompat.getColor(context,android.R.color.holo_purple));
+            }
+
         }
 
         public void bind(final Request request, OnItemClickListener listener) {

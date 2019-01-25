@@ -55,7 +55,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:src="@drawable/ic_name" />
+            android:tint="#000"
+            android:backgroundTint="#000"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/full_name" />
 
         <EditText
             android:id="@+id/signUpNameID"
@@ -142,6 +145,7 @@
             android:layout_height="wrap_content"
             android:src="@drawable/address"
             android:layout_marginLeft="10dp"
+            android:layout_gravity="center"
             />
 
         <EditText
@@ -150,9 +154,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:ems="10"
-            android:hint="Address"
-            android:padding="10dp"
-            android:singleLine="true" />
+            android:hint="Address\n(Please enter your detailed address including your road,area and country)"
+            android:singleLine="false" />
 
     </LinearLayout>
 
