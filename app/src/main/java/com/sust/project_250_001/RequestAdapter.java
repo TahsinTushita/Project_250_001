@@ -1,6 +1,7 @@
 package com.sust.project_250_001;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
@@ -140,6 +141,15 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.RequestH
                     request.setStatus(2);
                     setVisibility(request);
                     setDetails(request);
+                }
+            });
+
+            itemView.findViewById(R.id.userName).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(itemView.getContext(),Profile.class);
+                    intent.putExtra("profileID",request.getUsername());
+                    v.getContext().startActivity(intent);
                 }
             });
 

@@ -57,8 +57,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:text="username"
-            android:textStyle="bold"
+            android:clickable="true"
+            android:text="@string/username"
+            android:textStyle="italic|bold"
             android:textSize="17dp"
             android:id="@+id/userName"
             />
