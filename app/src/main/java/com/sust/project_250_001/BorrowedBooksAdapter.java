@@ -2,6 +2,7 @@ package com.sust.project_250_001;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -67,10 +68,14 @@ public class BorrowedBooksAdapter extends RecyclerView.Adapter<BorrowedBooksAdap
         public void setDetails(Request request){
             borrowedBook.setText(request.getBookTitle());
             borrowedFrom.setText(request.getUsername());
-            if(request.getStatus()==0)
+            if(request.getStatus()==0) {
                 status.setText("borrowed");
-            else if(request.getStatus()==1)
+                status.setTextColor(ContextCompat.getColor(context,android.R.color.holo_orange_dark));
+            }
+            else if(request.getStatus()==1) {
                 status.setText("returned");
+                status.setTextColor(ContextCompat.getColor(context,android.R.color.holo_blue_bright));
+            }
         }
 
         public void bind(final Request request,OnItemClickListener listener){

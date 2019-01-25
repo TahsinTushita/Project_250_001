@@ -107,7 +107,7 @@
             android:layout_height="wrap_content"
             android:text="Confirm"
             android:id="@+id/confirmBtn"
-            android:layout_marginRight="150dp"
+            android:layout_marginRight="130dp"
             android:visibility="gone"
             android:background="@android:color/transparent"
             android:fontFamily="@font/patrickhandsc"

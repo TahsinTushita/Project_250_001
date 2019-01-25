@@ -4,6 +4,8 @@
     android:layout_width="match_parent"
     android:layout_margin="10dp"
     android:orientation="vertical"
+    android:background="@drawable/bg_request"
+    android:padding="35dp"
     android:layout_height="wrap_content">
 
     <LinearLayout
@@ -27,7 +29,8 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:text="book name"
-            android:textSize="17dp"
+            android:fontFamily="@font/justanotherhand"
+            android:textSize="30dp"
             android:id="@+id/bookTitle"
             />
 
@@ -53,8 +56,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
+            android:fontFamily="@font/justanotherhand"
             android:text="username"
-            android:textSize="17dp"
+            android:textSize="30dp"
             android:id="@+id/userName"
             />
 
@@ -101,7 +105,9 @@
             android:layout_height="wrap_content"
             android:text="Confirm returned"
             android:visibility="gone"
-            style="@android:style/Widget.Holo.Button"
+            android:fontFamily="@font/patrickhandsc"
+            android:textColor="@android:color/holo_green_dark"
+            android:background="@android:color/transparent"
             />
 
 
