@@ -48,7 +48,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Trending Books"
-            android:textSize="20sp"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/pecita"
             android:textAlignment="center"/>
         <LinearLayout
             android:layout_width="match_parent"
@@ -62,7 +64,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Recent Reviews"
-            android:textSize="20sp"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/pecita"
             android:textAlignment="center"/>
         <LinearLayout
             android:layout_width="match_parent"

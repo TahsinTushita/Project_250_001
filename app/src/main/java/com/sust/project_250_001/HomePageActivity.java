@@ -230,6 +230,7 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
             if (dataSnapshot.exists()) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Review review = snapshot.getValue(Review.class);
+                    if(reviewArrayList.contains(review)==false)
                     reviewArrayList.add(0,review);
                 }
                 ReviewAdapter adapter = new ReviewAdapter(HomePageActivity.this,reviewArrayList);
