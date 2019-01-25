@@ -209,6 +209,7 @@ public class BookProfile extends AppCompatActivity implements View.OnClickListen
             boolean focusable = true; // lets taps outside the popup also dismiss it
             final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
             popupReview.setText(book.getPostDesc());
+            popupWindow.setAnimationStyle(R.style.popup_window_animation);
             // show the popup window
             // which view you pass in doesn't matter, it is only used for the window tolken
             popupWindow.showAtLocation(popupView, Gravity.CENTER, 0, 0);

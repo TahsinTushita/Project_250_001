@@ -34,13 +34,13 @@
                 />
 
             <item
-                android:title="BOOK List"
+                android:title="Book List"
                 android:id="@+id/bookListid"
                 android:icon="@drawable/booklist"
                 />
 
             <item
-                android:title="WISH List"
+                android:title="Wish List"
                 android:id="@+id/wishListid"
                 android:icon="@drawable/wishlist"
                 />

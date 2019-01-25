@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="500dp"
-    android:background="@drawable/round_corner_bg">
+    android:background="@drawable/bg_paper">
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -13,10 +13,11 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:layout_margin="30dp"
-        android:textSize="22sp"
+        android:textSize="26sp"
         android:overScrollMode="always"
         android:scrollbarStyle="insideInset"
         android:scrollbars="vertical"
+        android:fontFamily="@font/justanotherhand"
         android:text="This is a popup window."/>
     </ScrollView>
 </RelativeLayout>

@@ -166,19 +166,31 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 System.out.println(dataSnapshot.getKey());
                 Query query = FirebaseDatabase.getInstance().getReference("Books");
-                query.orderByChild("parent").equalTo(dataSnapshot.getKey()).addValueEventListener(new ValueEventListener() {
+                query.orderByChild("parent").equalTo(dataSnapshot.getKey()).addChildEventListener(new ChildEventListener() {
                     @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                         if (dataSnapshot.exists()) {
-                            for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                                Book book = snapshot.getValue(Book.class);
-                                if(bookArrayList.contains(book)==false)
-                                bookArrayList.add(0,book);
-                            }
+                            Book book = dataSnapshot.getValue(Book.class);
+                            bookArrayList.add(0,book);
                             BookAdapter adapter = new BookAdapter(HomePageActivity.this,bookArrayList,listener);
                             recyclerView.setAdapter(adapter);
                             adapter.notifyDataSetChanged();
                         }
+                    }
+
+                    @Override
+                    public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+                    }
+
+                    @Override
+                    public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+                    }
+
+                    @Override
+                    public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
                     }
 
                     @Override
