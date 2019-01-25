@@ -48,7 +48,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
     private GoogleMap mMap;
     private FusedLocationProviderClient mfusedLocationProviderClient;
-    private static final float DEFAULT_ZOOM = 25f;
+    private static final float DEFAULT_ZOOM = 8f;
 
     private EditText mSearchText;
     private ImageView mGps;
@@ -333,7 +333,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         }
 
         if(userMarker == null) {
-            mMap.addCircle(new CircleOptions().center(new LatLng(latitude,longitude)).radius(1000).strokeWidth(0f).fillColor(0xE6FFBEBE));
+            mMap.addCircle(new CircleOptions().center(new LatLng(latitude,longitude)).radius(10000).strokeWidth(0f).fillColor(0xE6FFBEBE));
 
             userMarker = new MarkerOptions().position(new LatLng(latitude, longitude)).title("Current Location");
             myMarker = mMap.addMarker(userMarker);
@@ -345,7 +345,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
             userMarker = new MarkerOptions().position(new LatLng(latitude, longitude)).title("Current Location");
             mMap.clear();
-            mMap.addCircle(new CircleOptions().center(new LatLng(latitude,longitude)).radius(1000).strokeWidth(0f).fillColor(0xE6FFBEBE));
+            mMap.addCircle(new CircleOptions().center(new LatLng(latitude,longitude)).radius(10000).strokeWidth(0f).fillColor(0xE6FFBEBE));
 
             myMarker = mMap.addMarker(userMarker);
             myMarker.showInfoWindow();
@@ -353,7 +353,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             hs.put(myMarker,LoginActivity.user);
         }
         //Toast.makeText(this,"lat:"+latitude+" long:"+longitude,Toast.LENGTH_SHORT).show();
-        moveCamera(new LatLng(latitude, longitude),15f
+        moveCamera(new LatLng(latitude, longitude),DEFAULT_ZOOM
                 , "my location");
 
         drawNearby();
