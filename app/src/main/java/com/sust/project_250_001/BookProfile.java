@@ -196,12 +196,10 @@ public class BookProfile extends AppCompatActivity implements View.OnClickListen
     BookReviewAdapter.OnItemClickListener listener = new BookReviewAdapter.OnItemClickListener() {
         @Override
         public void onItemClick(BookReview book) {
-
             // inflate the layout of the popup window
             LayoutInflater inflater = (LayoutInflater)
                     getSystemService(LAYOUT_INFLATER_SERVICE);
             View popupView = inflater.inflate(R.layout.popup_window, null);
-
             popupReview = popupView.findViewById(R.id.popupReview);
             // create the popup window
             int width = LinearLayout.LayoutParams.WRAP_CONTENT;

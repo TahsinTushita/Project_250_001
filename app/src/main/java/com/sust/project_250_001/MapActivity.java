@@ -259,7 +259,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
                     double longitude = add.getLongitude();
                     double latitude = add.getLatitude();
-                    MarkerOptions options = new MarkerOptions().position(new LatLng(latitude,longitude)).title(address).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
+                    MarkerOptions options = new MarkerOptions().position(new LatLng(latitude,longitude)).title(HomePageActivity.profileInfoArrayList.get(i).getName()).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
                     Marker marker = mMap.addMarker(options);
 
                     hs.put(marker,HomePageActivity.profileInfoArrayList.get(i).getUsername());
