@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Project_250_0.01</string>
+    <string name="app_name">BookShelf</string>
     <string name="invalid_login_msg">Invalid login credential</string>
     <string name="successful_login">Login Successful</string>
     <string name="unsuccessful_login">There is problem. Have you entered your credentials correctly?</string>
