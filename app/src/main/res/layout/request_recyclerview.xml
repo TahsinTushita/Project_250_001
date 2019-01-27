@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_margin="10dp"
     android:padding="35dp"
-    android:background="@drawable/bg_request"
+    android:background="@drawable/ic_bg_request"
     android:layout_height="wrap_content">
 
 
@@ -36,6 +36,12 @@
             />
 
     </LinearLayout>
+    <View
+        android:layout_width="350dp"
+        android:layout_gravity="center"
+        android:layout_height="2dp"
+        android:background="@android:color/darker_gray"
+        />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -65,6 +71,12 @@
             />
 
     </LinearLayout>
+    <View
+        android:layout_width="350dp"
+        android:layout_gravity="center"
+        android:layout_height="2dp"
+        android:background="@android:color/darker_gray"
+        />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -133,12 +145,6 @@
             android:text="Cancel" />
 
     </LinearLayout>
-
-    <View
-        android:layout_width="350dp"
-        android:layout_gravity="center"
-        android:layout_height="2dp"
-        android:background="#000000"/>
 
 
 
