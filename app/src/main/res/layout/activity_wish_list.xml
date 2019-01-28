@@ -34,10 +34,12 @@
                 android:text="Nothing to show!"
                 android:textSize="20dp"
                 android:layout_gravity="center"
+                android:textStyle="bold"
                 />
 
             <TextView
                 android:layout_width="wrap_content"
+                android:textStyle="bold"
                 android:layout_height="wrap_content"
                 android:textSize="20dp"
                 android:text="You can select books to add in your list"

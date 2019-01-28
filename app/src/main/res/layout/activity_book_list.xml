@@ -34,6 +34,7 @@
                 android:text="Nothing to show!"
                 android:textSize="20dp"
                 android:layout_gravity="center"
+                android:textStyle="bold"
                 />
 
             <TextView
@@ -42,6 +43,7 @@
                 android:textSize="20dp"
                 android:text="You can select books to add in your list"
                 android:layout_gravity="center"
+                android:textStyle="bold"
                 />
 
 

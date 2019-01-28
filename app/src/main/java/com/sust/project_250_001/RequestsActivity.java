@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.firebase.database.ChildEventListener;
@@ -22,7 +23,7 @@ public class RequestsActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private RequestAdapter adapter;
-    private TextView userName;
+    private TextView userName,noRequests;
     private FirebaseDatabase databaseReference = FirebaseDatabase.getInstance();
     RequestAdapter.OnItemClickListener listener;
 
@@ -38,6 +39,7 @@ public class RequestsActivity extends AppCompatActivity {
 
         userName = findViewById(R.id.userName);
         recyclerView = findViewById(R.id.request_recyclerView);
+        noRequests = findViewById(R.id.noRequestid);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new RequestAdapter(this,requestList, listener,databaseReference);
         recyclerView.setAdapter(adapter);

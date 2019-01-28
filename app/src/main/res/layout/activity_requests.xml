@@ -13,6 +13,17 @@
         android:id="@+id/toolbar"
         />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="250dp"
+        android:textSize="20dp"
+        android:layout_gravity="center"
+        android:text="No Requests!"
+        android:id="@+id/noRequestid"
+        android:textStyle="bold"
+        />
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/request_recyclerView"
         android:elevation="5dp"
