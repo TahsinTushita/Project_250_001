@@ -7,8 +7,10 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -45,7 +47,10 @@ public class RequestsActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
         fetchBooks();
+
     }
+
+
 
     private void fetchRequests(final DatabaseReference database){
         database.addChildEventListener(new ChildEventListener() {
@@ -54,6 +59,8 @@ public class RequestsActivity extends AppCompatActivity {
                 Request request = dataSnapshot.getValue(Request.class);
                 requestList.add(request);
                 adapter.notifyDataSetChanged();
+                if(requestList.size()==0) noRequests.setVisibility(View.VISIBLE);
+                else noRequests.setVisibility(View.GONE);
             }
 
             @Override
@@ -63,6 +70,8 @@ public class RequestsActivity extends AppCompatActivity {
 
             @Override
             public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+                if(requestList.size()==0) noRequests.setVisibility(View.VISIBLE);
+                else noRequests.setVisibility(View.GONE);
             }
 
             @Override

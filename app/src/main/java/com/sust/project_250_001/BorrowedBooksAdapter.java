@@ -68,7 +68,7 @@ public class BorrowedBooksAdapter extends RecyclerView.Adapter<BorrowedBooksAdap
         public void setDetails(Request request){
             borrowedBook.setText(request.getBookTitle());
             borrowedFrom.setText(request.getUsername());
-            if(request.getStatus()==0) {
+            if(request.getStatus()==0){
                 status.setText("borrowed");
                 status.setTextColor(ContextCompat.getColor(context,android.R.color.holo_orange_dark));
             }
@@ -83,7 +83,7 @@ public class BorrowedBooksAdapter extends RecyclerView.Adapter<BorrowedBooksAdap
                 @Override
                 public void onClick(View v) {
                     DatabaseReference db = database.getReference("Profile/"+LoginActivity.user+"/borrowedBooks/"+
-                                                    request.getParent());
+                            request.getParent());
                     db.child("status").setValue(1);
 
                     db = database.getReference("Profile/"+request.getUsername()+"/lentBooks/"+request.getParent());
@@ -92,7 +92,6 @@ public class BorrowedBooksAdapter extends RecyclerView.Adapter<BorrowedBooksAdap
                     request.setStatus(1);
                     setVisibility(request);
                     setDetails(request);
-
                 }
             });
         }
