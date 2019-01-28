@@ -72,10 +72,28 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             //mMap.getUiSettings().setMyLocationButtonEnabled(false);
 
 
-            googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+           googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
 
+               @Override
+               public boolean onMarkerClick(Marker marker) {
+
+                    marker.showInfoWindow();
+//
+//                    Intent intent = new Intent(MapActivity.this,Profile.class);
+//                    intent.putExtra("profileID",hs.get(marker));
+//                    if(hs.get(marker).equals(LoginActivity.user)) {
+//                        intent.putExtra("from", "");
+//                    }
+//                    else intent.putExtra("from", "MapActivity");
+//                    startActivity(intent);
+//
+                    return false;
+                }
+            });
+
+            googleMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
                 @Override
-                public boolean onMarkerClick(Marker marker) {
+                public void onInfoWindowClick(Marker marker) {
                     Intent intent = new Intent(MapActivity.this,Profile.class);
                     intent.putExtra("profileID",hs.get(marker));
                     if(hs.get(marker).equals(LoginActivity.user)) {
@@ -83,8 +101,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                     }
                     else intent.putExtra("from", "MapActivity");
                     startActivity(intent);
-
-                    return false;
+//
                 }
             });
 
