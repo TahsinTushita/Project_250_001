@@ -19,6 +19,34 @@
             android:id="@+id/toolbar"
             />
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="250dp"
+            android:visibility="visible"
+            android:id="@+id/layoutid"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nothing to show!"
+                android:textSize="20dp"
+                android:layout_gravity="center"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:text="You can select books to add in your list"
+                android:layout_gravity="center"
+                />
+
+
+        </LinearLayout>
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/search_recyclerView"
             android:elevation="5dp"

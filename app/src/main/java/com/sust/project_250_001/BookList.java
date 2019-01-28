@@ -13,6 +13,8 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,6 +43,7 @@ public class BookList extends AppCompatActivity implements NavigationView.OnNavi
     private BookAdapter adapter;
     private SearchresultsAdapter searchresultsAdapter;
     private ArrayList<Book> bookArrayList;
+    private LinearLayout layout;
 
     private ArrayList<String> bookList;
 
@@ -68,6 +71,7 @@ public class BookList extends AppCompatActivity implements NavigationView.OnNavi
 
         bookList = new ArrayList<>();
 
+        layout = findViewById(R.id.layoutid);
         recyclerView = findViewById(R.id.search_recyclerView);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 1, GridLayoutManager.VERTICAL, false));
         bookArrayList = new ArrayList<>();
@@ -80,7 +84,6 @@ public class BookList extends AppCompatActivity implements NavigationView.OnNavi
                     if (postSnapshot.exists()) {
                         String book = (String) postSnapshot.getValue(Book.class).getParent();
                         bookList.add(book);
-                        System.out.println("Book Name " + book);
                     }
                 }
 
@@ -92,9 +95,15 @@ public class BookList extends AppCompatActivity implements NavigationView.OnNavi
             }
         });
 
+
     }
 
     private void updateRecyclerView() {
+
+        if(bookList.size()!=0){
+            layout.setVisibility(View.GONE);
+        }
+        else layout.setVisibility(View.VISIBLE);
         bookArrayList.clear();
         for (String st : bookList) {
             Query db = FirebaseDatabase.getInstance().getReference("Books").orderByChild("parent").equalTo(st);

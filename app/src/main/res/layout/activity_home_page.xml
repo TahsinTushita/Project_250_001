@@ -35,6 +35,7 @@
             app:contentInsetRight="0dp"
             app:contentInsetEnd="0dp">
 
+
         </android.support.v7.widget.Toolbar>
         <com.lapism.searchview.widget.SearchView
             android:id="@+id/searchBar"

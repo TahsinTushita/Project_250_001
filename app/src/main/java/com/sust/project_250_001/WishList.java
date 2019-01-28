@@ -13,6 +13,8 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.firebase.database.ChildEventListener;
@@ -36,6 +38,7 @@ public class WishList extends AppCompatActivity implements NavigationView.OnNavi
     private ArrayList<Book> bookArrayList;
     private ArrayList<String> wishList;
     private RecyclerView recyclerView;
+    private LinearLayout layout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +59,7 @@ public class WishList extends AppCompatActivity implements NavigationView.OnNavi
         navigationView.setNavigationItemSelectedListener(this);
         wishList = new ArrayList<>();
         recyclerView = findViewById(R.id.search_recyclerView);
+        layout = findViewById(R.id.layoutid);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 1, GridLayoutManager.VERTICAL, false));
         bookArrayList = new ArrayList<>();
         searchresultsAdapter = new SearchresultsAdapter(this, bookArrayList,listener);
@@ -83,6 +87,12 @@ public class WishList extends AppCompatActivity implements NavigationView.OnNavi
     }
 
     private void updateRecyclerView() {
+
+        if(wishList.size()!=0)
+            layout.setVisibility(View.GONE);
+        else
+            layout.setVisibility(View.VISIBLE);
+
         bookArrayList.clear();
         for (String st : wishList) {
             Query db = FirebaseDatabase.getInstance().getReference("Books").orderByChild("parent").equalTo(st);
