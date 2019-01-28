@@ -62,31 +62,91 @@
                     android:textStyle="bold"
                     android:layout_marginBottom="10dp"
                     android:text="AUTHOR" />
-                <Button
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Add to wishlist"
-                    android:id="@+id/wishListid"
-                    android:background="@android:color/transparent"
-                    style="@style/Base.V7.Widget.AppCompat.EditText"
-                    />
-                <Button
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Add to booklist"
-                    android:background="@android:color/transparent"
-                    android:id="@+id/bookListid"
-                    style="@style/Base.V7.Widget.AppCompat.EditText"
-                    />
 
-                <Button
-                    android:background="@android:color/transparent"
-                    android:layout_width="fill_parent"
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/checkAvailability"
-                    android:text="Check availability"
-                    style="@style/Base.V7.Widget.AppCompat.EditText"
-                    />
+                    android:orientation="horizontal"
+                    >
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/wishlist"
+                        android:layout_marginTop="13dp"
+                        android:layout_marginRight="5dp"
+                        />
+
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Add to wishlist"
+                        android:fontFamily="@font/patrickhandsc"
+                        android:id="@+id/wishListid"
+                        android:background="@android:color/transparent"
+                        style="@style/Base.V7.Widget.AppCompat.EditText"
+                        />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    >
+
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/booklist"
+                        android:layout_marginTop="13dp"
+                        android:layout_marginRight="5dp"
+                        android:tint="#000"
+                        />
+
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/patrickhandsc"
+                        android:text="Add to booklist"
+                        android:background="@android:color/transparent"
+                        android:id="@+id/bookListid"
+                        style="@style/Base.V7.Widget.AppCompat.EditText"
+                        />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    >
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/location"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginTop="13dp"
+                        />
+
+                    <Button
+                        android:background="@android:color/transparent"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/patrickhandsc"
+                        android:id="@+id/checkAvailability"
+                        android:text="Check availability"
+                        style="@style/Base.V7.Widget.AppCompat.EditText"
+                        />
+
+
+                </LinearLayout>
+
+
 
 
             </LinearLayout>
