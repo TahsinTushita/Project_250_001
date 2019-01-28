@@ -12,7 +12,17 @@
         layout="@layout/toolbar_layout"
         android:id="@+id/toolbar"
         />
-
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="250dp"
+        android:textSize="20dp"
+        android:layout_gravity="center"
+        android:text="Nothing to show!"
+        android:id="@+id/noRequestid"
+        android:textStyle="bold"
+        android:visibility="visible"
+        />
     <android.support.v7.widget.RecyclerView
         android:id="@+id/borrowedbooks_recyclerView"
         android:elevation="5dp"

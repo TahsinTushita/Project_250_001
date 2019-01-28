@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.TextView;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -25,7 +27,7 @@ public class RequestedBooksActivity extends AppCompatActivity {
     RequestedBooksAdapter.OnItemClickListener listener;
 
     private ArrayList<Request> requestedBooksList = new ArrayList();
-
+    private TextView noRequest;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +43,8 @@ public class RequestedBooksActivity extends AppCompatActivity {
         adapter = new RequestedBooksAdapter(this,requestedBooksList, listener,databaseReference);
         recyclerView.setAdapter(adapter);
 
+        noRequest = findViewById(R.id.noRequestid);
+
         fetchBooks();
 
     }
@@ -54,6 +58,8 @@ public class RequestedBooksActivity extends AppCompatActivity {
                 System.out.println("BOokTitle " + request.getBookTitle());
                 requestedBooksList.add(request);
                 adapter.notifyDataSetChanged();
+                if(requestedBooksList.size() != 0) noRequest.setVisibility(View.GONE);
+                else noRequest.setVisibility(View.VISIBLE);
             }
 
             @Override
@@ -63,7 +69,8 @@ public class RequestedBooksActivity extends AppCompatActivity {
 
             @Override
             public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-
+                if(requestedBooksList.size() != 0) noRequest.setVisibility(View.GONE);
+                else noRequest.setVisibility(View.VISIBLE);
             }
 
             @Override

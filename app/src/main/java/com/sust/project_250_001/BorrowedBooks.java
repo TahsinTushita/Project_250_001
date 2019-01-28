@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.TextView;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -18,6 +20,7 @@ import java.util.ArrayList;
 public class BorrowedBooks extends AppCompatActivity {
 
     private Toolbar toolbar;
+    private TextView noRequest;
 
     private RecyclerView recyclerView;
     private BorrowedBooksAdapter adapter;
@@ -35,11 +38,12 @@ public class BorrowedBooks extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Borrowed Books");
 
+        noRequest = findViewById(R.id.noRequestid);
+
         recyclerView = findViewById(R.id.borrowedbooks_recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new BorrowedBooksAdapter(this,borrowedBooksList, databaseReference,listener);
         recyclerView.setAdapter(adapter);
-
         fetchBooks();
     }
 
@@ -51,6 +55,8 @@ public class BorrowedBooks extends AppCompatActivity {
                 System.out.println("BOokTitle " + request.getBookTitle());
                 borrowedBooksList.add(request);
                 adapter.notifyDataSetChanged();
+                if(borrowedBooksList.size() != 0) noRequest.setVisibility(View.GONE);
+                else noRequest.setVisibility(View.VISIBLE);
             }
 
             @Override
@@ -60,7 +66,8 @@ public class BorrowedBooks extends AppCompatActivity {
 
             @Override
             public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-
+                if(borrowedBooksList.size() != 0) noRequest.setVisibility(View.GONE);
+                else noRequest.setVisibility(View.VISIBLE);
             }
 
             @Override

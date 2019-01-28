@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.TextView;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -22,6 +24,7 @@ public class LentBooks extends AppCompatActivity {
     private RecyclerView recyclerView;
     private LentBooksAdapter adapter;
     private FirebaseDatabase databaseReference = FirebaseDatabase.getInstance();
+    private TextView noRequest;
     LentBooksAdapter.OnItemClickListener listener;
 
     private ArrayList<Request> lentBooksList = new ArrayList();
@@ -39,6 +42,7 @@ public class LentBooks extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new LentBooksAdapter(this,lentBooksList,databaseReference,listener);
         recyclerView.setAdapter(adapter);
+        noRequest = findViewById(R.id.noRequestid);
 
         fetchBooks();
     }
@@ -51,6 +55,8 @@ public class LentBooks extends AppCompatActivity {
                 System.out.println("BOokTitle " + request.getBookTitle());
                 lentBooksList.add(request);
                 adapter.notifyDataSetChanged();
+                if(lentBooksList.size() != 0) noRequest.setVisibility(View.GONE);
+                else noRequest.setVisibility(View.VISIBLE);
             }
 
             @Override
@@ -60,7 +66,8 @@ public class LentBooks extends AppCompatActivity {
 
             @Override
             public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-
+                if(lentBooksList.size() != 0) noRequest.setVisibility(View.GONE);
+                else noRequest.setVisibility(View.VISIBLE);
             }
 
             @Override
