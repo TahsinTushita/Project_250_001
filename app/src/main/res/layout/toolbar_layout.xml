@@ -6,12 +6,15 @@
     android:layout_height="?attr/actionBarSize"
     android:background="@color/colorPrimaryDark"
     android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-    android:contentInsetLeft="0dp"
-    android:contentInsetStart="0dp"
-    app:contentInsetLeft="0dp"
-    app:contentInsetStart="0dp"
-    android:contentInsetRight="0dp"
-    android:contentInsetEnd="0dp"
-    app:contentInsetRight="0dp"
-    app:contentInsetEnd="0dp">
+    app:contentInsetStart="72dp"
+    >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hello"
+        android:textSize="50dp"
+        android:fontFamily="@font/justanotherhand"
+        />
+
 </android.support.v7.widget.Toolbar>

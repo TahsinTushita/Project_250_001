@@ -46,7 +46,7 @@ public class WishList extends AppCompatActivity implements NavigationView.OnNavi
         setContentView(R.layout.activity_wish_list);
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Wish List");
+        getSupportActionBar().setTitle(null);
         drawer = (DrawerLayout) findViewById(R.id.drawerid);
         navigationView = (NavigationView) findViewById(R.id.navigation_drawer_id);
         drawerToggle = new ActionBarDrawerToggle(this,drawer,R.string.nav_open,R.string.nav_close);

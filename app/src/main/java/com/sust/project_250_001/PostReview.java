@@ -34,6 +34,7 @@ public class PostReview extends AppCompatActivity {
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle(null);
 
         reviewTitle = findViewById(R.id.reviewTitle) ;
         reviewDesc = findViewById(R.id.reviewDesc);

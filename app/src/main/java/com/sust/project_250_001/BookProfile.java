@@ -77,7 +77,7 @@ public class BookProfile extends AppCompatActivity implements View.OnClickListen
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("BOOK");
+        getSupportActionBar().setTitle(null);
 
         drawer = (DrawerLayout) findViewById(R.id.drawerid);
         navigationView = (NavigationView) findViewById(R.id.navigation_drawer_id);

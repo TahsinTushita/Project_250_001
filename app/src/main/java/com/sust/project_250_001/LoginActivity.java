@@ -47,6 +47,7 @@ public class LoginActivity extends AppCompatActivity {
         //Find and set Toolbar
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle(null);
 
         //Find loginBox ids and match them
         userName = findViewById(R.id.userNameID);

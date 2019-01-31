@@ -40,7 +40,7 @@ public class AllBooksActivity extends AppCompatActivity {
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("All Books");
+        getSupportActionBar().setTitle(null);
 
         final SearchresultsAdapter adapter = new SearchresultsAdapter(this,booklist,listener);
 

@@ -52,7 +52,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Profile");
+        getSupportActionBar().setTitle(null);
 
 
         drawer = (DrawerLayout) findViewById(R.id.drawerid);

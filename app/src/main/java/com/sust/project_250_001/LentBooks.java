@@ -36,7 +36,7 @@ public class LentBooks extends AppCompatActivity {
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Lent Books");
+        getSupportActionBar().setTitle(null);
 
         recyclerView = findViewById(R.id.lentbooks_recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

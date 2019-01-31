@@ -8,10 +8,24 @@
     android:orientation="vertical"
     tools:context=".RequestsActivity">
 
-    <include
-        layout="@layout/toolbar_layout"
+    <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
-        />
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimaryDark"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:contentInsetStart="50dp"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Requests"
+            android:textSize="40dp"
+            android:fontFamily="@font/justanotherhand"
+            />
+
+    </android.support.v7.widget.Toolbar>
 
     <TextView
         android:layout_width="wrap_content"

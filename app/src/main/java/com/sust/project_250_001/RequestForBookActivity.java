@@ -25,7 +25,7 @@ public class RequestForBookActivity extends AppCompatActivity {
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Send Request");
+        getSupportActionBar().setTitle(null);
 
 
 

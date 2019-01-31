@@ -31,7 +31,7 @@ public class UpdateProfile extends AppCompatActivity {
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Update Profile");
+        getSupportActionBar().setTitle(null);
 
         firebaseAuth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance().getReference("Profile").child(LoginActivity.user);

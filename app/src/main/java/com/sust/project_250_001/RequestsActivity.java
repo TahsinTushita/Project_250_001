@@ -37,7 +37,7 @@ public class RequestsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_requests);
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Requests");
+        getSupportActionBar().setTitle(null);
 
         userName = findViewById(R.id.userName);
         recyclerView = findViewById(R.id.request_recyclerView);

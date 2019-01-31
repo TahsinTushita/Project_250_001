@@ -7,10 +7,24 @@
     android:orientation="vertical"
     tools:context=".PostReview">
 
-    <include
-        layout="@layout/toolbar_layout"
+    <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
-        />
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimaryDark"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:contentInsetStart="50dp"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Post Review"
+            android:textSize="40dp"
+            android:fontFamily="@font/justanotherhand"
+            />
+
+    </android.support.v7.widget.Toolbar>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -67,6 +81,9 @@
         android:layout_marginTop="15sp"
         android:layout_gravity="center"
         android:text="Post"
+        android:background="@android:color/transparent"
+        android:fontFamily="@font/justanotherhand"
+        android:textSize="35dp"
         android:onClick="startPosting"
         />
 

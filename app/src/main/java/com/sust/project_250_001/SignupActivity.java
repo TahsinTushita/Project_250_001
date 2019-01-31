@@ -34,6 +34,7 @@ public class SignupActivity extends AppCompatActivity {
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle(null);
 
         userName = findViewById(R.id.signUpUserNameID);
         passWord = findViewById(R.id.signUpPassWordID);

@@ -36,7 +36,7 @@ public class BorrowedBooks extends AppCompatActivity {
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Borrowed Books");
+        getSupportActionBar().setTitle(null);
 
         noRequest = findViewById(R.id.noRequestid);
 

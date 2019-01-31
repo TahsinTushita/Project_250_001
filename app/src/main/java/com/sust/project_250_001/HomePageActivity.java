@@ -69,6 +69,7 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
         //Set toolbar as actionbar
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle(null);
 
         drawer = (DrawerLayout) findViewById(R.id.drawerid);
         navigationView = (NavigationView) findViewById(R.id.navigation_drawer_id);
