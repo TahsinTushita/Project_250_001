@@ -9,6 +9,16 @@ public class ProfileInfo implements Serializable {
     String address;
     String email;
 
+    public ProfileInfo(String name, String username, String address, String email, String profilephoto) {
+        this.name = name;
+        this.username = username;
+        this.address = address;
+        this.email = email;
+        this.profilephoto = profilephoto;
+    }
+
+    String profilephoto;
+
     public String getName() {
         return name;
     }
@@ -21,11 +31,12 @@ public class ProfileInfo implements Serializable {
 
     }
 
-    public ProfileInfo(String username,String address,String email,String name){
-        this.address = address;
-        this.email = email;
-        this.username = username;
-        this.name = name;
+    public String getProfilephoto() {
+        return profilephoto;
+    }
+
+    public void setProfilephoto(String profilephoto) {
+        this.profilephoto = profilephoto;
     }
 
     public void setUsername(String username){

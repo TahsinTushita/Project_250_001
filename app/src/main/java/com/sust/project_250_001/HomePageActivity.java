@@ -44,6 +44,7 @@ import java.util.List;
 public class HomePageActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     //Add the toolbar;
+
     private Toolbar toolbar;
     private ArrayList<String> trendingList = new ArrayList<>();
 

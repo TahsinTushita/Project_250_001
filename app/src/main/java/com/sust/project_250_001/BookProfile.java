@@ -1,5 +1,6 @@
 package com.sust.project_250_001;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -48,6 +49,7 @@ public class BookProfile extends AppCompatActivity implements View.OnClickListen
     private ProfileInfo profileInfo;
     public static final String EXTRA_BOOK = "bookObject";
 
+    private ProgressDialog mapWaitDialog;
     private ImageView bookCover;
     private TextView bookAuthor;
     private TextView bookTitle;
@@ -78,6 +80,8 @@ public class BookProfile extends AppCompatActivity implements View.OnClickListen
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(null);
+
+        mapWaitDialog = new ProgressDialog(this);
 
         drawer = (DrawerLayout) findViewById(R.id.drawerid);
         navigationView = (NavigationView) findViewById(R.id.navigation_drawer_id);
@@ -310,7 +314,8 @@ public class BookProfile extends AppCompatActivity implements View.OnClickListen
         }
 
         if(id==R.id.checkAvailability){
-
+            mapWaitDialog.setMessage("Please Wait...");
+            mapWaitDialog.show();
             HomePageActivity.profileInfoArrayList.clear();
             for(int i=0;i<usersArrayList.size();i++){
                 Query mQuery = FirebaseDatabase.getInstance().getReference().child("Profile").orderByChild("username").equalTo(usersArrayList.get(i).getUsername());
@@ -325,13 +330,14 @@ public class BookProfile extends AppCompatActivity implements View.OnClickListen
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
-
                     }
                 });
             }
 
             Intent intent = new Intent(BookProfile.this,MapActivity.class);
             startActivity(intent);
+            if(mapWaitDialog.isShowing())
+                mapWaitDialog.dismiss();
         }
     }
 

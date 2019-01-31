@@ -1,5 +1,6 @@
 package com.sust.project_250_001;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -46,12 +47,15 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ReviewHold
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    dialog.setMessage("Please Wait...");
+                    dialog.show();
 //                    Snackbar.make(view,"Item Clicked!!",Snackbar.LENGTH_LONG).show();
                     FirebaseDatabase.getInstance().getReference("Books").orderByChild("title").equalTo(review.getBookTitle())
                             .addChildEventListener(new ChildEventListener() {
                                 @Override
                                 public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                                     context.startActivity(new Intent(context.getApplicationContext(),BookProfile.class).putExtra("bookObject",dataSnapshot.getValue(Book.class)));
+                                    dialog.dismiss();
                                 }
 
                                 @Override
@@ -80,6 +84,7 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ReviewHold
         }
     }
 
+    private ProgressDialog dialog;
     private Context context;
     private ArrayList<Review> reviewArrayList;
     private OnItemClickListener listener;
@@ -88,6 +93,7 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ReviewHold
         this.reviewArrayList = reviewArrayList;
         this.context = context;
         this.listener = listener;
+        dialog = new ProgressDialog(context);
     }
 
     @NonNull

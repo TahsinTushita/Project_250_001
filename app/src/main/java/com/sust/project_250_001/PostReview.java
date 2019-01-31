@@ -1,6 +1,7 @@
 package com.sust.project_250_001;
 
 import android.app.ProgressDialog;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -58,7 +59,10 @@ public class PostReview extends AppCompatActivity {
     public void startPosting(View view) {
         String postTitle = reviewTitle.getText().toString();
         String postDesc = reviewDesc.getText().toString();
-
+        if(postDesc.isEmpty()) {
+            Snackbar.make(view,"I Can't post Anything!! Your message is John Cena",Snackbar.LENGTH_LONG).show();
+            return;
+        }
         progressDialog.setMessage("Posting....");
         progressDialog.show();
 

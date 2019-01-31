@@ -1,6 +1,8 @@
 package com.sust.project_250_001;
 
 import android.content.Intent;
+import android.media.Image;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -13,6 +15,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,6 +26,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -44,6 +48,8 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
     private ProfileInfo profileInfo = new ProfileInfo();
     private DatabaseReference profileInfodatabase,profileDatabase;
     Button requestBtn;
+
+    private ImageView profilePhoto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +80,8 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
 
         profileInfodatabase = FirebaseDatabase.getInstance().getReference("Profile");
         profileDatabase = FirebaseDatabase.getInstance().getReference("Profile");
+
+        profilePhoto = findViewById(R.id.profilePhoto);
 
         String map = (String) getIntent().getExtras().get("from");
         if (map != null)
@@ -110,6 +118,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
                     username.setText(profileInfo.getName());
                     address.setText(profileInfo.getAddress());
                     email.setText(profileInfo.getEmail());
+                    Picasso.get().load(profileInfo.getProfilephoto()).into(profilePhoto);
                 }
             }
 
