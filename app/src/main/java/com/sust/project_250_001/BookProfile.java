@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -15,6 +16,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -37,6 +39,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -144,10 +147,7 @@ public class BookProfile extends AppCompatActivity implements View.OnClickListen
 //        Recent Reviews fetching from firebase
         reviewDatabase.addValueEventListener(reviewValueEventListener);
         bookDatabaseReference.addValueEventListener(usersValueEventListener);
-
-
     }
-
 
     ValueEventListener reviewValueEventListener = new ValueEventListener() {
         @Override
@@ -200,30 +200,41 @@ public class BookProfile extends AppCompatActivity implements View.OnClickListen
     BookReviewAdapter.OnItemClickListener listener = new BookReviewAdapter.OnItemClickListener() {
         @Override
         public void onItemClick(BookReview book) {
-            // inflate the layout of the popup window
             LayoutInflater inflater = (LayoutInflater)
-                    getSystemService(LAYOUT_INFLATER_SERVICE);
+            getSystemService(LAYOUT_INFLATER_SERVICE);
             View popupView = inflater.inflate(R.layout.popup_window, null);
-            popupReview = popupView.findViewById(R.id.popupReview);
-            // create the popup window
-            int width = LinearLayout.LayoutParams.WRAP_CONTENT;
+            popupReview = popupView.findViewById(R.id.popupReview);            int width = LinearLayout.LayoutParams.WRAP_CONTENT;
             int height = LinearLayout.LayoutParams.WRAP_CONTENT;
             boolean focusable = true; // lets taps outside the popup also dismiss it
             final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
             popupReview.setText(book.getPostDesc());
-            popupWindow.setAnimationStyle(R.style.popup_window_animation);
-            // show the popup window
-            // which view you pass in doesn't matter, it is only used for the window tolken
+            popupWindow.setAnimationStyle(R.style.popup_window_animation);            popupWindow.showAtLocation(popupView, Gravity.CENTER, 0, 0);
+        }
+
+        @Override
+        public void onLongClick(final BookReview book) {
+            LayoutInflater inflater = (LayoutInflater)
+            getSystemService(LAYOUT_INFLATER_SERVICE);
+            View popupView = inflater.inflate(R.layout.popup_delete, null);
+            popupReview = popupView.findViewById(R.id.btnRemove);
+            int width = LinearLayout.LayoutParams.WRAP_CONTENT;
+            int height = LinearLayout.LayoutParams.WRAP_CONTENT;
+            boolean focusable = true; // lets taps outside the popup also dismiss it
+            final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
             popupWindow.showAtLocation(popupView, Gravity.CENTER, 0, 0);
-            // dismiss the popup window when touched
-//            popupView.setOnTouchListener(new View.OnTouchListener() {
-//                @Override
-//                public boolean onTouch(View v, MotionEvent event) {
-//                    popupWindow.dismiss();
-//                    return true;
-//                }
-//            });
-//            startActivity(new Intent(BookProfile.this,Profile.class));
+            popupReview.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Books/"+currentBook.getParent()+"/reviews/"+LoginActivity.user);
+                    if (book.getUsername().equals(LoginActivity.user)) {
+                        databaseReference.setValue(null);
+                        Snackbar.make(view.getRootView(),"Post has been removed!",Snackbar.LENGTH_LONG).show();
+                    } else {
+                        Snackbar.make(view.getRootView(),"Not your post",Snackbar.LENGTH_LONG).show();
+                    }
+                    reviewAdapter.notifyDataSetChanged();
+                }
+            });
         }
     };
     Integer cnt = 0;
@@ -249,7 +260,7 @@ public class BookProfile extends AppCompatActivity implements View.OnClickListen
             }
             @Override
             public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-
+                reviewAdapter.notifyDataSetChanged();
             }
             @Override
             public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {

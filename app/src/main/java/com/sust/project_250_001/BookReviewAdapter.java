@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ public class BookReviewAdapter extends RecyclerView.Adapter<BookReviewAdapter.Bo
 
     public interface OnItemClickListener {
         void onItemClick(BookReview book);
+        void onLongClick(BookReview book);
     }
 
 
@@ -42,6 +44,13 @@ public class BookReviewAdapter extends RecyclerView.Adapter<BookReviewAdapter.Bo
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override public void onClick(View v) {
                     listener.onItemClick(book);
+                }
+            });
+            itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    listener.onLongClick(book);
+                    return true;
                 }
             });
 
