@@ -36,6 +36,15 @@ public class PostReview extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(null);
+        toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.back_arrow));
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
         reviewTitle = findViewById(R.id.reviewTitle) ;
         reviewDesc = findViewById(R.id.reviewDesc);

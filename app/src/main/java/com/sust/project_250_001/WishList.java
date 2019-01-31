@@ -215,6 +215,11 @@ public class WishList extends AppCompatActivity implements NavigationView.OnNavi
                 drawer.closeDrawer(GravityCompat.START);
                 break;
 
+            case R.id.help_and_support:
+                intent = new Intent(this,UserManual.class);
+                drawer.closeDrawer(GravityCompat.START);
+                break;
+
         }
         startActivity(intent);
         return true;

@@ -365,6 +365,11 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
                 intent = new Intent(this,RequestForBookActivity.class);
                 drawer.closeDrawer(GravityCompat.START);
                 break;
+
+            case R.id.help_and_support:
+               intent = new Intent(this,UserManual.class);
+               drawer.closeDrawer(GravityCompat.START);
+               break;
         }
         this.startActivity(intent);
         return false;

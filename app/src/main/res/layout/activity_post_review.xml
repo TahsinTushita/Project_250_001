@@ -40,6 +40,7 @@
             android:textStyle="bold"
             android:textSize="18sp"
             android:layout_marginLeft="10dp"
+            android:fontFamily="@font/patrickhandsc"
             />
 
         <EditText
@@ -62,6 +63,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
         android:textStyle="bold"
+        android:fontFamily="@font/patrickhandsc"
         android:textSize="18sp"
         />
 

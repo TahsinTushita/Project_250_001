@@ -38,6 +38,15 @@ public class RequestsActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(null);
+        toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.back_arrow));
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
         userName = findViewById(R.id.userName);
         recyclerView = findViewById(R.id.request_recyclerView);

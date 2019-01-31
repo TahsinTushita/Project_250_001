@@ -24,6 +24,12 @@
         android:icon="@drawable/request_book"
         />
 
+    <item
+        android:title="Help and Support"
+        android:id="@+id/help_and_support"
+        android:icon="@drawable/help_and_support"
+        />
+
 
     <item android:title="Info">
         <menu>
