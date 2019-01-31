@@ -46,7 +46,7 @@
             android:padding="8dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="15dp"
-            android:background="@drawable/round_corner_bg"
+            android:background="@drawable/round_corner_bg1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/reviewTitle"
@@ -71,7 +71,7 @@
         android:layout_width="match_parent"
         android:layout_margin="10dp"
         android:layout_height="150dp"
-        android:background="@drawable/round_corner_bg"
+        android:background="@drawable/round_corner_bg1"
         android:id="@+id/reviewDesc" />
 
     <Button
@@ -81,7 +81,7 @@
         android:layout_marginTop="15sp"
         android:layout_gravity="center"
         android:text="Post"
-        android:background="@android:color/transparent"
+        android:background="@drawable/round_corner_bg"
         android:fontFamily="@font/justanotherhand"
         android:textSize="35dp"
         android:onClick="startPosting"

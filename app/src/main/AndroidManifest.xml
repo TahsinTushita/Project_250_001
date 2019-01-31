@@ -25,7 +25,8 @@
         android:roundIcon="@mipmap/bookcase"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AllBooksActivity"></activity>
+        <activity android:name=".UserManual"></activity>
+        <activity android:name=".AllBooksActivity" />
         <activity android:name=".RequestForBookActivity" />
         <activity android:name=".LentBooks" />
         <activity android:name=".BorrowedBooks" />
