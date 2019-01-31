@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FCF7E8"
     android:id="@+id/drawerid"
     tools:context=".Profile">
 
@@ -73,10 +74,7 @@
                 />
 
         </LinearLayout>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@android:color/background_dark"/>
+
 
 
         <LinearLayout
@@ -107,10 +105,7 @@
                 />
 
         </LinearLayout>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@android:color/background_dark"/>
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -140,10 +135,6 @@
                 />
 
         </LinearLayout>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@android:color/background_dark"/>
 
         <Button
             android:layout_width="wrap_content"
