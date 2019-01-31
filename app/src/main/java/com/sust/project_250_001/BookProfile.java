@@ -74,11 +74,14 @@ public class BookProfile extends AppCompatActivity implements View.OnClickListen
     private ActionBarDrawerToggle drawerToggle;
     public static Book currentBook;
 
+    private View rootview;
+
     private DatabaseReference bookDatabaseReference,profileDatabaseReference,userDatabaseReference,newUser;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_profile);
+        rootview = findViewById(android.R.id.content);
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -97,8 +100,6 @@ public class BookProfile extends AppCompatActivity implements View.OnClickListen
         drawerToggle.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         navigationView.setNavigationItemSelectedListener(this);
-
-
 
         book = (Book) getIntent().getExtras().getSerializable(EXTRA_BOOK);
         currentBook = book;
@@ -119,12 +120,11 @@ public class BookProfile extends AppCompatActivity implements View.OnClickListen
         bookAuthor.setText(book.getAuthor());
         bookTitle.setText(book.getTitle());
 
-
         userName = "Anonymous";
 
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         if(firebaseUser != null)
-            userName = firebaseUser.getEmail();
+        userName = firebaseUser.getEmail();
         userName = userName.substring(0,userName.lastIndexOf('@'));
 
         reviewDatabase = FirebaseDatabase.getInstance().getReference("Books").child(book.getParent()).child("reviews");
@@ -215,7 +215,7 @@ public class BookProfile extends AppCompatActivity implements View.OnClickListen
         public void onLongClick(final BookReview book) {
             LayoutInflater inflater = (LayoutInflater)
             getSystemService(LAYOUT_INFLATER_SERVICE);
-            View popupView = inflater.inflate(R.layout.popup_delete, null);
+            final View popupView = inflater.inflate(R.layout.popup_delete, null);
             popupReview = popupView.findViewById(R.id.btnRemove);
             int width = LinearLayout.LayoutParams.WRAP_CONTENT;
             int height = LinearLayout.LayoutParams.WRAP_CONTENT;
@@ -228,9 +228,9 @@ public class BookProfile extends AppCompatActivity implements View.OnClickListen
                     DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Books/"+currentBook.getParent()+"/reviews/"+LoginActivity.user);
                     if (book.getUsername().equals(LoginActivity.user)) {
                         databaseReference.setValue(null);
-                        Snackbar.make(view.getRootView(),"Post has been removed!",Snackbar.LENGTH_LONG).show();
+                        Snackbar.make(rootview,"Post has been removed!Will be processed Soon",Snackbar.LENGTH_LONG).show();
                     } else {
-                        Snackbar.make(view.getRootView(),"Not your post",Snackbar.LENGTH_LONG).show();
+                        Snackbar.make(rootview,"Not your post",Snackbar.LENGTH_LONG).show();
                     }
                     reviewAdapter.notifyDataSetChanged();
                 }
