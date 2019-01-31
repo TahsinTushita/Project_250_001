@@ -61,6 +61,7 @@ public class BookProfile extends AppCompatActivity implements View.OnClickListen
     private Button booklistbtn,wishlishbtn;
     private TextView drawerUserName;
     private TextView popupReview;
+    TextView noReviewText;
     private String userName;
 
     private RecyclerView reviewView;
@@ -87,6 +88,7 @@ public class BookProfile extends AppCompatActivity implements View.OnClickListen
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(null);
 
+        noReviewText = findViewById(R.id.noReviewText);
         mapWaitDialog = new ProgressDialog(this);
 
         drawer = (DrawerLayout) findViewById(R.id.drawerid);
@@ -158,6 +160,8 @@ public class BookProfile extends AppCompatActivity implements View.OnClickListen
                     BookReview review = snapshot.getValue(BookReview.class);
                     reviewArrayList.add(review);
                 }
+                if(reviewArrayList.size()>0) noReviewText.setVisibility(View.GONE);
+                else noReviewText.setVisibility(View.VISIBLE);
                 BookReviewAdapter adapter = new BookReviewAdapter(BookProfile.this,reviewArrayList,listener);
                 reviewView.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
