@@ -97,7 +97,7 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
         reviewView = findViewById(R.id.reviewView);
         reviewView.setLayoutManager(new LinearLayoutManager(this));
         reviewArrayList = new ArrayList<>();
-        reviewAdapter = new ReviewAdapter(this,reviewArrayList);
+        reviewAdapter = new ReviewAdapter(this,reviewArrayList,listener2);
         reviewView.setAdapter(reviewAdapter);
 
         //Trending books fetching from firebase
@@ -234,7 +234,7 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
                     if(reviewArrayList.contains(review)==false)
                     reviewArrayList.add(0,review);
                 }
-                ReviewAdapter adapter = new ReviewAdapter(HomePageActivity.this,reviewArrayList);
+                ReviewAdapter adapter = new ReviewAdapter(HomePageActivity.this,reviewArrayList,listener2);
                 reviewView.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
             }
@@ -277,6 +277,12 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
         public void onItemClick(Book book) {
             startActivity(new Intent(HomePageActivity.this,BookProfile.class).putExtra("bookObject",book));
         }
+    };
+
+    ReviewAdapter.OnItemClickListener listener2 = new ReviewAdapter.OnItemClickListener() {
+        @Override
+        public void onItemClick(Review review) {
+            }
     };
 
 
