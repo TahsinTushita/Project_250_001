@@ -174,7 +174,6 @@ public class UpdateProfile extends AppCompatActivity {
             if (progressDialog.isShowing()) progressDialog.dismiss();
         }
         if(!err){
-//            onBackPressed();
         }
     }
 }
